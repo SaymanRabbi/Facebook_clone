@@ -2,6 +2,7 @@ import React from 'react';
 import {Form, Formik} from 'formik';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import Logininput from '../../components/inputs/Logininput/Logininput';
 
 const Login = () => {
     return (
@@ -19,8 +20,7 @@ const Login = () => {
                 <Formik>
                   {(formik) => (
                     <Form>
-                      <input type="text" />
-                      <input type="text" />
+                      <Logininput/>
                       <button type="submit" className="blue_btn">
                         Log In
                       </button>
