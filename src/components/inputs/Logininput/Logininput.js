@@ -37,7 +37,7 @@ query: '(min-width: 850px)'
         )}
   
         {meta.touched && meta.error &&  (
-          <i className="error_icon" style={{ top: `${!bottom && !desktopView && "63%"}` }}></i>
+          <i className="error_icon" style={{ top: `${!bottom && !desktopView ? "63%" :"15px"}` }}></i>
         )}
       </div>
     );
