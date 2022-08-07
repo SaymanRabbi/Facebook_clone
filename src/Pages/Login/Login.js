@@ -1,5 +1,6 @@
 import LoginFooter from '../../components/Login/LoginFooter';
 import LoginForm from '../../components/Login/LoginForm';
+import RegisterForm from '../../components/Login/RegisterForm';
 import './Login.css';
 
 const Login = () => {
@@ -9,7 +10,7 @@ const Login = () => {
       <div className="login_wrapper">
         <LoginForm/>
         {/* ==============Register Part================= */}
-        <div className="register"></div>
+        <RegisterForm/>
         {/* ===============Footer Part=============== */}
         <LoginFooter/>
       </div>
