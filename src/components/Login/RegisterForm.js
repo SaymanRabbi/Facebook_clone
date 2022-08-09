@@ -1,15 +1,15 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import DotLoader from "react-spinners/DotLoader";
 import RegisterInput from "../inputs/registerInput";
 import * as Yup from "yup";
 import DateOfBirthSelect from "./DateOfBirthSelect";
 import GenderSelect from "./GenderSelect";
+import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import Cookies from 'js-cookie'
 import {useNavigate} from 'react-router-dom'
-export default function RegisterForm() {
+export default function RegisterForm({setVisible,vesible}) {
   //redux
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -75,6 +75,7 @@ export default function RegisterForm() {
   //submit register  information to the server
   const registerSubmit = async() => {
     try {
+      setLoading(true);
       const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
         first_name,
         last_name,
@@ -87,6 +88,7 @@ export default function RegisterForm() {
       });
       setError("")
       setsuccess(data?.messages)
+      setLoading(false);
       const { messages, ...rest } = data
       setTimeout(() => {
         dispatch({ type: 'LOGIN', payload: rest })
@@ -95,9 +97,11 @@ export default function RegisterForm() {
       }, 2000);
      
     } catch (error) {
+      setLoading(true);
       setLoading(false);
       setsuccess("");
       setError(error.response.data.messages);
+      setLoading(false);
     }
   }
   const [dateError, setDateError] = useState("");
@@ -106,7 +110,7 @@ export default function RegisterForm() {
     <div className="blur">
       <div className="register">
         <div className="register_header">
-          <i className="exit_icon"></i>
+          <i className="exit_icon" onClick={()=>setVisible(!vesible)}></i>
           <span>Sign Up</span>
           <span>it's quick and easy</span>
         </div>
