@@ -1,5 +1,5 @@
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import RegisterInput from "../inputs/registerInput";
 import * as Yup from "yup";
 import DateOfBirthSelect from "./DateOfBirthSelect";
@@ -9,7 +9,12 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import Cookies from 'js-cookie'
 import {useNavigate} from 'react-router-dom'
-export default function RegisterForm({setVisible,vesible}) {
+import useClickoutside from "../../Helpers/useClickoutside";
+export default function RegisterForm({ setVisible, vesible }) {
+  const hidden = useRef(null)
+  useClickoutside(hidden, () => {
+   setVisible(false)
+  })
   //redux
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -107,7 +112,7 @@ export default function RegisterForm({setVisible,vesible}) {
   const [dateError, setDateError] = useState("");
   const [genderError, setGenderError] = useState("");
   return (
-    <div className="blur">
+    <div ref={hidden} className="blur">
       <div className="register">
         <div className="register_header">
           <i className="exit_icon" onClick={()=>setVisible(!vesible)}></i>
