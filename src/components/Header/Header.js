@@ -7,6 +7,7 @@ import SearchMenu from './SearchMenu';
 import AllMenu from './AllMenu';
 const Header = () => {
     const [showSearch, setShowSearch] = useState(false);
+    const [showAllMenu, setShowAllMenu] = useState(false);
     const { user } = useSelector(user => ({ ...user }))
     const color = "#65676b"
     return (
@@ -56,9 +57,11 @@ const Header = () => {
                     <img src={user?.picture} alt="User Profile" />
                     <span>{user?.first_name}</span>
                 </Link>
-                <div className="circle_icon hover1">
+                <div className="circle_icon hover1" onClick={()=>setShowAllMenu(!showAllMenu)}>
                     <Menu />
-                    <AllMenu/>
+                    {
+                        showAllMenu && <AllMenu setShowAllMenu={setShowAllMenu} /> 
+                   }
                 </div>
                 <div className="circle_icon hover1">
                     <Messenger/>

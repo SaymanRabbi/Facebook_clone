@@ -1,8 +1,14 @@
+import { useRef } from "react";
 import { menu, create } from "../../data/allMenu";
+import useClickoutside from "../../Helpers/useClickoutside";
 import AllMenuItem from "./AllMenuItem";
-const AllMenu = () => {
+const AllMenu = ({ setShowAllMenu }) => {
+  const Allmenu = useRef(null);
+  useClickoutside(Allmenu, () => {
+    setShowAllMenu(false)
+})
     return (
-        <div className="all_menu">
+        <div className="all_menu" ref={Allmenu}>
         <div className="all_menu_header">Menu</div>
         <div className="all_menu_wrap scrollbar">
           <div className="all_left">
