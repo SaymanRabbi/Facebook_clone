@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowDown, Friends, Gaming, HomeActive, Logo, Market, Menu, Messenger, Notifications, Search, Watch } from '../../svg'
 import {useSelector} from 'react-redux'
 import SearchMenu from './SearchMenu';
+import AllMenu from './AllMenu';
 const Header = () => {
     const [showSearch, setShowSearch] = useState(false);
     const { user } = useSelector(user => ({ ...user }))
@@ -56,7 +57,8 @@ const Header = () => {
                     <span>{user?.first_name}</span>
                 </Link>
                 <div className="circle_icon hover1">
-                    <Menu/>
+                    <Menu />
+                    <AllMenu/>
                 </div>
                 <div className="circle_icon hover1">
                     <Messenger/>
