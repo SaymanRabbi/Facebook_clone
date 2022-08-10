@@ -5,10 +5,12 @@ import { ArrowDown, Friends, Gaming, HomeActive, Logo, Market, Menu, Messenger, 
 import {useSelector} from 'react-redux'
 import SearchMenu from './SearchMenu';
 import AllMenu from './AllMenu';
+import UserMenu from './UserMenu';
 const Header = () => {
     const [showSearch, setShowSearch] = useState(false);
     const [showAllMenu, setShowAllMenu] = useState(false);
     const { user } = useSelector(user => ({ ...user }))
+    console.log(user);
     const color = "#65676b"
     return (
         <header>
@@ -71,7 +73,8 @@ const Header = () => {
                     <div className="right_notification">5</div>
                 </div>
                 <div className="circle_icon hover1">
-                    <ArrowDown/>
+                    <ArrowDown />
+                    <UserMenu user={user} />
                 </div>
             </div>
               {/* --------Header Right---------------- */}
