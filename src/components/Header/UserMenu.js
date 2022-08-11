@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useClickoutside from '../../Helpers/useClickoutside';
 import DisplayAccessibility from './DisplayAccessibility';
 import HelpSupport from './HelpSupport';
 import SettingsPrivacy from "./SettingsPrivacy";
-const UserMenu = ({user}) => {
+const UserMenu = ({ user,setShowUserMenu }) => {
+    const usermenu = useRef(null);
+  useClickoutside(usermenu, () => {
+    setShowUserMenu(false)
+})
     const [visible, setVisible] = useState(0);
     return (
-        <div className="mmenu">
+        <div className="mmenu" ref={usermenu}>
         {visible === 0 && (
           <div>
             <Link to="/profile" className="mmenu_header hover3">

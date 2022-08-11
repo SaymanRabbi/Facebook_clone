@@ -9,8 +9,8 @@ import UserMenu from './UserMenu';
 const Header = () => {
     const [showSearch, setShowSearch] = useState(false);
     const [showAllMenu, setShowAllMenu] = useState(false);
+    const [showuserMenu, setShowUserMenu] = useState(false);
     const { user } = useSelector(user => ({ ...user }))
-    console.log(user);
     const color = "#65676b"
     return (
         <header>
@@ -59,7 +59,7 @@ const Header = () => {
                     <img src={user?.picture} alt="User Profile" />
                     <span>{user?.first_name}</span>
                 </Link>
-                <div className="circle_icon hover1" onClick={()=>setShowAllMenu(!showAllMenu)}>
+                <div className={`circle_icon hover1 ${showAllMenu && "active_header"}`} onClick={()=>setShowAllMenu(true)}>
                     <Menu />
                     {
                         showAllMenu && <AllMenu setShowAllMenu={setShowAllMenu} /> 
@@ -72,9 +72,12 @@ const Header = () => {
                     <Notifications />
                     <div className="right_notification">5</div>
                 </div>
-                <div className="circle_icon hover1">
+                <div className={`circle_icon hover1 ${showuserMenu && "active_header"}`} onClick={()=>setShowUserMenu(true)}>
                     <ArrowDown />
-                    <UserMenu user={user} />
+                    {
+                        showuserMenu &&
+                        <UserMenu user={user} setShowUserMenu={setShowUserMenu} />
+                    }
                 </div>
             </div>
               {/* --------Header Right---------------- */}
