@@ -13,7 +13,7 @@ function App() {
         <Route element={<LoginRoutes/>}>
         <Route path="/profile" element={<Profile />} exact />
         <Route path="/" element={<Home />} exact />
-        <Route path="/activate/:token" element={<Activate/>} exact />
+        <Route path="/activate/:token" element={<Activate/>}/>
         </Route>
         <Route element={<NotLoginRoutes/>}>
         <Route path="/login" element={<Login />} exact />

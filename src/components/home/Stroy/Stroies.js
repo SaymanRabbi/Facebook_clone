@@ -23,7 +23,7 @@ const Stroies = () => {
           <div className="story_create_text">Create Story</div>
         </div>
         {stories.slice(0,max).map((story, i) => (
-          <Stroy  story={story} />
+          <Stroy story={story} key={i} />
         ))}
         <div className="white_circle">
           <ArrowRight color="#65676b" />
