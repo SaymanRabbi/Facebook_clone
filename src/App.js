@@ -4,6 +4,7 @@ import Profile from "./pages/profile";
 import Home from "./pages/home";
 import LoginRoutes from "./Routes/LoginRoutes";
 import NotLoginRoutes from "./Routes/NotLoginRoutes";
+import Activate from "./pages/home/activate";
 function App() {
   return (
     <div>
@@ -12,6 +13,7 @@ function App() {
         <Route element={<LoginRoutes/>}>
         <Route path="/profile" element={<Profile />} exact />
         <Route path="/" element={<Home />} exact />
+        <Route path="/activate/:token" element={<Activate/>} exact />
         </Route>
         <Route element={<NotLoginRoutes/>}>
         <Route path="/login" element={<Login />} exact />
