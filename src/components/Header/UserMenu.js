@@ -1,11 +1,23 @@
 import React, { useRef } from 'react';
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useClickoutside from '../../Helpers/useClickoutside';
 import DisplayAccessibility from './DisplayAccessibility';
 import HelpSupport from './HelpSupport';
 import SettingsPrivacy from "./SettingsPrivacy";
-const UserMenu = ({ user,setShowUserMenu }) => {
+import { useDispatch } from 'react-redux';
+import Cookies from 'js-cookie';
+const UserMenu = ({ user, setShowUserMenu }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // Logout function
+  const logout = () => {
+    Cookies.set("user","")
+    dispatch({
+      type: "LOGOUT"
+    });
+    navigate("/login");
+  }
     const usermenu = useRef(null);
   useClickoutside(usermenu, () => {
     setShowUserMenu(false)
@@ -77,7 +89,7 @@ const UserMenu = ({ user,setShowUserMenu }) => {
                 <i className="right_icon"></i>
               </div>
             </div>
-            <div className="mmenu_item hover3">
+            <div className="mmenu_item hover3" onClick={()=>logout()}>
               <div className="small_circle">
                 <i className="logout_filled_icon"></i>
               </div>
