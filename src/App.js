@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import LoginRoutes from "./Routes/LoginRoutes";
 import NotLoginRoutes from "./Routes/NotLoginRoutes";
 import Activate from "./pages/home/activate";
+import Reset from "./pages/Reset/Reset";
 function App() {
   return (
     <div>
@@ -18,6 +19,7 @@ function App() {
         <Route element={<NotLoginRoutes/>}>
         <Route path="/login" element={<Login />} exact />
         </Route>
+        <Route path="/reset" element={<Reset/>}></Route>
       </Routes>
     </div>
   );

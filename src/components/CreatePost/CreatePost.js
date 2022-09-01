@@ -1,10 +1,10 @@
-import React from 'react';
-import { Feeling, LiveVideo, Photo } from '../../svg';
-import './CreatePost.css'
+import React from "react";
+import { Feeling, LiveVideo, Photo } from "../../svg";
+import "./CreatePost.css";
 
-const CreatePost = ({user}) => {
-    return (
-        <div className="createPost">
+const CreatePost = ({ user }) => {
+  return (
+    <div className="createPost">
       <div className="createPost_header">
         <img src={user?.picture} alt="" />
         <div className="open_post hover2">
@@ -27,7 +27,7 @@ const CreatePost = ({user}) => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default CreatePost;
