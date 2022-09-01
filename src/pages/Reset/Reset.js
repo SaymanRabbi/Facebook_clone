@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Reset.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
-import { Form, Formik } from "formik";
-import { useState } from "react";
-import LoginInput from "../../components/inputs/loginInput";
+import SearchAccount from "./SearchAccount";
+import SendEmail from "./SendEmail";
+import CodeVerification from "./CodeVerification";
 const Reset = () => {
+  const [visibel, setVisibel] = useState(2);
   const { user } = useSelector((state) => ({ ...state }));
+  const [code, setCode] = useState();
+  const { error, setError } = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { email, setEmail } = useState("");
-  const { error, setError } = useState("");
   const logout = () => {
     Cookies.set("user", "");
     dispatch({
@@ -44,39 +45,16 @@ const Reset = () => {
         )}
       </div>
       <div className="reset_wrap">
-        <div className="reset_form">
-          <div className="reset_form_header">Find Your Account</div>
-          <div className="reset_form_text">
-            Please enter your email address or mobile number to search for your
-            account.
-          </div>
-          <Formik
-            enableReinitialize
-            initialValues={{
-              email,
-            }}
-          >
-            {(formik) => (
-              <Form>
-                <LoginInput
-                  type="text"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email address or phone number"
-                />
-                {error && <div className="error_text">{error}</div>}
-                <div className="reset_form_btns">
-                  <Link to="/login" className="gray_btn">
-                    Cancel
-                  </Link>
-                  <button type="submit" className="blue_btn">
-                    Search
-                  </button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
+        {visibel === 0 && <SearchAccount />}
+        {visibel === 1 && <SendEmail user={user} />}
+        {visibel === 2 && (
+          <CodeVerification
+            user={user}
+            code={code}
+            setCode={setCode}
+            error={error}
+          />
+        )}
       </div>
     </div>
   );
