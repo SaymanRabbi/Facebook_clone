@@ -3,16 +3,23 @@ import "./Reset.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import { Form, Formik } from "formik";
+import LoginInput from "../../components/inputs/loginInput";
 import SearchAccount from "./SearchAccount";
 import SendEmail from "./SendEmail";
 import CodeVerification from "./CodeVerification";
+import Footer from "../../components/login/Footer";
+import ChangesPassword from "./ChangesPassword";
 const Reset = () => {
-  const [visibel, setVisibel] = useState(2);
   const { user } = useSelector((state) => ({ ...state }));
-  const [code, setCode] = useState();
-  const { error, setError } = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [visible, setVisible] = useState(3);
+  const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
+  const [password, setPassword] = useState("");
+  const [conf_password, setConf_password] = useState("");
+  const [error, setError] = useState("");
   const logout = () => {
     Cookies.set("user", "");
     dispatch({
@@ -45,9 +52,11 @@ const Reset = () => {
         )}
       </div>
       <div className="reset_wrap">
-        {visibel === 0 && <SearchAccount />}
-        {visibel === 1 && <SendEmail user={user} />}
-        {visibel === 2 && (
+        {visible === 0 && (
+          <SearchAccount email={email} setEmail={setEmail} error={error} />
+        )}
+        {visible === 1 && <SendEmail user={user} />}
+        {visible === 2 && (
           <CodeVerification
             user={user}
             code={code}
@@ -55,7 +64,16 @@ const Reset = () => {
             error={error}
           />
         )}
+        {visible === 3 && (
+          <ChangesPassword
+            password={password}
+            conf_password={conf_password}
+            setConf_password={setConf_password}
+            setPassword={setPassword}
+          />
+        )}
       </div>
+      <Footer />
     </div>
   );
 };

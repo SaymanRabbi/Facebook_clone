@@ -3,9 +3,14 @@ import { Form, Formik } from "formik";
 import LoginInput from "../../components/inputs/loginInput";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-const SearchAccount = () => {
-  const { email, setEmail } = useState("");
-  const { error, setError } = useState("");
+import * as Yup from "yup";
+const SearchAccount = ({ email, setEmail, error }) => {
+  const validateEmail = Yup.object({
+    email: Yup.string()
+      .required("Email address ir required.")
+      .email("Must be a valid email address.")
+      .max(50, "Email address can't be more than 50 characters."),
+  });
   return (
     <div className="reset_form">
       <div className="reset_form_header">Find Your Account</div>
@@ -18,6 +23,7 @@ const SearchAccount = () => {
         initialValues={{
           email,
         }}
+        validationSchema={validateEmail}
       >
         {(formik) => (
           <Form>
@@ -42,5 +48,4 @@ const SearchAccount = () => {
     </div>
   );
 };
-
 export default SearchAccount;
