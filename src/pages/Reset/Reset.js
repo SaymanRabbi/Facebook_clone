@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import { Form, Formik } from "formik";
-import LoginInput from "../../components/inputs/loginInput";
+// import LoginInput from "../../components/inputs/loginInput";
 import SearchAccount from "./SearchAccount";
 import SendEmail from "./SendEmail";
 import CodeVerification from "./CodeVerification";
@@ -14,12 +14,15 @@ const Reset = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [visible, setVisible] = useState(3);
+  const [visible, setVisible] = useState(0);
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
+  const [userInfos, setUserInfos] = useState("");
   const [conf_password, setConf_password] = useState("");
   const [error, setError] = useState("");
+  console.log(error, userInfos);
   const logout = () => {
     Cookies.set("user", "");
     dispatch({
@@ -34,7 +37,7 @@ const Reset = () => {
         {user ? (
           <div className="right_reset">
             <Link to="/profile">
-              <img src={user.picture} alt="" />
+              <img src={user?.picture} alt="" />
             </Link>
             <button
               className="blue_btn"
@@ -53,9 +56,18 @@ const Reset = () => {
       </div>
       <div className="reset_wrap">
         {visible === 0 && (
-          <SearchAccount email={email} setEmail={setEmail} error={error} />
+          <SearchAccount
+            email={email}
+            setEmail={setEmail}
+            error={error}
+            setError={setError}
+            loading={loading}
+            setLoading={setLoading}
+            setUserInfos={setUserInfos}
+            setVisible={setVisible}
+          />
         )}
-        {visible === 1 && <SendEmail user={user} />}
+        {visible === 1 && userInfos && <SendEmail userInfos={userInfos} />}
         {visible === 2 && (
           <CodeVerification
             user={user}

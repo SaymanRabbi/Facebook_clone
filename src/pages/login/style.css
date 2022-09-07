@@ -4,7 +4,7 @@
 }
 
 .login_wrap {
-  height: 78vh;
+  min-height: 78vh;
   color: var(--color-primary);
 }
 .login_1 {
@@ -216,13 +216,13 @@
 }
 /*----Footer------*/
 /* ------Error---------------- */
-.error_text{
+.error_text {
   color: #b94a48;
 }
 /* ------Error---------------- */
 /* -------success-------------- */
-.success_text{
-  color:var(--green-color);
+.success_text {
+  color: var(--green-color);
 }
 /* -------success-------------- */
 /*----dob and gender errors-----*/
