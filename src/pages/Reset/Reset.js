@@ -22,7 +22,6 @@ const Reset = () => {
   const [userInfos, setUserInfos] = useState("");
   const [conf_password, setConf_password] = useState("");
   const [error, setError] = useState("");
-  console.log(error, userInfos);
   const logout = () => {
     Cookies.set("user", "");
     dispatch({
@@ -83,7 +82,13 @@ const Reset = () => {
             user={user}
             code={code}
             setCode={setCode}
+            setEmail={setEmail}
             error={error}
+            setError={setError}
+            loading={loading}
+            setLoading={setLoading}
+            setVisible={setVisible}
+            userInfos={userInfos}
           />
         )}
         {visible === 3 && (
