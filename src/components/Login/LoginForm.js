@@ -6,8 +6,8 @@ import { useState } from "react";
 import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import Cookies from 'js-cookie'
-import {useNavigate} from 'react-router-dom'
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 const loginInfos = {
   email: "",
   password: "",
@@ -15,7 +15,7 @@ const loginInfos = {
 export default function LoginForm({ setVisible, vesible }) {
   //redux
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [login, setLogin] = useState(loginInfos);
   const { email, password } = login;
   const handleLoginChange = (e) => {
@@ -31,25 +31,27 @@ export default function LoginForm({ setVisible, vesible }) {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const loginSubmit = async() => {
+  const loginSubmit = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
-        email,
-        password,
-      })
-      setError("")
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/login`,
+        {
+          email,
+          password,
+        }
+      );
+      setError("");
       setLoading(false);
-     
-        dispatch({ type: 'LOGIN', payload: data })
-        Cookies.set('user', JSON.stringify(data))
-        navigate('/')
-     
+
+      dispatch({ type: "LOGIN", payload: data });
+      Cookies.set("user", JSON.stringify(data));
+      navigate("/");
     } catch (error) {
       setError(error.response.data.messages);
       setLoading(false);
     }
-  }
+  };
   return (
     <div className="login_wrap">
       <div className="login_1">
@@ -67,11 +69,9 @@ export default function LoginForm({ setVisible, vesible }) {
               password,
             }}
             validationSchema={loginValidation}
-            onSubmit={
-              ()=>{
-            loginSubmit()
-              }
-            }
+            onSubmit={() => {
+              loginSubmit();
+            }}
           >
             {(formik) => (
               <Form>
@@ -97,12 +97,15 @@ export default function LoginForm({ setVisible, vesible }) {
           <Link to="/reset" className="forgot_password">
             Forgotten password?
           </Link>
-          <DotLoader color="#1876f2" loading={loading}  size={30} />
-          {
-            error && <div className="error_text">{error}</div>
-          }
+          <DotLoader color="#1876f2" loading={loading} size={30} />
+          {error && <div className="error_text">{error}</div>}
           <div className="sign_splitter"></div>
-          <button className="blue_btn open_signup" onClick={()=>setVisible(!vesible)}>Create Account</button>
+          <button
+            className="blue_btn open_signup"
+            onClick={() => setVisible(!vesible)}
+          >
+            Create Account
+          </button>
         </div>
         <Link to="/" className="sign_extra">
           <b>Create a Page</b> for a celebrity, brand or business.
