@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import AddtoYourPost from "./AddtoYourPost";
 import "./CreatePostPopup.css";
-import Picker from "emoji-picker-react";
+import EmojiPicker from "./EmojiPicker";
 
 const CreatePostPopup = ({ user }) => {
   const [text, setText] = useState("");
@@ -30,7 +31,7 @@ const CreatePostPopup = ({ user }) => {
           <span>Create Post</span>
         </div>
         <div className="box_profile">
-          <img src={user.picture} alt="" className="box_profile_img" />
+          <img src={user?.picture} alt="" className="box_profile_img" />
           <div className="box_col">
             <div className="box_profile_name">
               {user.first_name} {user.last_name}
@@ -44,31 +45,25 @@ const CreatePostPopup = ({ user }) => {
         </div>
 
         {!showPrev && (
-          <div className="flex_center">
-            <textarea
-              ref={textRef}
-              maxLength="100"
-              value={text}
-              placeholder={`What's on your mind, ${user.first_name}`}
-              className="post_input"
-              onChange={(e) => setText(e.target.value)}
-            ></textarea>
-          </div>
-        )}
-        <div className="post_emojis_wrap">
-          {picker && (
-            <div className="comment_emoji_picker rlmove">
-              <Picker onEmojiClick={handleEmoji} />
+          <>
+            <div className="flex_center">
+              <textarea
+                ref={textRef}
+                maxLength="100"
+                value={text}
+                placeholder={`What's on your mind, ${user.first_name}`}
+                className="post_input"
+                onChange={(e) => setText(e.target.value)}
+              ></textarea>
             </div>
-          )}
-          <img src="../../../icons/colorful.png" alt="" />
-          <i
-            className="emoji_icon_large"
-            onClick={() => {
-              setPicker((prev) => !prev);
-            }}
-          ></i>
-        </div>
+            <EmojiPicker
+              handleEmoji={handleEmoji}
+              picker={picker}
+              setPicker={setPicker}
+            />
+          </>
+        )}
+        <AddtoYourPost />
       </div>
     </div>
   );
