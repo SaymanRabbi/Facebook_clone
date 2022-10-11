@@ -1,13 +1,13 @@
-import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import CreatePostPopup from "./components/CreatePostPopup/CreatePostPopup";
+import Home from "./pages/home";
+import Activate from "./pages/home/activate";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
-import Home from "./pages/home";
+import Reset from "./pages/Reset/Reset";
 import LoginRoutes from "./Routes/LoginRoutes";
 import NotLoginRoutes from "./Routes/NotLoginRoutes";
-import Activate from "./pages/home/activate";
-import Reset from "./pages/Reset/Reset";
-import CreatePostPopup from "./components/CreatePostPopup/CreatePostPopup";
-import { useSelector } from "react-redux";
 function App() {
   const { user } = useSelector((state) => ({ ...state }));
   return (

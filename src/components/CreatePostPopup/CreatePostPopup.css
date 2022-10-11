@@ -146,3 +146,26 @@
 }
 
 /* =============Add Your Post */
+/* ==============Type Tow====================== */
+.overflow_a {
+  max-height: 500px;
+  overflow-y: auto;
+}
+.input2 {
+  position: relative;
+  display: block;
+  font-size: 15px;
+  min-height: 15px !important;
+}
+.moveleft {
+  transform: translateX(-20px);
+}
+.rlmove2 {
+  right: 1rem;
+  top: 9.7rem;
+  z-index: 999;
+}
+.images_input {
+  display: flex;
+}
+/* ==============Type Tow====================== */

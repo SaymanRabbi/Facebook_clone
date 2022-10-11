@@ -1,26 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import AddtoYourPost from "./AddtoYourPost";
 import "./CreatePostPopup.css";
 import EmojiPicker from "./EmojiPicker";
+import ImagesPreview from "./ImagesPreview";
 
 const CreatePostPopup = ({ user }) => {
   const [text, setText] = useState("");
-  const [showPrev, setShowPrev] = useState(false);
-  const [picker, setPicker] = useState(false);
-  const textRef = useRef(null);
-  const [cursorPosition, setCursorPosition] = useState();
-  useEffect(() => {
-    textRef.current.selectionEnd = cursorPosition;
-  }, [cursorPosition]);
-  const handleEmoji = (e, { emoji }) => {
-    const ref = textRef.current;
-    ref.focus();
-    const start = text.substring(0, ref.selectionStart);
-    const end = text.substring(ref.selectionStart);
-    const newText = start + emoji + end;
-    setText(newText);
-    setCursorPosition(start.length + emoji.length);
-  };
+  const [showPrev, setShowPrev] = useState(true);
   return (
     <div className="blur">
       <div className="postBox">
@@ -44,26 +30,13 @@ const CreatePostPopup = ({ user }) => {
           </div>
         </div>
 
-        {!showPrev && (
-          <>
-            <div className="flex_center">
-              <textarea
-                ref={textRef}
-                maxLength="100"
-                value={text}
-                placeholder={`What's on your mind, ${user.first_name}`}
-                className="post_input"
-                onChange={(e) => setText(e.target.value)}
-              ></textarea>
-            </div>
-            <EmojiPicker
-              handleEmoji={handleEmoji}
-              picker={picker}
-              setPicker={setPicker}
-            />
-          </>
+        {!showPrev ? (
+          <EmojiPicker user={user} text={text} setText={setText} setShowPrev={setShowPrev}/>
+        ) : (
+          <ImagesPreview user={user} text={text} setText={setText} setShowPrev={setShowPrev} />
         )}
         <AddtoYourPost />
+        <button className="post_submit">Post</button>
       </div>
     </div>
   );
