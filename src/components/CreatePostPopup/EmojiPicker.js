@@ -18,8 +18,8 @@ const EmojiPicker = ({ user, text, setText,setShowPrev,type2 }) => {
     setCursorPosition(start.length + emoji.length);
   };
   return (
-    <div className={type2 &&"images_input"}>
-      <div className={!type2 &&'flex_center'}>
+    <div className={type2 ?"images_input":''}>
+      <div className={!type2 ?'flex_center':''}>
         <textarea
           ref={textRef}
           maxLength="100"
@@ -29,7 +29,7 @@ const EmojiPicker = ({ user, text, setText,setShowPrev,type2 }) => {
           onChange={(e) => setText(e.target.value)}
         ></textarea>
       </div>
-      <div className={!type2 && 'post_emojis_wrap'}>
+      <div className={!type2 ? 'post_emojis_wrap':''}>
         {picker && (
           <div className={`comment_emoji_picker ${type2 ? 'rlmove2' :'rlmove'}`}>
             <Picker onEmojiClick={handleEmoji} />

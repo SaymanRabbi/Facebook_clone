@@ -38,7 +38,7 @@ const CreatePostPopup = ({ user }) => {
           setImages={setImages}/>
           
         )}
-        <AddtoYourPost />
+        <AddtoYourPost setShowPrev={setShowPrev}/>
         <button className="post_submit">Post</button>
       </div>
     </div>
