@@ -361,3 +361,31 @@
   object-fit: cover;
 }
 /* =============images add=============== */
+.post_backgrounds {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.post_backgrounds img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.no_bg {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--bg-secondary);
+}
+.bgActive {
+  height: 350px;
+  width: 100%;
+  background-size: cover;
+}
+.bgActive textarea {
+  text-align: center;
+  height: 350px;
+  margin-top: 10px;
+}
