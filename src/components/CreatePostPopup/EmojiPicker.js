@@ -50,7 +50,7 @@ const EmojiPicker = ({ user, text, setText,type2,background,setBackground }) => 
           placeholder={`What's on your mind, ${user.first_name}`}
           className={`post_input ${type2 && "input2"}` }
           onChange={(e) => setText(e.target.value)}
-          style={{paddingTop:`${background ? Math.abs(textRef.current.value.length * 0.1 -30) :'0'}%`}}
+          style={{paddingTop:`${background&& showBgs ? Math.abs(textRef.current.value.length * 0.1 -20) :'0'}%`}}
         ></textarea>
       </div>
       <div className={!type2 ? 'post_emojis_wrap':''}>
@@ -59,7 +59,7 @@ const EmojiPicker = ({ user, text, setText,type2,background,setBackground }) => 
             <Picker onEmojiClick={handleEmoji} />
           </div>
         )}
-        {!type2&& <img src="../../../icons/colorful.png" alt="" onClick={()=>{setShowBgs(!showBgs)}}/>}
+        {!type2&& <span onClick={()=>removebg()}><img src="../../../icons/colorful.png" alt="" onClick={()=>{setShowBgs(!showBgs)}}/></span>}
         {
          !type2&& showBgs && <div className="post_backgrounds">
           <div className="no_bg" onClick={()=>removebg()}></div>

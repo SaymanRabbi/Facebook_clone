@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import CreatePostPopup from "./components/CreatePostPopup/CreatePostPopup";
 import Home from "./pages/home";
 import Activate from "./pages/home/activate";
@@ -9,14 +12,17 @@ import Reset from "./pages/Reset/Reset";
 import LoginRoutes from "./Routes/LoginRoutes";
 import NotLoginRoutes from "./Routes/NotLoginRoutes";
 function App() {
+  const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
   return (
     <div>
-      <CreatePostPopup user={user} />
+      {visible &&
+       <CreatePostPopup user={user} setVisible={setVisible}/>}
+     
       <Routes>
         <Route element={<LoginRoutes />}>
           <Route path="/profile" element={<Profile />} exact />
-          <Route path="/" element={<Home />} exact />
+          <Route path="/" element={<Home setVisible={setVisible}/>} exact />
           <Route path="/activate/:token" element={<Activate />} />
         </Route>
         <Route element={<NotLoginRoutes />}>
@@ -24,6 +30,7 @@ function App() {
         </Route>
         <Route path="/reset" element={<Reset />}></Route>
       </Routes>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

@@ -1,19 +1,39 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
+import { toast } from 'react-toastify';
+import { createPost } from "../../func/post";
+import useClickoutside from "../../Helpers/useClickoutside";
 import AddtoYourPost from "./AddtoYourPost";
 import "./CreatePostPopup.css";
 import EmojiPicker from "./EmojiPicker";
 import ImagesPreview from "./ImagesPreview";
 
-const CreatePostPopup = ({ user }) => {
+const CreatePostPopup = ({ user,setVisible }) => {
+  const popup = useRef(null)
   const [text, setText] = useState("");
   const [showPrev, setShowPrev] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [images, setImages] = useState([]);
-  const [background, setBackground] = useState([]);
+  const [background, setBackground] = useState('');
+  useClickoutside(popup, () => setVisible(false));
+
+  const submitPost = async()=>{
+    if(background){
+      setLoading(true)
+      const res = await createPost(null,background,text,null,user.id,user.token)
+      setLoading(false)
+      setBackground('')
+      setText('')
+      setVisible(false)
+      toast.success(res.data.messages)
+
+    }
+  }
   return (
-    <div className="blur">
-      <div className="postBox">
+    <div className="blur scrollbar">
+      <div className="postBox scrollbar" ref={popup}>
         <div className="box_header">
-          <div className="small_circle">
+          <div className="small_circle" onClick={()=>setVisible(false)}>
             <i className="exit_icon"></i>
           </div>
           <span>Create Post</span>
@@ -42,7 +62,9 @@ const CreatePostPopup = ({ user }) => {
           
         )}
         <AddtoYourPost setShowPrev={setShowPrev}/>
-        <button className="post_submit">Post</button>
+        <button className="post_submit" onClick={()=>submitPost()} disabled={loading}>{
+          loading ? <PulseLoader color="#fff" size={5} /> : 'Post'
+}</button>
       </div>
     </div>
   );

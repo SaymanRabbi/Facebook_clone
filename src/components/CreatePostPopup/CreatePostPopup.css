@@ -1,5 +1,5 @@
 .postBox {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -9,6 +9,7 @@
   min-height: 228px;
   width: 500px;
   border-radius: 5px;
+  /* overflow: scroll; */
 }
 .box_header {
   position: relative;
@@ -183,7 +184,7 @@
   background: var(--bg-secondary);
   border-radius: 10px;
   padding: 10px;
-  height: 250px;
+  height: 150px;
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -380,12 +381,12 @@
   background: var(--bg-secondary);
 }
 .bgActive {
-  height: 350px;
+  height: 250px;
   width: 100%;
   background-size: cover;
 }
 .bgActive textarea {
   text-align: center;
-  height: 350px;
+  height: 250px;
   margin-top: 10px;
 }
