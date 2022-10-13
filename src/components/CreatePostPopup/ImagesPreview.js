@@ -1,10 +1,20 @@
 import React, { useRef } from "react";
 import EmojiPicker from "./EmojiPicker";
-const ImagesPreview = ({ user, text, setText,images,setImages,setShowPrev }) => {
+const ImagesPreview = ({ user, text, setText,images,setImages,setShowPrev,setError }) => {
   const imagesInputRef = useRef(null);
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img) => {
+      if(img.type !== "image/jpeg" && img.type !== "image/png"&& img.type !== "image/jpg"&& img.type !== "image/gif"){
+       setError("Only jpeg, png, jpg and gif files are allowed")
+       files = files.filter((file) => file.name !== img.name);
+       return 
+      }
+      else if(img.size > 1024 *1024 *5){
+        setError("File size is too big")
+        files = files.filter((file) => file.name !== img.name);
+        return
+      }
       const reader = new FileReader();
       reader.readAsDataURL(img);
       reader.onload = (readerEvent) => {
@@ -19,6 +29,7 @@ const ImagesPreview = ({ user, text, setText,images,setImages,setShowPrev }) => 
         <input
           type="file"
           multiple
+          accept="image/jpeg, image/png, image/jpg, image/webp, image/gif"
           hidden
           ref={imagesInputRef}
           onChange={handleImages}

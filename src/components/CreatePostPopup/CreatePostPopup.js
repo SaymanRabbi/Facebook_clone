@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 import { toast } from "react-toastify";
 import { createPost } from "../../func/post";
+import { uploadImages } from "../../func/UploadImages";
+import dataURItoBlob from "../../Helpers/dataURItoBlob";
 import useClickoutside from "../../Helpers/useClickoutside";
 import AddtoYourPost from "./AddtoYourPost";
 import "./CreatePostPopup.css";
@@ -34,6 +36,46 @@ const CreatePostPopup = ({ user,setVisible }) => {
     setError(res)
      }
 
+    }
+    else if(images && images.length > 0){
+      setLoading(true)
+      const img = images.map(i=> dataURItoBlob(i))
+      const path = `${user.usrname}/post Images`
+      let formdata = new FormData()
+      formdata.append("path",path)
+      img.forEach((image)=>{
+        formdata.append("file",image)
+      })
+      const res= await uploadImages(formdata,user.token,path)
+     const response= await createPost(null,null,text,res,user.id,user.token)
+      setLoading(false)
+     if(response==="ok"){
+      setBackground('')
+      setText('')
+      setVisible(false)
+      setText('')
+      toast.success("Post created successfully")
+     }
+     else{
+      setError(response)
+     }
+    }
+    else if(text){
+      setLoading(true)
+      const res = await createPost(null,null,text,null,user.id,user.token)
+      setLoading(false)
+      if(res === "ok"){
+        setBackground('')
+        setText('')
+        setVisible(false)
+        toast.success("Post created successfully")
+      }
+     else{
+    setError(res)
+     }
+    }
+    else{
+      console.log("nothing");
     }
   }
   return (
@@ -68,7 +110,7 @@ const CreatePostPopup = ({ user,setVisible }) => {
           />
         ) : (
           <ImagesPreview user={user} text={text} setText={setText} setShowPrev={setShowPrev} images={images} 
-          setImages={setImages}/>
+          setImages={setImages} setError={setError}/>
           
         )}
         <AddtoYourPost setShowPrev={setShowPrev}/>
