@@ -390,3 +390,28 @@
   height: 250px;
   margin-top: 10px;
 }
+/* -------------------post error--------------- */
+.posterror {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  gap: 10px;
+  opacity: 0.8;
+  animation: animate 0.5s ease-in-out;
+}
+@keyframes animate {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+/* -------------------post error--------------- */

@@ -1,18 +1,20 @@
 import React, { useRef, useState } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { createPost } from "../../func/post";
 import useClickoutside from "../../Helpers/useClickoutside";
 import AddtoYourPost from "./AddtoYourPost";
 import "./CreatePostPopup.css";
 import EmojiPicker from "./EmojiPicker";
 import ImagesPreview from "./ImagesPreview";
+import PostError from "./PostError";
 
 const CreatePostPopup = ({ user,setVisible }) => {
   const popup = useRef(null)
   const [text, setText] = useState("");
   const [showPrev, setShowPrev] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [images, setImages] = useState([]);
   const [background, setBackground] = useState('');
   useClickoutside(popup, () => setVisible(false));
@@ -22,16 +24,24 @@ const CreatePostPopup = ({ user,setVisible }) => {
       setLoading(true)
       const res = await createPost(null,background,text,null,user.id,user.token)
       setLoading(false)
-      setBackground('')
-      setText('')
-      setVisible(false)
-      toast.success(res.data.messages)
+      if(res === "ok"){
+        setBackground('')
+        setText('')
+        setVisible(false)
+        toast.success("Post created successfully")
+      }
+     else{
+    setError(res)
+     }
 
     }
   }
   return (
     <div className="blur scrollbar">
       <div className="postBox scrollbar" ref={popup}>
+        {
+          error && <PostError error={error} setError={setError}/>
+        }
         <div className="box_header">
           <div className="small_circle" onClick={()=>setVisible(false)}>
             <i className="exit_icon"></i>
