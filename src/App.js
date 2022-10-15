@@ -45,7 +45,7 @@ function App() {
     posts:[]
   })
   useEffect(()=>{
-getAllpost()
+  getAllpost()
   },[])
   const getAllpost = async () => {
     try {
