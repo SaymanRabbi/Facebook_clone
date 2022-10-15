@@ -63,6 +63,7 @@ getAllpost()
       })
     }
   }
+  console.log(posts);
   return (
     <div>
       {visible &&
@@ -71,7 +72,7 @@ getAllpost()
       <Routes>
         <Route element={<LoginRoutes />}>
           <Route path="/profile" element={<Profile />} exact />
-          <Route path="/" element={<Home setVisible={setVisible} posts={posts.posts}/>} exact />
+          <Route path="/" element={<Home loading={loading} setVisible={setVisible} posts={posts.posts} error={error}/>} exact />
           <Route path="/activate/:token" element={<Activate />} />
         </Route>
         <Route element={<NotLoginRoutes />}>

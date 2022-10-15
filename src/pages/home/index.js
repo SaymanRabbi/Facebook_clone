@@ -7,7 +7,7 @@ import SendVerification from "../../components/home/sendVerification/SendVerific
 import Stroies from "../../components/home/Stroy/Stroies";
 import Post from "../../components/Posts/Post";
 import './style.css';
-export default function Home({setVisible,posts}) {
+export default function Home({setVisible,posts,loading}) {
   //user
   const { user } = useSelector((user) => ({ ...user }))
   return <div className="home">
