@@ -5,9 +5,9 @@ import HomeLeft from "../../components/home/HomeLeft";
 import Right from "../../components/home/Right/Right";
 import SendVerification from "../../components/home/sendVerification/SendVerification";
 import Stroies from "../../components/home/Stroy/Stroies";
+import Post from "../../components/Posts/Post";
 import './style.css';
 export default function Home({setVisible,posts}) {
-  console.log(posts);
   //user
   const { user } = useSelector((user) => ({ ...user }))
   return <div className="home">
@@ -19,11 +19,11 @@ export default function Home({setVisible,posts}) {
         user.verified === false && <SendVerification user={user} />
       } 
       <CreatePost user={user} setVisible={setVisible}/>
-      {
-        posts?.map((post) => <div key={post._id}>
-          {post._id}
-        </div>)
-      }
+      <div className="posts">
+        {
+          posts?.map(post=><Post key={post._id} post={post}/>)
+        }
+      </div>
       </div>
     <Right user={user}/>
 </div>;
