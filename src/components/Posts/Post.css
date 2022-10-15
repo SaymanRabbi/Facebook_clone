@@ -260,3 +260,15 @@
   cursor: pointer;
   color: #fff;
 }
+/* =============BreakPoints================ */
+@media (max-width: 500px) {
+  .post .grid_2 img,
+  .post .grid_3 img,
+  .post .grid_4 img,
+  .post .grid_5 img {
+    height: 200px !important;
+  }
+  .post_bg {
+    height: 400px !important;
+  }
+} /* =============BreakPoints================ */
