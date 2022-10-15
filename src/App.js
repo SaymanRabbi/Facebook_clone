@@ -63,7 +63,7 @@ getAllpost()
       })
     }
   }
-  console.log(posts);
+
   return (
     <div>
       {visible &&

@@ -9,14 +9,15 @@ import Stroies from "../../components/home/Stroy/Stroies";
 import Post from "../../components/Posts/Post";
 import './style.css';
 export default function Home({setVisible,posts,loading}) {
+  const middle = useRef(null)
+  const [height,setHeight] = useState(0)
+  useEffect(()=>{
+  setHeight(middle.current.clientHeight)
+  },[])
   //user
   const { user } = useSelector((user) => ({ ...user }))
-  const middle = useRef(null);
-  const [height,setheight] = useState();
-  useEffect(()=>{
-setheight(middle.current.clientHeight)
-  },[])
-  return <div className="home" style={{height:`${height + 200}px`}}>
+  
+  return <div className="home" style={{height:`${height+150}px`}}>
     <Header/>
     <HomeLeft user={user} />
     <div className="home_middle" ref={middle}>
