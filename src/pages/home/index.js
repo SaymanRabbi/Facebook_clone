@@ -28,7 +28,7 @@ export default function Home({setVisible,posts,loading}) {
       <CreatePost user={user} setVisible={setVisible}/>
       <div className="posts">
         {
-          posts?.map(post=><Post key={post._id} post={post}/>)
+          posts?.map(post=><Post key={post._id} post={post} user={user}/>)
         }
       </div>
       </div>
