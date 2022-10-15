@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { Dots, Public } from "../../svg";
 import CreateComent from './CreateComent';
 import './Post.css';
+import PostMenu from './PostMenu';
 import ReactPopup from './ReactPopup';
 const Post = ({post}) => {
   const [visible, setVisible] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
     return (
         <div className="post">
       <div className="post_header">
@@ -118,6 +120,14 @@ const Post = ({post}) => {
         <div className="comments_order"></div>
         <CreateComent user={post.user} />
       </div>
+      {showMenu && (
+        <PostMenu
+          userId={user.id}
+          postUserId={post.user._id}
+          imagesLength={post?.images?.length}
+          setShowMenu={setShowMenu}
+        />
+      )}
     </div>
     );
 };
