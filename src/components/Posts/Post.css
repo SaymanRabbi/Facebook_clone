@@ -257,7 +257,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--light-color-primary);
   cursor: pointer;
   color: #fff;
 }
