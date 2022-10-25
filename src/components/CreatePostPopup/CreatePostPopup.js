@@ -40,7 +40,7 @@ const CreatePostPopup = ({ user,setVisible }) => {
     else if(images && images.length > 0){
       setLoading(true)
       const img = images.map(i=> dataURItoBlob(i))
-      const path = `${user.usrname}/post Images`
+      const path = `${user.usrname}/post_images`
       let formdata = new FormData()
       formdata.append("path",path)
       img.forEach((image)=>{

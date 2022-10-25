@@ -72,6 +72,7 @@ function App() {
       <Routes>
         <Route element={<LoginRoutes />}>
           <Route path="/profile" element={<Profile />} exact />
+          <Route path="/profile/:username" element={<Profile />} exact />
           <Route path="/" element={<Home loading={loading} setVisible={setVisible} posts={posts.posts} error={error}/>} exact />
           <Route path="/activate/:token" element={<Activate />} />
         </Route>
