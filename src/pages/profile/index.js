@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useEffect, useReducer } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { profilereducer } from "../../func/reducers";
 
 export default function Profile() {
+  const navigate = useNavigate()
   const { user } = useSelector((state) => ({ ...state }));
+  console.log(user);
   const {username} = useParams();
   const userName = username === undefined ? user.usrname : username;
   const [{loading,error,profile},dispatch] = useReducer(profilereducer,{
@@ -18,13 +20,19 @@ export default function Profile() {
   },[userName])
   const getProfile = async () => {
     try {
-      dispatch({type:"PROFILE_REQUEST"})
+     dispatch({type:"PROFILE_REQUEST"})
       const {data} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getProfile/${userName}`,{
         headers:{
           Authorization:`Bearer ${user.token}`
         }
       });
-      dispatch({type:"PROFILE_SUCCESS",payload:data})
+      if(data.messages===false){
+          navigate("/profile")
+      }
+      else{
+           dispatch({type:"PROFILE_SUCCESS",payload:data})
+      }
+ 
     } catch (error) {
       dispatch({
         type:"PROFILE_ERROR",
@@ -32,7 +40,5 @@ export default function Profile() {
       })
     }
   }
-  console.log(profile);
-
   return <div>Profile</div>;
 }
