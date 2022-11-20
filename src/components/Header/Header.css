@@ -569,10 +569,14 @@ header {
 }
 /*---responsive----------*/
 /* Active Header */
-.active_header{
+.active_header {
   background-color: var(--light-blue-color);
 }
-.active_header svg{
+.active_header svg {
   fill: var(--blue-color);
+}
+.active_link {
+  background-color: var(--light-blue-color);
+  color: var(--blue-color);
 }
 /* Active Header */

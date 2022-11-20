@@ -41,6 +41,6 @@ export default function Profile() {
     }
   }
   return <div>
-    <Header/>
+    <Header page='profile'/>
   </div>;
 }
