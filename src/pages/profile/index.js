@@ -7,9 +7,9 @@ import { profilereducer } from "../../func/reducers";
 export default function Profile() {
   const navigate = useNavigate()
   const { user } = useSelector((state) => ({ ...state }));
-  console.log(user);
   const {username} = useParams();
   const userName = username === undefined ? user.usrname : username;
+  console.log(userName);
   const [{loading,error,profile},dispatch] = useReducer(profilereducer,{
     loading:false,
     error:null,
@@ -26,6 +26,7 @@ export default function Profile() {
           Authorization:`Bearer ${user.token}`
         }
       });
+      console.log(data)
       if(data.messages===false){
           navigate("/profile")
       }
@@ -40,5 +41,6 @@ export default function Profile() {
       })
     }
   }
+  console.log(profile);
   return <div>Profile</div>;
 }
