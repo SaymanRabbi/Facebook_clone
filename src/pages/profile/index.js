@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useReducer } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import Header from "../../components/Header/Header";
 import { profilereducer } from "../../func/reducers";
 
 export default function Profile() {
@@ -9,7 +10,6 @@ export default function Profile() {
   const { user } = useSelector((state) => ({ ...state }));
   const {username} = useParams();
   const userName = username === undefined ? user.usrname : username;
-  console.log(userName);
   const [{loading,error,profile},dispatch] = useReducer(profilereducer,{
     loading:false,
     error:null,
@@ -26,7 +26,6 @@ export default function Profile() {
           Authorization:`Bearer ${user.token}`
         }
       });
-      console.log(data)
       if(data.messages===false){
           navigate("/profile")
       }
@@ -41,6 +40,7 @@ export default function Profile() {
       })
     }
   }
-  console.log(profile);
-  return <div>Profile</div>;
+  return <div>
+    <Header/>
+  </div>;
 }

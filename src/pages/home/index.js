@@ -18,7 +18,7 @@ export default function Home({setVisible,posts,loading}) {
   const { user } = useSelector((user) => ({ ...user }))
   
   return <div className="home" style={{height:`${height+150}px`}}>
-    <Header/>
+    <Header page="home"/>
     <HomeLeft user={user} />
     <div className="home_middle" ref={middle}>
       <Stroies />

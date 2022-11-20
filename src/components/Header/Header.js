@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import './Header.css'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ArrowDown, Friends, Gaming, HomeActive, Logo, Market, Menu, Messenger, Notifications, Search, Watch } from '../../svg'
-import {useSelector} from 'react-redux'
-import SearchMenu from './SearchMenu';
+import { ArrowDown, Friends, Gaming, Home, HomeActive, Logo, Market, Menu, Messenger, Notifications, Search, Watch } from '../../svg';
 import AllMenu from './AllMenu';
+import './Header.css';
+import SearchMenu from './SearchMenu';
 import UserMenu from './UserMenu';
-const Header = () => {
+const Header = ({page}) => {
     const [showSearch, setShowSearch] = useState(false);
     const [showAllMenu, setShowAllMenu] = useState(false);
     const [showuserMenu, setShowUserMenu] = useState(false);
@@ -34,8 +34,10 @@ const Header = () => {
             {/* --------Header Left---------------- */}
             {/* --------Header Middle---------------- */}
             <div className="header_middle">
-                <Link to='/' className='middle_icon active'>
-                 <HomeActive  color={color}/>
+                <Link to='/' className={`middle_icon ${page==='home'? 'active':''}`}>
+                 {
+                    page ==='home' ? <HomeActive  color={color}/>: <Home color={color}/>
+                 }
                 </Link>
                 <Link to='/' className='middle_icon hover1'>
                  <Friends color={color}/>
