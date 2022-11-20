@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
@@ -9,7 +9,6 @@ import './style.css';
 
 export default function Profile() {
   // covermenu
-  const [showCoverMenu, setShowCoverMenu] = useState(false);
   const navigate = useNavigate()
   const { user } = useSelector((state) => ({ ...state }));
   const {username} = useParams();
@@ -48,7 +47,7 @@ export default function Profile() {
     <Header page='profile'/>
     <div className="profile_top">
       <div className="profile_container">
-       <Cover profile={profile} cover={profile.cover} showCoverMenu={showCoverMenu} setShowCoverMenu={setShowCoverMenu}/>
+       <Cover profile={profile}/>
       </div>
     </div>
   </div>;
