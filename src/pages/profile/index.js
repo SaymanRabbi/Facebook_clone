@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { profilereducer } from "../../func/reducers";
+import './style.css';
 
 export default function Profile() {
   const navigate = useNavigate()
@@ -40,7 +41,17 @@ export default function Profile() {
       })
     }
   }
-  return <div>
+  return <div className="profile">
     <Header page='profile'/>
+    <div className="profile_top">
+      <div className="profile_container">
+        <div className="profile_cover">
+          {
+            profile.cover &&
+            <img src={profile.cover} alt="cover" className="cover" />
+          }
+        </div>
+      </div>
+    </div>
   </div>;
 }
