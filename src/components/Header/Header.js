@@ -34,7 +34,7 @@ const Header = ({page}) => {
             {/* --------Header Left---------------- */}
             {/* --------Header Middle---------------- */}
             <div className="header_middle">
-                <Link to='/' className={`middle_icon ${page==='home'? 'active':''}`}>
+                <Link to='/' className={`middle_icon ${page==='home'? 'active':'hover1'}`}>
                  {
                     page ==='home' ? <HomeActive  color={color}/>: <Home color={color}/>
                  }
