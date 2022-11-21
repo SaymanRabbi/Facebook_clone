@@ -9,7 +9,7 @@ const Cover = ({profile}) => {
   
             <div className="profile_cover" >
           {
-            profile.cover &&
+            profile?.cover &&
             <img src={profile.cover} alt="cover" className="cover" />
           }
           <div className="update_cover_wrapper">

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { profilereducer } from "../../func/reducers";
 import Cover from "./Cover";
+import PplYouMayKnow from "./PplYouMayKnow";
 import ProfileMenu from "./ProfileMenu";
 import ProfilePictureInfo from "./ProfilePictureInfo";
 import './style.css';
@@ -54,5 +55,12 @@ export default function Profile() {
        <ProfileMenu/>
       </div>
     </div>
+    <div className="profile_bottom">
+        <div className="profile_container">
+          <div className="bottom_container">
+            <PplYouMayKnow />
+          </div>
+        </div>
+      </div>
   </div>;
 }
