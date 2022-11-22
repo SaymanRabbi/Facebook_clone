@@ -2,15 +2,17 @@ import axios from "axios";
 import { useEffect, useReducer } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import CreatePost from "../../components/CreatePost/CreatePost";
 import Header from "../../components/Header/Header";
 import { profilereducer } from "../../func/reducers";
 import Cover from "./Cover";
+import GridPosts from "./GridPosts";
 import PplYouMayKnow from "./PplYouMayKnow";
 import ProfileMenu from "./ProfileMenu";
 import ProfilePictureInfo from "./ProfilePictureInfo";
 import './style.css';
 
-export default function Profile() {
+export default function Profile({setVisible}) {
   // covermenu
   const navigate = useNavigate()
   const { user } = useSelector((state) => ({ ...state }));
@@ -59,6 +61,13 @@ export default function Profile() {
         <div className="profile_container">
           <div className="bottom_container">
             <PplYouMayKnow />
+            <div className="profile_grid">
+              <div className="profile_left"></div>
+              <div className="profile_right">
+                <CreatePost user={user} profile setVisible={setVisible} />
+                <GridPosts />
+              </div>
+            </div>
           </div>
         </div>
       </div>

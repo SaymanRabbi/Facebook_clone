@@ -13,27 +13,27 @@ const Post = ({post,user}) => {
         <div className="post">
       <div className="post_header">
         <Link
-          to={`/profile/${post.user.username}`}
+          to={`/profile/${post?.user?.username}`}
           className="post_header_left"
         >
-          <img src={post.user.picture} alt="" />
+          <img src={post?.user?.picture} alt="" />
           <div className="header_col">
             <div className="post_profile_name">
-              {post.user.first_name} {post.user.last_name}
+              {post?.user?.first_name} {post?.user?.last_name}
               <div className="updated_p">
                 {post.type == "profilePicture" &&
                   `updated ${
-                    post.user.gender === "male" ? "his" : "her"
+                    post?.user?.gender === "male" ? "his" : "her"
                   } profile picture`}
                 {post.type == "cover" &&
                   `updated ${
-                    post.user.gender === "male" ? "his" : "her"
+                    post?.user?.gender === "male" ? "his" : "her"
                   } cover picture`}
               </div>
             </div>
             <div className="post_profile_privacy_date">
               <Moment fromNow interval={30}>
-                {post.createdAt}
+                {post?.createdAt}
               </Moment>
               . <Public color="#828387" />
             </div>
@@ -45,7 +45,7 @@ const Post = ({post,user}) => {
           <Dots color="#828387" />
         </div>
       </div>
-      {post.background ? (
+      {post?.background ? (
         <div
           className="post_bg"
           style={{ backgroundImage: `url(${post.background})` }}
@@ -55,10 +55,10 @@ const Post = ({post,user}) => {
       ) : (
         <>
           <div className="post_text">{post.text}</div>
-          {post.images && post.images.length && (
+          {post?.images && post.images.length && (
             <div
               className={
-                post.images.length === 1
+                post?.images.length === 1
                   ? "grid_1"
                   : post.images.length === 2
                   ? "grid_2"
