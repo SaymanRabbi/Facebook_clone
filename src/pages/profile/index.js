@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import Header from "../../components/Header/Header";
+import Post from "../../components/Posts/Post";
 import { profilereducer } from "../../func/reducers";
 import Cover from "./Cover";
 import GridPosts from "./GridPosts";
@@ -66,6 +67,13 @@ export default function Profile({setVisible}) {
               <div className="profile_right">
                 <CreatePost user={user} profile setVisible={setVisible} />
                 <GridPosts />
+                <div className="posts">
+                  {
+                    profile?.post?.map((post)=>
+                    <Post post={post} user={user} key={post._id}/>
+                    )
+                  }
+                </div>
               </div>
             </div>
           </div>
