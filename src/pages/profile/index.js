@@ -16,8 +16,8 @@ import './style.css';
 export default function Profile({setVisible}) {
   // covermenu
   const navigate = useNavigate()
-  const { user } = useSelector((state) => ({ ...state }));
   const {username} = useParams();
+  const { user } = useSelector((state) => ({ ...state }));
   const userName = username === undefined ? user.usrname : username;
   const [{loading,error,profile},dispatch] = useReducer(profilereducer,{
     loading:false,
@@ -27,6 +27,8 @@ export default function Profile({setVisible}) {
   useEffect(()=>{
     getProfile()
   },[userName])
+  const visitor =  userName===user.usrname? false : true;
+  console.log(visitor);
   const getProfile = async () => {
     try {
      dispatch({type:"PROFILE_REQUEST"})
@@ -53,8 +55,8 @@ export default function Profile({setVisible}) {
     <Header page='profile'/>
     <div className="profile_top">
       <div className="profile_container">
-       <Cover profile={profile?.user}/>
-       <ProfilePictureInfo profile={profile?.user}/>
+       <Cover profile={profile} visitor={visitor}/>
+       <ProfilePictureInfo profile={profile} visitor={visitor}/>
        <ProfileMenu/>
       </div>
     </div>
@@ -65,7 +67,9 @@ export default function Profile({setVisible}) {
             <div className="profile_grid">
               <div className="profile_left"></div>
               <div className="profile_right">
-                <CreatePost user={user} profile setVisible={setVisible} />
+                {
+                  !visitor && <CreatePost user={user} profile setVisible={setVisible} />
+                }
                 <GridPosts />
                 <div className="posts">
                   {

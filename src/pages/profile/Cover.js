@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import useClickoutside from '../../Helpers/useClickoutside';
 
-const Cover = ({profile}) => {
+const Cover = ({profile,visitor}) => {
     const [showCoverMenu, setShowCoverMenu] = useState(false);
     const menuRef = useRef(null)
     useClickoutside(menuRef,()=>setShowCoverMenu(false))
@@ -12,7 +12,8 @@ const Cover = ({profile}) => {
             profile?.cover &&
             <img src={profile.cover} alt="cover" className="cover" />
           }
-          <div className="update_cover_wrapper">
+          {
+            !visitor &&<div className="update_cover_wrapper">
             <div className="open_cover_update" onClick={()=>setShowCoverMenu(!showCoverMenu)}>
               <i className="camera_filled_icon"></i>
               Add Cover Photo
@@ -32,6 +33,7 @@ const Cover = ({profile}) => {
               </div>
             }
           </div>
+          }
         </div>
        
     );

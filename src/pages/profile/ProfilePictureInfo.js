@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfilePictureInfo = ({profile}) => {
+const ProfilePictureInfo = ({profile,visitor}) => {
     return (
         <div className="profile_img_wrap">
       <div className="profile_w_left">
@@ -19,13 +19,14 @@ const ProfilePictureInfo = ({profile}) => {
         <div className="profile_w_col">
           <div className="profile_name">
             {profile?.first_name} {profile?.last_name}
-            <div className="othername">Othername</div>
+            <div className="othername">(Othername)</div>
           </div>
           <div className="profile_friend_count"></div>
           <div className="profile_friend_imgs"></div>
         </div>
       </div>
-      <div className="profile_w_right">
+      {
+        visitor ?'':<div className="profile_w_right">
         <div className="blue_btn">
           <img src="../../../icons/plus.png" alt="" className="invert" />
           <span>Add to story</span>
@@ -35,6 +36,7 @@ const ProfilePictureInfo = ({profile}) => {
           <span>Edit profile</span>
         </div>
       </div>
+      }
     </div>
     );
 };
