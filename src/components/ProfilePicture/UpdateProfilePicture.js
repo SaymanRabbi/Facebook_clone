@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Cropper from 'react-easy-crop';
 const UpdateProfilePicture = ({setImage,image}) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
