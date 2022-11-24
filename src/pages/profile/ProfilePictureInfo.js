@@ -12,9 +12,11 @@ const ProfilePictureInfo = ({profile,visitor}) => {
               backgroundImage: `url(${profile?.picture})`,
             }}
           ></div>
-          <div className="profile_circle hover1">
+          {
+            !visitor && <div className="profile_circle hover1">
             <i className="camera_filled_icon"></i>
           </div>
+          }
         </div>
         <div className="profile_w_col">
           <div className="profile_name">

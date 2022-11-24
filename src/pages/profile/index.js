@@ -8,6 +8,7 @@ import Post from "../../components/Posts/Post";
 import { profilereducer } from "../../func/reducers";
 import Cover from "./Cover";
 import GridPosts from "./GridPosts";
+import Photos from "./Photos";
 import PplYouMayKnow from "./PplYouMayKnow";
 import ProfileMenu from "./ProfileMenu";
 import ProfilePictureInfo from "./ProfilePictureInfo";
@@ -65,7 +66,9 @@ export default function Profile({setVisible}) {
           <div className="bottom_container">
             <PplYouMayKnow />
             <div className="profile_grid">
-              <div className="profile_left"></div>
+              <div className="profile_left">
+                <Photos userName={userName} user={user}/>
+              </div>
               <div className="profile_right">
                 {
                   !visitor && <CreatePost user={user} profile setVisible={setVisible} />
@@ -74,7 +77,7 @@ export default function Profile({setVisible}) {
                 <div className="posts">
                   {
                     profile?.post?.map((post)=>
-                    <Post post={post} user={user} key={post._id}/>
+                    <Post post={post} user={user} key={post._id} profile={profile}/>
                     )
                   }
                 </div>

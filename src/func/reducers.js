@@ -46,3 +46,27 @@ export function profilereducer (state,action){
     }
   
   }
+  export function photosreducer (state,action){
+    switch(action.type){
+      case "PHOTOS_REQUEST":
+        return {
+          ...state,
+          loading:true,
+          error:null
+        }
+      case "PHOTOS_SUCCESS":
+        return {
+          ...state,
+          loading:false,
+          error:null,
+          photos:action.payload
+        }
+      case "PHOTOS_ERROR":
+        return {
+          ...state,
+          loading:false,
+          error:action.payload
+        }
+    }
+  
+  }
