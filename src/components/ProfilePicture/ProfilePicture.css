@@ -1,6 +1,6 @@
 .pictureBox {
   width: 700px !important;
-
+  /* position: relative; */
   height: 62vh;
 }
 .update_picture_wrap {
@@ -116,8 +116,13 @@
   font-size: 17px;
   border-bottom: 1px solid var(--bg-third);
 }
+.button_wrap {
+  display: flex;
+  justify-content: space-between;
+}
 .update_submit_wrap {
-  position: absolute;
+  /* position: absolute; */
+  right: 0;
   bottom: 1rem;
   right: 1rem;
   display: flex;

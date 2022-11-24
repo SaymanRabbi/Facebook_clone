@@ -72,6 +72,7 @@ const UpdateProfilePicture = ({setImage,image}) => {
           <i className="temp_icon"></i>Make Temporary
         </div>
       </div>
+      <div className="button_wrap">
       <div className="flex_p_t">
         <i className="public_icon"></i>
         Your profile picture is public
@@ -79,6 +80,7 @@ const UpdateProfilePicture = ({setImage,image}) => {
       <div className="update_submit_wrap">
         <div className="blue_link">Cancel</div>
         <button className="blue_btn">Save</button>
+      </div>
       </div>
     </div>
     );
