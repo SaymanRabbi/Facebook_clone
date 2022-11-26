@@ -19,6 +19,13 @@ const UpdateProfilePicture = ({setImage,image}) => {
       slider.current.stepDown();
       setZoom(slider.current.value);
     };
+    const getCroppedImg = useCallback(async () => {
+      try {
+        
+      } catch (error) {
+        console.log(error);
+      }
+    })
     return (
       <div className="postBox update_img">
       <div className="box_header">
