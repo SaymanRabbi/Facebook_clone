@@ -1,6 +1,9 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Cropper from 'react-easy-crop';
 const UpdateProfilePicture = ({setImage,image}) => {
+  useEffect(()=>{
+
+  },[image])
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
     const [description, setDescription] = useState("");
@@ -19,7 +22,7 @@ const UpdateProfilePicture = ({setImage,image}) => {
     return (
       <div className="postBox update_img">
       <div className="box_header">
-        <div className="small_circle" onClick={() => setImage("")}>
+        <div className="small_circle" onClick={(prev) => setImage(!prev)}>
           <i className="exit_icon"></i>
         </div>
         <span>Update profile picture</span>
@@ -78,7 +81,7 @@ const UpdateProfilePicture = ({setImage,image}) => {
         Your profile picture is public
       </div>
       <div className="update_submit_wrap">
-        <div className="blue_link">Cancel</div>
+        <div className="blue_link" onClick={(prev) => setImage(!prev)}>Cancel</div>
         <button className="blue_btn">Save</button>
       </div>
       </div>

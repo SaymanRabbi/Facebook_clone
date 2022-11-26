@@ -5,6 +5,7 @@ const ProfilePicture = () => {
     const refInput = useRef(null);
     const [image, setImage] = useState("");
     const [error, setError] = useState("");
+  
     const handleImage = (e) => {
       let file = e.target.files[0];
       if (
