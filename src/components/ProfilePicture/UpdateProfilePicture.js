@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Cropper from 'react-easy-crop';
+import getCroppedImg from "../../Helpers/getCroppedImg";
 const UpdateProfilePicture = ({setImage,image}) => {
   useEffect(()=>{
 
   },[image])
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
+  const [croppedAreaPixles, setCroppedAreaPixels] = useState(null)
     const [description, setDescription] = useState("");
     const slider = useRef(null);
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-      console.log(croppedArea, croppedAreaPixels)
+      setCroppedAreaPixels(croppedAreaPixels)
     }, [])
     const zoomIn = () => {
       slider.current.stepUp();
@@ -19,13 +21,18 @@ const UpdateProfilePicture = ({setImage,image}) => {
       slider.current.stepDown();
       setZoom(slider.current.value);
     };
-    const getCroppedImg = useCallback(async () => {
+    const getCroppedImage = useCallback(async () => {
       try {
-        
+        const img = await getCroppedImg(image, croppedAreaPixles);
+        setImage(img);
+        setZoom(1);
+        setCrop({ x: 0, y: 0 });
+        console.log(img);
+        return img;
       } catch (error) {
         console.log(error);
       }
-    })
+    },[croppedAreaPixles])
     return (
       <div className="postBox update_img">
       <div className="box_header">
@@ -89,7 +96,7 @@ const UpdateProfilePicture = ({setImage,image}) => {
       </div>
       <div className="update_submit_wrap">
         <div className="blue_link" onClick={() => setImage(false)}>Cancel</div>
-        <button className="blue_btn">Save</button>
+        <button className="blue_btn" onClick={()=>getCroppedImage()}>Save</button>
       </div>
       </div>
     </div>
