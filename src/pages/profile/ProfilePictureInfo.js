@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
 
 const ProfilePictureInfo = ({profile,visitor}) => {
-  const [show,setShow] = useState(true);
+  const [show,setShow] = useState(false);
     return (
         <div className="profile_img_wrap">
           {
-            show&& <ProfilePicture/>
+            show&& <ProfilePicture setShow={setShow}/>
           }
       <div className="profile_w_left">
         <div className="profile_w_img">
@@ -19,7 +19,7 @@ const ProfilePictureInfo = ({profile,visitor}) => {
           ></div>
           {
             !visitor && <div className="profile_circle hover1">
-            <i className="camera_filled_icon"></i>
+            <i className="camera_filled_icon" onClick={()=>setShow(true)}></i>
           </div>
           }
         </div>

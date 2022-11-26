@@ -22,7 +22,7 @@ const UpdateProfilePicture = ({setImage,image}) => {
     return (
       <div className="postBox update_img">
       <div className="box_header">
-        <div className="small_circle" onClick={(prev) => setImage(!prev)}>
+        <div className="small_circle" onClick={() => setImage(false)}>
           <i className="exit_icon"></i>
         </div>
         <span>Update profile picture</span>
@@ -81,7 +81,7 @@ const UpdateProfilePicture = ({setImage,image}) => {
         Your profile picture is public
       </div>
       <div className="update_submit_wrap">
-        <div className="blue_link" onClick={(prev) => setImage(!prev)}>Cancel</div>
+        <div className="blue_link" onClick={() => setImage(false)}>Cancel</div>
         <button className="blue_btn">Save</button>
       </div>
       </div>

@@ -1,11 +1,13 @@
 import { useRef, useState } from 'react';
+import useClickoutside from '../../Helpers/useClickoutside';
 import './ProfilePicture.css';
 import UpdateProfilePicture from './UpdateProfilePicture';
-const ProfilePicture = () => {
+const ProfilePicture = ({setShow}) => {
+  const ref = useRef(null);
+  useClickoutside(ref, () => setShow(false));
     const refInput = useRef(null);
     const [image, setImage] = useState("");
     const [error, setError] = useState("");
-  
     const handleImage = (e) => {
       let file = e.target.files[0];
       if (
@@ -36,10 +38,10 @@ const ProfilePicture = () => {
           onChange={handleImage}
           accept="image/jpeg,image/png,image/webp,image/gif"
         />
-        <div className="postBox pictureBox">
+        <div className="postBox pictureBox" ref={ref}>
           <div className="box_header">
             <div className="small_circle">
-              <i className="exit_icon"></i>
+              <i className="exit_icon" onClick={()=>setShow(false)}></i>
             </div>
             <span>Update profile picture</span>
           </div>

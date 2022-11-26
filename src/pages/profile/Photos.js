@@ -34,7 +34,6 @@ const Photos = ({userName,user}) => {
           })
         }
       }
-      console.log(photos);
     return (
         <div className="profile_card">
       <div className="profile_card_header">
