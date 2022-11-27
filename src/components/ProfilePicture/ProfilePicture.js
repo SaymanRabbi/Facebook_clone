@@ -44,6 +44,7 @@ const ProfilePicture = ({setShow}) => {
           </div>
           <div className="update_picture_wrap">
             <div className="update_picture_buttons">
+              
               <button
                 className="light_blue_btn"
                 onClick={() => refInput.current.click()}
@@ -51,6 +52,7 @@ const ProfilePicture = ({setShow}) => {
                 <i className="plus_icon filter_blue"></i>
                 Upload photo
               </button>
+              
               <button className="gray_btn">
                 <i className="frame_icon"></i>
                 Add frame
@@ -67,7 +69,7 @@ const ProfilePicture = ({setShow}) => {
           )}
           <div className="old_pictures_wrap"></div>
         </div>
-        {image && <UpdateProfilePicture setImage={setImage} image={image} />}
+        {image && <UpdateProfilePicture setImage={setImage} image={image} setError={setError}/>}
       </div>
     );
 };
