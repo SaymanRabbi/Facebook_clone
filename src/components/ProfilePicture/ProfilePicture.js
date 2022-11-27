@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import './ProfilePicture.css';
 import UpdateProfilePicture from './UpdateProfilePicture';
-const ProfilePicture = ({setShow}) => {
+const ProfilePicture = ({setShow,pref}) => {
     const refInput = useRef(null);
     const [image, setImage] = useState("");
     const [error, setError] = useState("");
@@ -37,8 +37,8 @@ const ProfilePicture = ({setShow}) => {
         />
         <div className="postBox pictureBox" >
           <div className="box_header">
-            <div className="small_circle">
-              <i className="exit_icon" onClick={()=>setShow(false)}></i>
+            <div className="small_circle" onClick={()=>setShow(false)}>
+              <i className="exit_icon" ></i>
             </div>
             <span>Update profile picture</span>
           </div>
@@ -69,7 +69,7 @@ const ProfilePicture = ({setShow}) => {
           )}
           <div className="old_pictures_wrap"></div>
         </div>
-        {image && <UpdateProfilePicture setImage={setImage} image={image} setError={setError}/>}
+        {image && <UpdateProfilePicture pref={pref} setShow={setShow} setImage={setImage} image={image} setError={setError}/>}
       </div>
     );
 };

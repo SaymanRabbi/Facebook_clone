@@ -1,17 +1,18 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import Cookies from "js-cookie";
+import { useCallback, useRef, useState } from "react";
 import Cropper from 'react-easy-crop';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import PulseLoader from "react-spinners/PulseLoader";
 import { createPost } from "../../func/post";
 import { uploadImages } from "../../func/UploadImages";
 import { updatePic } from "../../func/user";
 import getCroppedImg from "../../Helpers/getCroppedImg";
-const UpdateProfilePicture = ({setImage,image,setError}) => {
-  useEffect(()=>{
-
-  },[image])
+const UpdateProfilePicture = ({setImage,image,setError,setShow,pref}) => {
+  const dispatch = useDispatch();
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const {user} = useSelector(state => ({...state}));
+  const [loading,setLoading] = useState(false);
   const [croppedAreaPixles, setCroppedAreaPixels] = useState(null)
     const [description, setDescription] = useState("");
     const slider = useRef(null);
@@ -34,14 +35,15 @@ const UpdateProfilePicture = ({setImage,image,setError}) => {
           setZoom(1); 
           setCrop({ x: 0, y: 0 });
         }else{
+
           return img;
         }
       } catch (error) {
-        console.log(error);
       }
     },[croppedAreaPixles])
     const updateProfilePicture = async () => {
       try {
+        setLoading(true);
         let img = await getCroppedImage();
         let blob = await fetch(img).then(r => r.blob());
         const path = `${user.usrname}/profile_pictures`;
@@ -49,23 +51,36 @@ const UpdateProfilePicture = ({setImage,image,setError}) => {
         formData.append("file", blob);
         formData.append("path", path);
         const res =await uploadImages(formData, user.token,path);
-        console.log(res,"res");
         const update_pic = await updatePic(res[0].url,user.token);
-        console.log(update_pic,"update_pic");
         if(update_pic === "ok"){
         const New_profile = await createPost("profilePicture",null,description,res,user.id,user.token);
-        console.log(New_profile,"new profile");
         if(New_profile === "ok"){
-
+          setLoading(false);
+          setImage("");
+          console.log(res,"Res");
+          pref.current.style.backgroundImage=`url(${res[0].url})`;
+          Cookies.set({
+            ...user,
+            picture:res[0].url
+          })
+          dispatch({
+            type:"UPDATEPROFILEPIC",
+            payload:res[0].url
+          })
+          setShow(false)
         }
         else{
+          setLoading(false);
           setError(New_profile);
         }
         }
         else{
+          setLoading(false);
           setError(update_pic);
         }
+       
       } catch (error) {
+        setLoading(false);
         setError(error?.messages);
       }
     }
@@ -131,8 +146,9 @@ const UpdateProfilePicture = ({setImage,image,setError}) => {
         Your profile picture is public
       </div>
       <div className="update_submit_wrap">
-        <div className="blue_link" onClick={() => setImage(false)}>Cancel</div>
-        <button className="blue_btn" onClick={()=>updateProfilePicture()}>Save</button>
+        <div className="blue_link" onClick={() => setImage('')}>Cancel</div>
+        <button className="blue_btn" onClick={()=>updateProfilePicture()} disabled={loading}>{
+          loading ? <PulseLoader color="#fff" size={5} /> : 'Post'}</button>
       </div>
       </div>
     </div>
