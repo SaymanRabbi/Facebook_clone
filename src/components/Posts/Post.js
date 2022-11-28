@@ -52,7 +52,7 @@ const Post = ({post,user,profile}) => {
         >
           <div className="post_bg_text">{post.text}</div>
         </div>
-      ) : (
+      ) :post.type===null? (
         <>
           <div className="post_text">{post.text}</div>
           {post?.images && post.images.length && (
@@ -80,7 +80,13 @@ const Post = ({post,user,profile}) => {
             </div>
           )}
         </>
-      )}
+      ):post.type==='profilePicture'?
+    <div className='post_profile_wrap'>
+      <div className="post_updated_bg">
+        <img src={post.user.cover} alt="" />
+      </div>
+     <img src={post.images[0].url} alt="" className='post_updated_picture' />
+    </div>:<div className='post_cover_wrap'>cover</div>}
        <div className="post_infos">
         <div className="reacts_count">
           <div className="reacts_count_imgs"></div>
