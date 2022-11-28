@@ -141,7 +141,7 @@ const Cover = ({profile,visitor}) => {
             </div>
           }
           {
-            profile?.cover &&
+            profile?.cover && !cover &&
             <img src={profile.cover} alt="cover" className="cover" />
           }
           {
