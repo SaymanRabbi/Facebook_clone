@@ -1,13 +1,16 @@
 import { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import useClickoutside from '../../Helpers/useClickoutside';
 import './ProfilePicture.css';
 import UpdateProfilePicture from './UpdateProfilePicture';
-const ProfilePicture = ({setShow,pref}) => {
-    const refInput = useRef(null);
-    const popup = useRef(null);
-    useClickoutside(popup,()=>setShow(false));
-    const [image, setImage] = useState("");
-    const [error, setError] = useState("");
+const ProfilePicture = ({setShow,pref,photos}) => {
+  const refInput = useRef(null);
+  const popup = useRef(null);
+  useClickoutside(popup,()=>setShow(false));
+  const [image, setImage] = useState("");
+  const [error, setError] = useState("");
+  console.log(photos);
+  const {user} = useSelector((state)=>({...state}));
     const handleImage = (e) => {
       let file = e.target.files[0];
       if (
@@ -71,7 +74,38 @@ const ProfilePicture = ({setShow,pref}) => {
               </button>
             </div>
           )}
-          <div className="old_pictures_wrap"></div>
+          <div className="old_pictures_wrap scrollbar">
+          <h4>your profile pictures</h4>
+          <div className="old_pictures">
+            {photos
+              .filter(
+                (img) => img.folder === `${user.usrname}/profile_pictures`
+              )
+              .map((photo) => (
+                <img
+                  src={photo.secure_url}
+                  key={photo.public_id}
+                  alt=""
+                  onClick={() => setImage(photo.secure_url)}
+                />
+              ))}
+          </div>
+          <h4>other pictures</h4>
+          <div className="old_pictures">
+            {photos
+              .filter(
+                (img) => img.folder !== `${user.usrname}/profile_pictures`
+              )
+              .map((photo) => (
+                <img
+                  src={photo.secure_url}
+                  key={photo.public_id}
+                  alt=""
+                  onClick={() => setImage(photo.secure_url)}
+                />
+              ))}
+          </div>
+        </div>  
         </div>
         {image && <UpdateProfilePicture pref={pref} setShow={setShow} setImage={setImage} image={image} setError={setError}/>}
         </div>
