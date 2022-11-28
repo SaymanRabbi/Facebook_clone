@@ -9,7 +9,6 @@ const ProfilePicture = ({setShow,pref,photos}) => {
   useClickoutside(popup,()=>setShow(false));
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
-  console.log(photos);
   const {user} = useSelector((state)=>({...state}));
     const handleImage = (e) => {
       let file = e.target.files[0];
