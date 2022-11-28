@@ -1,8 +1,11 @@
 import { useRef, useState } from 'react';
+import useClickoutside from '../../Helpers/useClickoutside';
 import './ProfilePicture.css';
 import UpdateProfilePicture from './UpdateProfilePicture';
 const ProfilePicture = ({setShow,pref}) => {
     const refInput = useRef(null);
+    const popup = useRef(null);
+    useClickoutside(popup,()=>setShow(false));
     const [image, setImage] = useState("");
     const [error, setError] = useState("");
     const handleImage = (e) => {
@@ -35,6 +38,7 @@ const ProfilePicture = ({setShow,pref}) => {
           onChange={handleImage}
           accept="image/jpeg,image/png,image/webp,image/gif"
         />
+        <div ref={popup}>
         <div className="postBox pictureBox" >
           <div className="box_header">
             <div className="small_circle" onClick={()=>setShow(false)}>
@@ -70,6 +74,7 @@ const ProfilePicture = ({setShow,pref}) => {
           <div className="old_pictures_wrap"></div>
         </div>
         {image && <UpdateProfilePicture pref={pref} setShow={setShow} setImage={setImage} image={image} setError={setError}/>}
+        </div>
       </div>
     );
 };
