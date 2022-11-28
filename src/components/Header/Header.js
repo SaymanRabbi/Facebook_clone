@@ -58,7 +58,7 @@ const Header = ({page}) => {
           
             <div className="header_right">
                 <Link to="/profile" className={`profile_link hover1 ${page==='profile'?'active_link':''}`}>
-                    <img src={user?.profile_picture} alt="User Profile"/>
+                    <img src={user?.picture} alt="User Profile"/>
                     <span>{user?.first_name}</span>
                 </Link>
                 <div className={`circle_icon hover1 ${showAllMenu && "active_header"}`} onClick={()=>setShowAllMenu(true)}>

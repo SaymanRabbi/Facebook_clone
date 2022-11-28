@@ -30,7 +30,6 @@ export default function Profile({setVisible}) {
     getProfile()
   },[userName])
   const visitor =  userName===user.usrname? false : true;
-  console.log(visitor);
   const getProfile = async () => {
     try {
      dispatch({type:"PROFILE_REQUEST"})
