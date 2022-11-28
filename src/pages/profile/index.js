@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CreatePost from "../../components/CreatePost/CreatePost";
@@ -16,16 +16,21 @@ import ProfilePictureInfo from "./ProfilePictureInfo";
 import './style.css';
 
 export default function Profile({setVisible}) {
+  const [photos,setPhotos] = useState({})
   // covermenu
   const navigate = useNavigate()
   const {username} = useParams();
   const { user } = useSelector((state) => ({ ...state }));
   const userName = username === undefined ? user.usrname : username;
+  const path = `${userName}/*`
+  const max=30
+  const sort = 'desc'
   const [{loading,error,profile},dispatch] = useReducer(profilereducer,{
     loading:false,
     error:null,
     profile:{}
   })
+
   useEffect(()=>{
     getProfile()
   },[userName])
@@ -42,6 +47,18 @@ export default function Profile({setVisible}) {
           navigate("/profile")
       }
       else{
+        try {
+          const {data} = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/listimages`,{
+            path,max,sort
+          },{
+            headers:{
+              Authorization:`Bearer ${user.token}`
+            }
+          });
+          setPhotos(data)
+        } catch (error) {
+          console.log(error);
+        }
            dispatch({type:"PROFILE_SUCCESS",payload:data})
       }
  
@@ -67,7 +84,7 @@ export default function Profile({setVisible}) {
             <PplYouMayKnow />
             <div className="profile_grid">
               <div className="profile_left">
-                <Photos userName={userName} user={user}/>
+                <Photos photos={photos}/>
                 <Friends friends={profile.friends}/>
                 <div className="relative_fb_copyright">
                   <Link to="/">Privacy </Link>

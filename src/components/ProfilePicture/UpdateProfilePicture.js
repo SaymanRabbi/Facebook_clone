@@ -58,7 +58,7 @@ const UpdateProfilePicture = ({setImage,image,setError,setShow,pref}) => {
           setLoading(false);
           setImage("");
           pref.current.style.backgroundImage=`url(${res[0].url})`;
-        Cookies.set("user",JSON.stringify({...user,profile_picture:res[0].url}));
+        Cookies.set("user",JSON.stringify({...user,picture:res[0].url}));
           dispatch({
             type:"UPDATEPROFILEPIC",
             payload:res[0].url
