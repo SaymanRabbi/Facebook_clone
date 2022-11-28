@@ -76,7 +76,7 @@ const Cover = ({profile,visitor}) => {
         const res =await uploadImages(formData, user.token,path);
         const update_pic = await updateCover(res[0].url,user.token);
         if(update_pic === "ok"){
-        const New_profile = await createPost("profilePicture",null,null,res,user.id,user.token);
+        const New_profile = await createPost("cover",null,null,res,user.id,user.token);
         if(New_profile === "ok"){
           setLoading(false);
           setCover("");
