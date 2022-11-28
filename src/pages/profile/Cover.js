@@ -1,13 +1,23 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import Cropper from 'react-easy-crop';
+import getCroppedImg from '../../Helpers/getCroppedImg';
 import useClickoutside from '../../Helpers/useClickoutside';
 
 const Cover = ({profile,visitor}) => {
     const [showCoverMenu, setShowCoverMenu] = useState(false);
+    const [width, setWidth] = useState();
     const [cover,setCover] = useState("")
     const [error, setError] = useState("");
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [zoom, setZoom] = useState(1)
+    const [croppedAreaPixles, setCroppedAreaPixels] = useState(null)
     const menuRef = useRef(null)
-    useClickoutside(menuRef,()=>setShowCoverMenu(false))
+    const hightRef = useRef(null)
     const Refinput = useRef(null)
+    useEffect(()=>{
+      setWidth(hightRef.current.clientWidth);
+    },[window.innerWidth])
+    useClickoutside(menuRef,()=>setShowCoverMenu(false))
     const handleImage = (e) => {
       let file = e.target.files[0];
       if (
@@ -29,12 +39,65 @@ const Cover = ({profile,visitor}) => {
         setCover(event.target.result);
       };
     };
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+      setCroppedAreaPixels(croppedAreaPixels)
+    }, [])
+    const getCroppedImage = useCallback(async (show) => {
+      try {
+        const img = await getCroppedImg(cover, croppedAreaPixles);
+        if(show){
+          setCover(img);
+          setZoom(1); 
+          setCrop({ x: 0, y: 0 });
+        }else{
+
+          return img;
+        }
+      } catch (error) {
+      }
+    },[croppedAreaPixles])
     return (
   
-            <div className="profile_cover" >
+            <div className="profile_cover" ref={hightRef}>
+              {
+                cover &&<div className="save_changes_cover">
+                <div className="save_changes-left">
+                  <i className='public_icon'>
+                    Your Cover Photo is Public
+                  </i>
+                </div>
+                <div className="save_changes_right">
+                  <button className='blue_btn opacity_btn'>Cancel</button>
+                  <button className='blue_btn'>Save</button>
+                </div>
+              </div>
+              }
               <input type="file" ref={Refinput} hidden accept='image/jpeg,image/png,image/webp,image/gif'
               onChange={handleImage}
               />
+              {error && (
+            <div className="postError comment_error">
+              <div className="postError_error">{error}</div>
+              <button className="blue_btn" onClick={() => setError("")}>
+                Try again
+              </button>
+            </div>
+          )}
+          {
+            cover &&  <div className="cover_cropper">
+            <Cropper
+             image={cover}
+             crop={crop}
+             zoom={zoom}
+             aspect={width / 350}
+             onCropChange={setCrop}
+             onCropComplete={onCropComplete}
+             onZoomChange={setZoom}
+             showGrid={true}
+             objectFit='horizontal-cover'
+           />
+            </div>
+          }
           {
             profile?.cover &&
             <img src={profile.cover} alt="cover" className="cover" />

@@ -11,9 +11,9 @@ const UpdateProfilePicture = ({setImage,image,setError,setShow,pref}) => {
   const dispatch = useDispatch();
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
+  const [croppedAreaPixles, setCroppedAreaPixels] = useState(null)
   const {user} = useSelector(state => ({...state}));
   const [loading,setLoading] = useState(false);
-  const [croppedAreaPixles, setCroppedAreaPixels] = useState(null)
     const [description, setDescription] = useState("");
     const slider = useRef(null);
     const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
