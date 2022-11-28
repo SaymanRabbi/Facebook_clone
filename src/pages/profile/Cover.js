@@ -1,11 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Cropper from 'react-easy-crop';
+import { useSelector } from 'react-redux';
+import PulseLoader from "react-spinners/PulseLoader";
+import { createPost } from '../../func/post';
+import { uploadImages } from '../../func/UploadImages';
+import { updateCover } from '../../func/user';
 import getCroppedImg from '../../Helpers/getCroppedImg';
 import useClickoutside from '../../Helpers/useClickoutside';
 
 const Cover = ({profile,visitor}) => {
     const [showCoverMenu, setShowCoverMenu] = useState(false);
     const [width, setWidth] = useState();
+    const [loading,setLoading] = useState(false);
+    const { user } = useSelector((state) => ({ ...state }));
     const [cover,setCover] = useState("")
     const [error, setError] = useState("");
     const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -14,6 +21,7 @@ const Cover = ({profile,visitor}) => {
     const menuRef = useRef(null)
     const hightRef = useRef(null)
     const Refinput = useRef(null)
+    const coverref = useRef(null)
     useEffect(()=>{
       setWidth(hightRef.current.clientWidth);
     },[window.innerWidth])
@@ -56,6 +64,39 @@ const Cover = ({profile,visitor}) => {
       } catch (error) {
       }
     },[croppedAreaPixles])
+    const updateCoverFunc = async () => {
+      try {
+        setLoading(true);
+        let img = await getCroppedImage();
+        let blob = await fetch(img).then(r => r.blob());
+        const path = `${user.usrname}/cover_pictures`;
+        let formData = new FormData();
+        formData.append("file", blob);
+        formData.append("path", path);
+        const res =await uploadImages(formData, user.token,path);
+        const update_pic = await updateCover(res[0].url,user.token);
+        if(update_pic === "ok"){
+        const New_profile = await createPost("profilePicture",null,null,res,user.id,user.token);
+        if(New_profile === "ok"){
+          setLoading(false);
+          setCover("");
+          coverref.current.src=`${res[0].url}`;
+        }
+        else{
+          setLoading(false);
+          setError(New_profile);
+        }
+        }
+        else{
+          setLoading(false);
+          setError(update_pic);
+        }
+       
+      } catch (error) {
+        setLoading(false);
+        setError(error?.messages);
+      }
+    }
     return (
   
             <div className="profile_cover" ref={hightRef}>
@@ -68,7 +109,8 @@ const Cover = ({profile,visitor}) => {
                 </div>
                 <div className="save_changes_right">
                   <button className='blue_btn opacity_btn'>Cancel</button>
-                  <button className='blue_btn'>Save</button>
+                  <button className='blue_btn' onClick={()=>updateCoverFunc()}>{
+          loading ? <PulseLoader color="#fff" size={5} /> : 'Save'}</button>
                 </div>
               </div>
               }
@@ -84,7 +126,7 @@ const Cover = ({profile,visitor}) => {
             </div>
           )}
           {
-            cover &&  <div className="cover_cropper">
+            cover &&  <div className="cover_cropper" ref={coverref}>
             <Cropper
              image={cover}
              crop={crop}
