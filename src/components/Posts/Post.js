@@ -7,6 +7,7 @@ import './Post.css';
 import PostMenu from './PostMenu';
 import ReactPopup from './ReactPopup';
 const Post = ({post,user,profile}) => {
+  console.log(post);
   const [visible, setVisible] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
     return (
