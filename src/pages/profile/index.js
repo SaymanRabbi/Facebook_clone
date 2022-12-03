@@ -73,7 +73,7 @@ export default function Profile({setVisible}) {
     <Header page='profile'/>
     <div className="profile_top">
       <div className="profile_container">
-       <Cover profile={profile} visitor={visitor}/>
+       <Cover profile={profile} visitor={visitor} photo = {photos.resources}/>
        <ProfilePictureInfo profile={profile} visitor={visitor} photos ={photos?.resources}/>
        <ProfileMenu/>
       </div>

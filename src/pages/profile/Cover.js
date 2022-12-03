@@ -7,9 +7,11 @@ import { uploadImages } from '../../func/UploadImages';
 import { updateCover } from '../../func/user';
 import getCroppedImg from '../../Helpers/getCroppedImg';
 import useClickoutside from '../../Helpers/useClickoutside';
+import OldProfilePopUp from './OldProfilePopUp';
 
-const Cover = ({profile,visitor}) => {
+const Cover = ({profile,visitor,photo}) => {
     const [showCoverMenu, setShowCoverMenu] = useState(false);
+    const [oldpic,setOldPic] = useState(false);
     const [width, setWidth] = useState();
     const [loading,setLoading] = useState(false);
     const { user } = useSelector((state) => ({ ...state }));
@@ -78,7 +80,6 @@ const Cover = ({profile,visitor}) => {
         if(update_pic === "ok"){
         const New_profile = await createPost("cover",null,null,res,user.id,user.token);
         if(New_profile === "ok"){
-          console.log(res,'hello');
           setLoading(false);
           setCover("");
           coverref.current.src=res[0].url;
@@ -153,7 +154,7 @@ const Cover = ({profile,visitor}) => {
             </div>
             {
               showCoverMenu && <div className="open_cover_menu" ref={menuRef}>
-                <div className="open_cover_menu_item hover1">
+                <div className="open_cover_menu_item hover1" onClick={()=>setOldPic(true)}>
                   <i className="photo_icon">
                   </i>
                   Select Photo
@@ -167,6 +168,7 @@ const Cover = ({profile,visitor}) => {
             }
           </div>
           }
+          {oldpic && <OldProfilePopUp photos={photo} setCover={setCover} setOldPic={setOldPic}/>}
         </div>
        
     );
