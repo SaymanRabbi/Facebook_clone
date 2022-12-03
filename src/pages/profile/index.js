@@ -31,21 +31,21 @@ export default function Profile({setVisible}) {
     error:null,
     profile:{}
   })
-
+  
   useEffect(()=>{
     getProfile()
   },[userName])
   const visitor =  userName===user.usrname? false : true;
   const getProfile = async () => {
     try {
-     dispatch({type:"PROFILE_REQUEST"})
+      dispatch({type:"PROFILE_REQUEST"})
       const {data} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getProfile/${userName}`,{
         headers:{
           Authorization:`Bearer ${user.token}`
         }
       });
       if(data.messages===false){
-          navigate("/profile")
+        navigate("/profile")
       }
       else{
         try {
@@ -60,9 +60,9 @@ export default function Profile({setVisible}) {
         } catch (error) {
           console.log(error);
         }
-           dispatch({type:"PROFILE_SUCCESS",payload:data})
+        dispatch({type:"PROFILE_SUCCESS",payload:data})
       }
- 
+      
     } catch (error) {
       dispatch({
         type:"PROFILE_ERROR",
@@ -70,6 +70,7 @@ export default function Profile({setVisible}) {
       })
     }
   }
+    console.log(profile);
   return <div className="profile">
     <Header page='profile'/>
     <div className="profile_top">
@@ -85,7 +86,7 @@ export default function Profile({setVisible}) {
             <PplYouMayKnow />
             <div className="profile_grid">
               <div className="profile_left">
-                <Intro details={profile.details} visitor={visitor}/>
+                <Intro detailss={profile.details} visitor={visitor}/>
                 <Photos photos={photos}/>
                 <Friends friends={profile.friends}/>
                 <div className="relative_fb_copyright">
