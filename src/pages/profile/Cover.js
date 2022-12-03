@@ -78,9 +78,10 @@ const Cover = ({profile,visitor}) => {
         if(update_pic === "ok"){
         const New_profile = await createPost("cover",null,null,res,user.id,user.token);
         if(New_profile === "ok"){
+          console.log(res,'hello');
           setLoading(false);
           setCover("");
-          coverref.current.src=`${res[0].url}`;
+          coverref.current.src=res[0].url;
         }
         else{
           setLoading(false);
@@ -108,7 +109,7 @@ const Cover = ({profile,visitor}) => {
                   </i>
                 </div>
                 <div className="save_changes_right">
-                  <button className='blue_btn opacity_btn'>Cancel</button>
+                  <button className='blue_btn opacity_btn' onClick={()=>setCover("")}>Cancel</button>
                   <button className='blue_btn' onClick={()=>updateCoverFunc()}>{
           loading ? <PulseLoader color="#fff" size={5} /> : 'Save'}</button>
                 </div>
@@ -126,7 +127,7 @@ const Cover = ({profile,visitor}) => {
             </div>
           )}
           {
-            cover &&  <div className="cover_cropper" ref={coverref}>
+            cover &&  <div className="cover_cropper" >
             <Cropper
              image={cover}
              crop={crop}
@@ -142,7 +143,7 @@ const Cover = ({profile,visitor}) => {
           }
           {
             profile?.cover && !cover &&
-            <img src={profile.cover} alt="cover" className="cover" />
+            <img src={profile.cover} alt="cover" className="cover"ref={coverref} />
           }
           {
             !visitor &&<div className="update_cover_wrapper">
