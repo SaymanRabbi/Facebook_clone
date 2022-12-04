@@ -39,6 +39,71 @@ const EditeDetails = ({details,handleChange,updateDetails,infos}) => {
                     updateDetails={updateDetails}
                     infos={infos}
                   />
+                  <div className="details_header">workplace</div>
+                  <Detail
+                    value={details?.workplace}
+                    img="job"
+                    text="workplace"
+                    placeholder="Add Workplace"
+                    name="workplace"
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                  />
+                  <div className="details_header">Education</div>
+                  <Detail
+                    value={details?.highSchool}
+                    img="studies"
+                    text="High School"
+                    placeholder="Add High School Name"
+                    name="highSchool"
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                  />
+                  <Detail
+                    value={details?.college}
+                    img="studies"
+                    text="College"
+                    placeholder="Add College Name"
+                    name="college"
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                  />
+                  <div className="details_header">Current City</div>
+                  <Detail
+                    value={details?.currentCity}
+                    img="home"
+                    text="a currentCity"
+                    placeholder="Add currentCity"
+                    name="currentCity"
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                  />
+                  <div className="details_header">Home Town</div>
+                  <Detail
+                    value={details?.hometown}
+                    img="home"
+                    text="a hometown"
+                    placeholder="Add hometown"
+                    name="hometown"
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                  />
+                  <div className="details_header">instagram</div>
+                  <Detail
+                    value={details?.instagram}
+                    img="instagram"
+                    text="Instagram"
+                    placeholder="Add instagram"
+                    name="instagram"
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                  />
                 </div>
               </div>
             </div>
