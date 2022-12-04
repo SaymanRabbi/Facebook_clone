@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import Bio from './Bio';
+import EditeDetails from "./EditeDetails";
 import './Intro.css';
 const Intro = ({detailss,visitor}) => {
   const { user } = useSelector((state) => ({ ...state }));
-  console.log(detailss);
+  const [visible, setVisible] = useState(1);
   const [details, setDetails] = useState();
   useEffect(() => {
     setDetails(detailss);
@@ -47,6 +48,11 @@ const Intro = ({detailss,visitor}) => {
     } catch (error) {
     }
   };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInfos({ ...infos, [name]: value });
+    setMax(100 - e.target.value.length);
+  };
   return (
     <div className="profile_card">
       <div className="profile_card_header">Intro</div>
@@ -75,7 +81,7 @@ const Intro = ({detailss,visitor}) => {
         <Bio
           infos={infos}
           max={max}
-          handleBioChange={handleBioChange}
+          handleBioChange={handleChange}
           setShowBio={setShowBio}
           updateDetails={updateDetails}
         />
@@ -143,6 +149,9 @@ const Intro = ({detailss,visitor}) => {
       {!visitor && (
         <button className="gray_btn hover1 w100">Edit Details</button>
       )}
+      {
+        visible && !visitor && <EditeDetails details={details}/>
+      }
       {!visitor && (
         <button className="gray_btn hover1 w100">Add Hobbies</button>
       )}
