@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Bio from "./Bio";
 
-const Detail = ({ img, value, placeholder, name,handleChange,updateDetails,infos,text }) => {
-  console.log(placeholder);
+const Detail = ({ img, value, placeholder, name,handleChange,updateDetails,infos,text,relationShip }) => {
     const [show, setShow] = useState(false);
   return (
     <div>
@@ -21,7 +20,7 @@ const Detail = ({ img, value, placeholder, name,handleChange,updateDetails,infos
           </>
         )}
       </div>
-      {show && <Bio placeholder={placeholder} name={name} handleChange={handleChange} updateDetails={updateDetails} infos={infos} detail setShow={setShow}/> }
+      {show && <Bio placeholder={placeholder} name={name} handleChange={handleChange} updateDetails={updateDetails} infos={infos} detail setShow={setShow} relationShip={relationShip}/> }
     </div>
   );
 };

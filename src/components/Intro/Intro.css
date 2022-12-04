@@ -97,3 +97,12 @@
 .no_underline:hover {
   text-decoration: underline;
 }
+.select {
+  height: 30px;
+  outline: none;
+  border: none;
+  background: var(--bg-secondary);
+  margin: 10px 0;
+  padding: 0px 10px;
+  border-radius: 5px;
+}

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import useClickoutside from '../../Helpers/useClickoutside';
 import Detail from './Detail';
 
-const EditeDetails = ({details,handleChange,updateDetails,infos}) => {
+const EditeDetails = ({details,handleChange,updateDetails,infos,setVisible}) => {
+  const refTo = useRef();
+  useClickoutside(refTo, () => setVisible(false));
     return (
        
             <div className="blur">
-              <div className="postBox infosBox">
+              <div className="postBox infosBox" ref={refTo}>
                 <div className="box_header">
-                  <div className="small_circle">
+                  <div className="small_circle" onClick={()=>setVisible(false)}>
                     <i className="exit_icon"></i>
                   </div>
                   <span>Edit Details</span>
@@ -103,6 +106,18 @@ const EditeDetails = ({details,handleChange,updateDetails,infos}) => {
                     handleChange={handleChange}
                     updateDetails={updateDetails}
                     infos={infos}
+                  />
+                  <div className="details_header">RelationShip</div>
+                  <Detail
+                    value={details?.relationship}
+                    img="relationship"
+                    text="relationship"
+                    placeholder="Add relationship"
+                    name="relationship"
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                    relationShip
                   />
                 </div>
               </div>

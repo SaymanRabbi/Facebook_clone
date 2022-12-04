@@ -6,7 +6,7 @@ import EditeDetails from "./EditeDetails";
 import './Intro.css';
 const Intro = ({detailss,visitor}) => {
   const { user } = useSelector((state) => ({ ...state }));
-  const [visible, setVisible] = useState(1);
+  const [visible, setVisible] = useState(false);
   const [details, setDetails] = useState();
   useEffect(() => {
     setDetails(detailss);
@@ -81,6 +81,8 @@ const Intro = ({detailss,visitor}) => {
           handleChange={handleChange}
           setShowBio={setShowBio}
           updateDetails={updateDetails}
+          placeholder="Add Bio"
+          name="bio"
         />
       )}
       {details?.job && details?.workplace ? (
@@ -144,10 +146,10 @@ const Intro = ({detailss,visitor}) => {
         </div>
       )}
       {!visitor && (
-        <button className="gray_btn hover1 w100">Edit Details</button>
+        <button className="gray_btn hover1 w100" onClick={()=>setVisible(true)}>Edit Details</button>
       )}
       {
-        visible && !visitor && <EditeDetails details={details} handleChange={handleChange} updateDetails={updateDetails} infos={infos}/>
+        visible && !visitor && <EditeDetails details={details} handleChange={handleChange} updateDetails={updateDetails} infos={infos} setVisible={setVisible}/>
       }
       {!visitor && (
         <button className="gray_btn hover1 w100">Add Hobbies</button>
