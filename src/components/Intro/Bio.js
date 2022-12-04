@@ -10,7 +10,7 @@ const Bio = ({ infos,
       <textarea
         placeholder="Add Bio"
         name={name}
-        value={infos?.name}
+        value={infos?.[name]}
         maxLength="100"
         className="textarea_blue details_input"
         onChange={handleChange}
@@ -24,7 +24,10 @@ const Bio = ({ infos,
           <button className="gray_btn" onClick={() =>!detail ? setShowBio(false):setShow(false)}>
             Cancel
           </button>
-          <button className="blue_btn" onClick={() => updateDetails()}>
+          <button className="blue_btn" onClick={() => {
+            updateDetails()
+            setShow(false)
+          }}>
             Save
           </button>
         </div>
