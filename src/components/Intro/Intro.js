@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Bio from './Bio';
 import EditeDetails from "./EditeDetails";
 import './Intro.css';
-const Intro = ({detailss,visitor}) => {
+const Intro = ({detailss,visitor,setOtherName}) => {
   const { user } = useSelector((state) => ({ ...state }));
   const [visible, setVisible] = useState(false);
   const [details, setDetails] = useState();
@@ -42,6 +42,7 @@ const Intro = ({detailss,visitor}) => {
       );
       setShowBio(false);
       setDetails(data);
+      setOtherName(data?.otherName)
     } catch (error) {
     }
   };

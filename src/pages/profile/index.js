@@ -35,6 +35,10 @@ export default function Profile({setVisible}) {
   useEffect(()=>{
     getProfile()
   },[userName])
+  const [othername , setOtherName] = useState('')
+  useEffect(()=>{
+    setOtherName(profile?.details?.otherName)
+  },[profile])
   const visitor =  userName===user.usrname? false : true;
   const getProfile = async () => {
     try {
@@ -75,7 +79,7 @@ export default function Profile({setVisible}) {
     <div className="profile_top">
       <div className="profile_container">
        <Cover profile={profile} visitor={visitor} photo = {photos.resources}/>
-       <ProfilePictureInfo profile={profile} visitor={visitor} photos ={photos?.resources}/>
+       <ProfilePictureInfo profile={profile} otherName={othername} visitor={visitor} photos ={photos?.resources}/>
        <ProfileMenu/>
       </div>
     </div>
@@ -85,7 +89,7 @@ export default function Profile({setVisible}) {
             <PplYouMayKnow />
             <div className="profile_grid">
               <div className="profile_left">
-                <Intro detailss={profile.details} visitor={visitor}/>
+                <Intro detailss={profile.details} visitor={visitor} setOtherName={setOtherName}/>
                 <Photos photos={photos}/>
                 <Friends friends={profile.friends}/>
                 <div className="relative_fb_copyright">
