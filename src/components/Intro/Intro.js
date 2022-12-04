@@ -26,10 +26,6 @@ const Intro = ({detailss,visitor}) => {
   const [infos, setInfos] = useState(initial);
   const [showBio, setShowBio] = useState(false);
   const [max, setMax] = useState(infos?.bio ? 100 - infos?.bio.length : 100);
-  const handleBioChange = (e) => {
-    setInfos({ ...infos, bio: e.target.value });
-    setMax(100 - e.target.value.length);
-  };
   const updateDetails = async () => {
     try {
       const { data } = await axios.put(
@@ -81,7 +77,7 @@ const Intro = ({detailss,visitor}) => {
         <Bio
           infos={infos}
           max={max}
-          handleBioChange={handleChange}
+          handleChange={handleChange}
           setShowBio={setShowBio}
           updateDetails={updateDetails}
         />
@@ -150,7 +146,7 @@ const Intro = ({detailss,visitor}) => {
         <button className="gray_btn hover1 w100">Edit Details</button>
       )}
       {
-        visible && !visitor && <EditeDetails details={details}/>
+        visible && !visitor && <EditeDetails details={details} handleChange={handleChange} updateDetails={updateDetails} infos={infos}/>
       }
       {!visitor && (
         <button className="gray_btn hover1 w100">Add Hobbies</button>

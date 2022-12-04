@@ -1,21 +1,21 @@
 import React from 'react';
 
 const Bio = ({ infos,
-  handleBioChange,
+  handleChange,
   max,
   setShowBio,
-  updateDetails, }) => {
+  updateDetails, detail}) => {
     return (
       <div className="add_bio_wrap">
       <textarea
         placeholder="Add Bio"
         name="bio"
-        value={infos?.bio}
+        value={infos?.name}
         maxLength="100"
         className="textarea_blue details_input"
-        onChange={handleBioChange}
+        onChange={handleChange}
       ></textarea>
-      <div className="remaining">{max} characters remaining</div>
+      {!detail && <div className="remaining">{max} characters remaining</div>}
       <div className="flex">
         <div className="flex flex_left">
           <i className="public_icon"></i>Public

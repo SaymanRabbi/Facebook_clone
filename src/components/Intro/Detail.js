@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Bio from "./Bio";
 
-const Detail = ({ header, img, value, placeholder, name }) => {
+const Detail = ({ header, img, value, placeholder, name,handleChange,updateDetails,infos }) => {
     const [show, setShow] = useState(true);
   return (
     <div>
@@ -20,7 +20,7 @@ const Detail = ({ header, img, value, placeholder, name }) => {
           </>
         )}
       </div>
-      {show && <Bio placeholder={placeholder} name={name} />}
+      {show && <Bio placeholder={placeholder} name={name} handleChange={handleChange} updateDetails={updateDetails} infos={infos}/>}
     </div>
   );
 };

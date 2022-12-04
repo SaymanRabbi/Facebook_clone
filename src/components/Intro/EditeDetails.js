@@ -1,7 +1,7 @@
 import React from 'react';
 import Detail from './Detail';
 
-const EditeDetails = ({details}) => {
+const EditeDetails = ({details,handleChange,updateDetails,infos}) => {
     return (
        
             <div className="blur">
@@ -23,6 +23,9 @@ const EditeDetails = ({details}) => {
                     img="studies"
                     placeholder="add other name"
                     name="othername"
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
                   />
                 </div>
               </div>
