@@ -17,12 +17,24 @@ const EditeDetails = ({details,handleChange,updateDetails,infos}) => {
                     <span>Customize Your Intro</span>
                     <span>Details you select will be public</span>
                   </div>
+                  <div className="details_header">Other Name</div>
                   <Detail
-                    header="Other Name"
                     value={details?.otherName}
                     img="studies"
-                    placeholder="add other name"
+                    text="Other Name"
+                    placeholder="Add other name"
                     name="otherName"
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                  />
+                  <div className="details_header">Work</div>
+                  <Detail
+                    value={details?.job}
+                    img="job"
+                    text="job"
+                    placeholder="Add Job Title"
+                    name="job"
                     handleChange={handleChange}
                     updateDetails={updateDetails}
                     infos={infos}

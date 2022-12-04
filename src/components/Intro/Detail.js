@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Bio from "./Bio";
 
-const Detail = ({ header, img, value, placeholder, name,handleChange,updateDetails,infos }) => {
+const Detail = ({ img, value, placeholder, name,handleChange,updateDetails,infos,text }) => {
+  console.log(placeholder);
     const [show, setShow] = useState(false);
   return (
     <div>
-      <div className="details_header">{header}</div>
       <div className="add_details_flex " onClick={()=>setShow(true)}>
         {value ? (
           <div className="info_profile">
@@ -16,7 +16,7 @@ const Detail = ({ header, img, value, placeholder, name,handleChange,updateDetai
         ) : (
           <>
             <i className="rounded_plus_icon"></i>
-            <span className="underline">Add {header}</span>
+            <span className="underline">Add {text}</span>
             
           </>
         )}
