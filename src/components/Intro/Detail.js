@@ -6,7 +6,7 @@ const Detail = ({ header, img, value, placeholder, name,handleChange,updateDetai
   return (
     <div>
       <div className="details_header">{header}</div>
-      <div className="add_details_flex ">
+      <div className="add_details_flex " onClick={()=>setShow(true)}>
         {value ? (
           <div className="info_profile no_underline">
             <img src={`../../../icons/${img}.png`} alt="" />
@@ -20,7 +20,7 @@ const Detail = ({ header, img, value, placeholder, name,handleChange,updateDetai
           </>
         )}
       </div>
-      {show && <Bio placeholder={placeholder} name={name} handleChange={handleChange} updateDetails={updateDetails} infos={infos}/>}
+      {show && <Bio placeholder={placeholder} name={name} handleChange={handleChange} updateDetails={updateDetails} infos={infos} detail setShow={setShow}/> }
     </div>
   );
 };
