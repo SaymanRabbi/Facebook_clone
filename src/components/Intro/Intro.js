@@ -10,6 +10,7 @@ const Intro = ({detailss,visitor}) => {
   const [details, setDetails] = useState();
   useEffect(() => {
     setDetails(detailss);
+    setInfos(detailss);
   }, [detailss]);
   const initial = {
     bio: details?.bio ? details.bio : "",
@@ -24,7 +25,6 @@ const Intro = ({detailss,visitor}) => {
     instagram: details?.instagram ? details.instagram : "",
   };
   const [infos, setInfos] = useState(initial);
-  console.log(infos);
   const [showBio, setShowBio] = useState(false);
   const [max, setMax] = useState(infos?.bio ? 100 - infos?.bio.length : 100);
   const updateDetails = async () => {
