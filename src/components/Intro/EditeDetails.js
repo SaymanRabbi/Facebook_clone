@@ -19,10 +19,10 @@ const EditeDetails = ({details,handleChange,updateDetails,infos}) => {
                   </div>
                   <Detail
                     header="Other Name"
-                    value={details?.othername}
+                    value={details?.otherName}
                     img="studies"
                     placeholder="add other name"
-                    name="othername"
+                    name="otherName"
                     handleChange={handleChange}
                     updateDetails={updateDetails}
                     infos={infos}

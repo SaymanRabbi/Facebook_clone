@@ -13,7 +13,7 @@ const Intro = ({detailss,visitor}) => {
   }, [detailss]);
   const initial = {
     bio: details?.bio ? details.bio : "",
-    othername: details?.othername ? details.othername : "",
+    otherName: details?.otherName ? details.otherName : "",
     job: details?.job ? details.job : "",
     workplace: details?.workplace ? details.workplace : "",
     highSchool: details?.highSchool ? details.highSchool : "",
