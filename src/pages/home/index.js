@@ -9,7 +9,6 @@ import Stroies from "../../components/home/Stroy/Stroies";
 import Post from "../../components/Posts/Post";
 import './style.css';
 export default function Home({setVisible,posts,loading}) {
-  console.log(posts);
   const middle = useRef(null)
   const [height,setHeight] = useState(0)
   useEffect(()=>{

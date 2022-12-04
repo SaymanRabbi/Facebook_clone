@@ -430,7 +430,9 @@
   .postBox {
     width: 96%;
   }
-
+  .l0 {
+    left: 0;
+  }
   .post_backgrounds {
     width: 80%;
     overflow-x: auto;
@@ -452,7 +454,6 @@
 @media (max-width: 380px) {
   .post_input {
     font-size: 17px;
-    left: 0;
   }
   .addtoyourpost {
     justify-content: center;

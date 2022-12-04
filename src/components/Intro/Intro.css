@@ -106,3 +106,8 @@
   padding: 0px 10px;
   border-radius: 5px;
 }
+@media (max-width: 810px) {
+  .infosBox {
+    width: 96% !important;
+  }
+}
