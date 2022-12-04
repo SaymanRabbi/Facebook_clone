@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import Header from "../../components/Header/Header";
@@ -15,7 +16,6 @@ import PplYouMayKnow from "./PplYouMayKnow";
 import ProfileMenu from "./ProfileMenu";
 import ProfilePictureInfo from "./ProfilePictureInfo";
 import './style.css';
-
 export default function Profile({setVisible}) {
   const [photos,setPhotos] = useState({})
   // covermenu
@@ -74,9 +74,29 @@ export default function Profile({setVisible}) {
       })
     }
   }
+  const profileTop = useRef(null);
+  const leftSide = useRef(null);
+  const [height, setHeight] = useState();
+  const [leftHeight, setLeftHeight] = useState();
+  const [scrollHeight, setScrollHeight] = useState();
+  useEffect(() => {
+    setHeight(profileTop.current.clientHeight + 300);
+    setLeftHeight(leftSide.current.clientHeight);
+    window.addEventListener("scroll", getScroll, { passive: true });
+    return () => {
+      window.addEventListener("scroll", getScroll, { passive: true });
+    };
+  }, [loading, scrollHeight]);
+  const check = useMediaQuery({
+    query: "(min-width:901px)",
+  });
+  const getScroll = () => {
+    setScrollHeight(window.pageYOffset);
+  };
+//  console.log(check && getScrollHight >= hight && leftSide >700);
   return <div className="profile">
     <Header page='profile'/>
-    <div className="profile_top">
+    <div className="profile_top" ref={profileTop}>
       <div className="profile_container">
        <Cover profile={profile} visitor={visitor} photo = {photos.resources}/>
        <ProfilePictureInfo profile={profile} otherName={othername} visitor={visitor} photos ={photos?.resources}/>
@@ -87,8 +107,15 @@ export default function Profile({setVisible}) {
         <div className="profile_container">
           <div className="bottom_container">
             <PplYouMayKnow />
-            <div className="profile_grid">
-              <div className="profile_left">
+            <div className={`profile_grid ${
+                check && scrollHeight >= height && leftHeight > 1000
+                  ? "scrollFixed showLess"
+                  : check &&
+                    scrollHeight >= height &&
+                    leftHeight < 1000 &&
+                    "scrollFixed showMore"
+              }`}>
+              <div className="profile_left" ref={leftSide}>
                 <Intro detailss={profile.details} visitor={visitor} setOtherName={setOtherName}/>
                 <Photos photos={photos}/>
                 <Friends friends={profile.friends}/>
