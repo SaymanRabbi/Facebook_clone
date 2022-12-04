@@ -63,6 +63,14 @@ const Intro = ({detailss,visitor}) => {
           )}
         </div>
       )}
+      {!details?.bio && !showBio && !visitor && (
+        <button
+        className="gray_btn hover1 w100"
+        onClick={() => setShowBio(true)}
+      >
+        Add Bio
+      </button>
+      )}
       {showBio && (
         <Bio
           infos={infos}
