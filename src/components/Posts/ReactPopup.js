@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { createReact } from '../../func/post';
 const reactsArray = [
   {
     name: "like",
@@ -25,7 +27,11 @@ const reactsArray = [
     image: "../../../reacts/angry.gif",
   },
 ];
-const ReactPopup = ({ visible, setVisible })=> {
+const ReactPopup = ({ visible, setVisible,postId })=> {
+  const {user} = useSelector((state)=>(({...state})))
+  const reactHandeler =async(react)=>{
+    createReact(react,postId, user.token)
+  }
   return (
     <>
       {visible && (
@@ -43,7 +49,7 @@ const ReactPopup = ({ visible, setVisible })=> {
           }}
         >
           {reactsArray.map((react, i) => (
-            <div className="react" key={i}>
+            <div className="react" key={i} onClick={()=>reactHandeler(react.name)}>
               <img src={react.image} alt="" />
             </div>
           ))}

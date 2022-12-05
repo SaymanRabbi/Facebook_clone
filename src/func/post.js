@@ -15,3 +15,19 @@ try {
     return error.response.data.messages
 }
 }
+export const createReact = async (
+    react, postRef,token
+)=>{
+try {
+    const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/reactPost`,{
+        react, postRef
+    },{
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    })
+    return "ok"
+} catch (error) {
+    return error.response.data.messages
+}
+}

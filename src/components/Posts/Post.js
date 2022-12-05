@@ -100,7 +100,7 @@ const Post = ({post,user,profile}) => {
         </div>
       </div>
       <div className="post_actions">
-        <ReactPopup visible={visible} setVisible={setVisible} />
+        <ReactPopup visible={visible} setVisible={setVisible} postId={post._id}/>
         <div
           className="post_action hover1"
           onMouseOver={() => {
