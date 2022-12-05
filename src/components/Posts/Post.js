@@ -22,14 +22,27 @@ const Post = ({post,user,profile}) => {
     setCheack(data?.data?.cheack?.react)
     setTotal(data?.data?.total)
   }
-  
-  // const {user} = useSelector((state)=>(({...state})))
   const reactHandeler =async(react)=>{
     createReact(react,post?._id, user.token)
     if (cheack == react) {
       setCheack();
+      let index = react.findIndex((item)=>item.react == cheack);
+      if(index !== -1){
+        setReact([...react,(react[index].count = --react[index].count)])
+        setTotal((prev)=>--prev)
+      }
     } else {
       setCheack(react);
+      let index = react.findIndex((item)=>item.react == react);
+      let index2 = react.findIndex((item)=>item.react == cheack);
+      if(index !== -1){
+        setReact([...react,(react[index].count = ++react[index].count)])
+        setTotal((prev)=>++prev)
+      }
+      if(index2 !== -1){
+        setReact([...react,(react[index2].count = --react[index2].count)])
+        setTotal((prev)=>--prev)
+      }
     }
   }
     return (
