@@ -128,7 +128,7 @@ setFriendship(friendshipp)
         <button className={friendship?.friends ? "blue_btn" : "gray_btn"}>
           <img
             src="../../../icons/message.png"
-            className={friendship?.friends && "invert"}
+            className={friendship?.friends ? "invert":""}
             alt=""
           />
           <span>Message</span>
