@@ -12,6 +12,7 @@ const Post = ({post,user,profile}) => {
   const [showMenu, setShowMenu] = useState(false);
  const [react, setReact] = useState([]);
  const [cheack, setCheack] = useState(''); 
+ const [total, setTotal] = useState(0);
  useEffect(()=>{
   getReactFunc()
 },[post])
@@ -19,6 +20,7 @@ const Post = ({post,user,profile}) => {
     const data = await getReact(post?._id,user?.token);
     setReact(data?.data?.reacts);
     setCheack(data?.data?.cheack?.react)
+    setTotal(data?.data?.total)
   }
   
   // const {user} = useSelector((state)=>(({...state})))
@@ -113,13 +115,14 @@ const Post = ({post,user,profile}) => {
        <div className="post_infos">
         <div className="reacts_count">
           <div className="reacts_count_imgs">
-            {react?.slice(0,3).map((r,i)=>
-             
+            {react.sort((a, b) => {
+            return b.count - a.count;
+           }).slice(0,3).map((r,i)=>
               r.count>0 &&(<img src={`../../../reacts/${r.react}.svg`} key={i}/>)
              
             )}
           </div>
-          <div className="reacts_count_num"></div>
+          <div className="reacts_count_num">{total ? total:''}</div>
         </div>
         <div className="to_right">
           <div className="comments_count">13 comments</div>
