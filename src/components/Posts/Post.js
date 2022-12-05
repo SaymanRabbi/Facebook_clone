@@ -11,16 +11,19 @@ const Post = ({post,user,profile}) => {
   const [visible, setVisible] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
  const [react, setReact] = useState([]);
+ console.log(react);
  const [cheack, setCheack] = useState(''); 
+ useEffect(()=>{
+  getReactFunc()
+},[post])
   const getReactFunc = async ()=>{
     const data = await getReact(post?._id,user?.token);
+    // console.log(data);
     setReact(data?.data?.reacts);
     setCheack(data?.data?.cheack?.react)
     // console.log(data?.data?.cheack?.react);
   }
-  useEffect(()=>{
-    getReactFunc()
-  },[post])
+  
   // const {user} = useSelector((state)=>(({...state})))
   const reactHandeler =async(react)=>{
     createReact(react,post?._id, user.token)
