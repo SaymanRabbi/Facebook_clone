@@ -89,7 +89,7 @@ const Intro = ({detailss,visitor,setOtherName}) => {
       {details?.job && details?.workplace ? (
         <div className="info_profile">
           <img src="../../../icons/job.png" alt="" />
-          works as {details?.job} at <b>{details?.workplace}</b>
+          works as {details?.job} at <p>{details?.workplace}</p>
         </div>
       ) : details?.job && !details?.workplace ? (
         <div className="info_profile">
