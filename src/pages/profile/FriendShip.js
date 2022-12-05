@@ -1,9 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AddFriend } from '../../func/user';
+import { AddFriend, CancenRequest } from '../../func/user';
 import useClickoutside from '../../Helpers/useClickoutside';
 
-const FriendShip = ({friendship,profileId}) => {
+const FriendShip = ({friendshipp,profileId}) => {
+  const [friendship,setFriendship] = useState(friendshipp);
+  useEffect(()=>{
+setFriendship(friendshipp)
+  },[friendshipp])
     const [friendsMenu, setFriendsMenu] = useState(false);
     const [respondMenu, setRespondMenu] = useState(false);
     const menu = useRef(null);
@@ -12,7 +16,12 @@ const FriendShip = ({friendship,profileId}) => {
     useClickoutside(menu1, () => setRespondMenu(false));
     const {user} = useSelector((state)=>({...state}));
     const addFriend =async () => {
+      setFriendsMenu({...friendship,requestsent:true,following:true});
      await AddFriend(profileId,user?.token)
+    }
+    const CancenRequestFunc =async () => {
+      setFriendsMenu({...friendship,requestsent:false,following:false});
+    await CancenRequest(profileId,user?.token)
     }
     return (
         <div className="friendship">
@@ -60,7 +69,7 @@ const FriendShip = ({friendship,profileId}) => {
           )
         )}
         {friendship?.requestsent ? (
-          <button className="blue_btn">
+          <button className="blue_btn" onClick={()=>CancenRequestFunc()}>
             <img
               src="../../../icons/cancelRequest.png"
               className="invert"

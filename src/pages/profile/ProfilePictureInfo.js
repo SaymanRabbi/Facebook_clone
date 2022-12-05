@@ -36,7 +36,7 @@ const ProfilePictureInfo = ({profile,visitor,photos,otherName}) => {
         </div>
       </div>
       {
-        visitor ?<FriendShip friendship={profile?.friendShip} profileId={profile._id}/>:<div className="profile_w_right">
+        visitor ?<FriendShip friendshipp={profile?.friendShip} profileId={profile._id}/>:<div className="profile_w_right">
         <div className="blue_btn">
           <img src="../../../icons/plus.png" alt="" className="invert" />
           <span>Add to story</span>
