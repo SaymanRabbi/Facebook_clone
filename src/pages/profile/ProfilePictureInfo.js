@@ -43,7 +43,9 @@ const ProfilePictureInfo = ({profile,visitor,photos,otherName}) => {
       )}
           </div>
           <div className="profile_friend_imgs">
-            
+          {
+              profile?.friends && profile?.friends.slice(0,6).map((friend,i)=>(<img src={friend.picture} key={i} style={{transform:`translateX(${-i*7}px)`,zIndex:`${i}`}}/>))
+          }
           </div>
         </div>
       </div>

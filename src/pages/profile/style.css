@@ -416,6 +416,24 @@
   .othername {
     transform: translateY(-10px);
   }
+  .profile_card_count {
+    text-align: center;
+    transform: translateY(-15px);
+    font-weight: 600;
+  }
+  .profile_friend_imgs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transform: translateY(-10px);
+    justify-content: center;
+  }
+  .profile_friend_imgs img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 }
 @media (max-width: 650px) {
   .profile_menu_wrap {
@@ -454,4 +472,18 @@
 }
 .friendship .blue_btn {
   height: 35px;
+}
+.profile_card_count {
+  font-weight: 600;
+}
+.profile_friend_imgs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.profile_friend_imgs img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  border-radius: 50%;
 }
