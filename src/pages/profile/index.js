@@ -23,7 +23,6 @@ export default function Profile({setVisible}) {
   const {username} = useParams();
   const { user } = useSelector((state) => ({ ...state }));
   const userName = username === undefined ? user.usrname : username;
-  console.log(username,userName)
   const path = `${userName}/*`
   const max=30
   const sort = 'desc'

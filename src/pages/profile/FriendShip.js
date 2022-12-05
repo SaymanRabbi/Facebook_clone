@@ -4,7 +4,9 @@ import { AddFriend, CancenRequest } from '../../func/user';
 import useClickoutside from '../../Helpers/useClickoutside';
 
 const FriendShip = ({friendshipp,profileId}) => {
+  console.log(friendshipp);
   const [friendship,setFriendship] = useState(friendshipp);
+  console.log(friendship);
   useEffect(()=>{
 setFriendship(friendshipp)
   },[friendshipp])
@@ -16,11 +18,11 @@ setFriendship(friendshipp)
     useClickoutside(menu1, () => setRespondMenu(false));
     const {user} = useSelector((state)=>({...state}));
     const addFriend =async () => {
-      setFriendsMenu({...friendship,requestsent:true,following:true});
-     await AddFriend(profileId,user?.token)
+      setFriendship({...friendship,requestsent:true,following:true});
+      await AddFriend(profileId,user?.token)
     }
     const CancenRequestFunc =async () => {
-      setFriendsMenu({...friendship,requestsent:false,following:false});
+      setFriendship({...friendship,requestsent:false,following:false});
     await CancenRequest(profileId,user?.token)
     }
     return (
