@@ -23,6 +23,7 @@ const Friends = ({friends}) => {
             .map((friend,i) =>  <Link
             to={`/profile/${friend.username}`}
             className="profile_photo_card"
+            key={i}
           >
             <img src={friend.picture} alt="" />
             <span>
