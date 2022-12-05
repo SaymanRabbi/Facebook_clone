@@ -20,7 +20,7 @@ const Friends = ({friends}) => {
         {friends &&
           friends
             .slice(0, 9)
-            .map((friend) => <div className="profile_photo_card"></div>)}
+            .map((friend,i) => <div className="profile_photo_card" key={i}></div>)}
       </div>
     </div>
     );

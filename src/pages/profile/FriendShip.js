@@ -113,6 +113,7 @@ setFriendship(friendshipp)
             </div>
           )
         )}
+        <div className="flex">
         {friendship?.following ? (
           <button className="gray_btn" onClick={()=>unfollowFunc()}>
             <img src="../../../icons/follow.png" alt="" />
@@ -132,6 +133,7 @@ setFriendship(friendshipp)
           />
           <span>Message</span>
         </button>
+        </div>
       </div>
     );
 };
