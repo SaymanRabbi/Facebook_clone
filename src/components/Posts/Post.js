@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Moment from "react-moment";
 import { Link } from 'react-router-dom';
+import { getReact } from '../../func/post';
 import { Dots, Public } from "../../svg";
 import CreateComent from './CreateComent';
 import './Post.css';
@@ -9,6 +10,17 @@ import ReactPopup from './ReactPopup';
 const Post = ({post,user,profile}) => {
   const [visible, setVisible] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+ const [react, setReact] = useState([]);
+ const [cheack, setCheack] = useState(''); 
+  const getReactFunc = async ()=>{
+    const data = await getReact(post?._id,user?.token);
+    setReact(data?.data?.reacts);
+    setCheack(data?.data?.cheack?.react)
+    // console.log(data?.data?.cheack?.react);
+  }
+  useEffect(()=>{
+    getReactFunc()
+  },[post])
     return (
         <div className="post" style={{width:`${profile && '100%'}`}}>
       <div className="post_header">

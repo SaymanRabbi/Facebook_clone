@@ -31,3 +31,17 @@ try {
     return error.response.data.messages
 }
 }
+export const getReact = async (
+    id,token
+)=>{
+try {
+    const data = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getReact/${id}`,{
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    })
+    return data
+} catch (error) {
+    return error?.response?.data?.messages
+}
+}
