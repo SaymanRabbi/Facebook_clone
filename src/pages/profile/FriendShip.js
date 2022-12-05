@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AddFriend, CancenRequest } from '../../func/user';
+import { AddFriend, CancenRequest, follow, unfollow } from '../../func/user';
 import useClickoutside from '../../Helpers/useClickoutside';
 
 const FriendShip = ({friendshipp,profileId}) => {
-  console.log(friendshipp);
   const [friendship,setFriendship] = useState(friendshipp);
   console.log(friendship);
   useEffect(()=>{
@@ -25,6 +24,14 @@ setFriendship(friendshipp)
       setFriendship({...friendship,requestsent:false,following:false});
     await CancenRequest(profileId,user?.token)
     }
+    const followFunc =async () => {
+      setFriendship({...friendship,following:true});
+    await follow(profileId,user?.token)
+    }
+    const unfollowFunc =async () => {
+      setFriendship({...friendship,following:false});
+    await unfollow(profileId,user?.token)
+    }
     return (
         <div className="friendship">
         {friendship?.friends ? (
@@ -43,13 +50,13 @@ setFriendship(friendshipp)
                   <img src="../../../icons/editFriends.png" alt="" />
                   Edit Friend list
                 </div>
-                {friendship?.following ? (
-                  <div className="open_cover_menu_item hover1">
-                    <img src="../../../icons/unfollowOutlined.png" alt="" />
+                {friendship?.following ? ( 
+                  <div className="open_cover_menu_item hover1" >
+                    <img src="../../../icons/unfollowOutlined.png" alt="" onClick={()=>unfollowFunc()}/>
                     Unfollow
                   </div>
                 ) : (
-                  <div className="open_cover_menu_item hover1">
+                  <div className="open_cover_menu_item hover1" onClick={()=>followFunc()}>
                     <img src="../../../icons/unfollowOutlined.png" alt="" />
                     Follow
                   </div>
@@ -96,12 +103,12 @@ setFriendship(friendshipp)
           )
         )}
         {friendship?.following ? (
-          <button className="gray_btn">
+          <button className="gray_btn" onClick={()=>unfollowFunc()}>
             <img src="../../../icons/follow.png" alt="" />
             <span>following</span>
           </button>
         ) : (
-          <button className="blue_btn">
+          <button className="blue_btn" onClick={()=>followFunc()}>
             <img src="../../../icons/follow.png" className="invert" alt="" />
             <span>Follow</span>
           </button>
