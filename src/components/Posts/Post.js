@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Moment from "react-moment";
 import { Link } from 'react-router-dom';
-import { getReact } from '../../func/post';
+import { createReact, getReact } from '../../func/post';
 import { Dots, Public } from "../../svg";
 import CreateComent from './CreateComent';
 import './Post.css';
@@ -21,6 +21,15 @@ const Post = ({post,user,profile}) => {
   useEffect(()=>{
     getReactFunc()
   },[post])
+  // const {user} = useSelector((state)=>(({...state})))
+  const reactHandeler =async(react)=>{
+    createReact(react,post?._id, user.token)
+    if (cheack == react) {
+      setCheack();
+    } else {
+      setCheack(react);
+    }
+  }
     return (
         <div className="post" style={{width:`${profile && '100%'}`}}>
       <div className="post_header">
@@ -112,7 +121,7 @@ const Post = ({post,user,profile}) => {
         </div>
       </div>
       <div className="post_actions">
-        <ReactPopup visible={visible} setVisible={setVisible} postId={post._id}/>
+        <ReactPopup visible={visible} setVisible={setVisible} reactHandeler={reactHandeler}/>
         <div
           className="post_action hover1"
           onMouseOver={() => {
@@ -125,9 +134,41 @@ const Post = ({post,user,profile}) => {
               setVisible(false);
             }, 500);
           }}
-        >
+          onClick={() => reactHandeler(cheack ? cheack : "like")}
+        > {cheack ? (
+          <img
+            src={`../../../reacts/${cheack}.svg`}
+            alt=""
+            className="small_react"
+            style={{ width: "18px" }}
+          />
+        ) : (
           <i className="like_icon"></i>
-          <span>Like</span>
+        )}
+        <span
+          style={{
+            color: `
+        
+        ${
+          cheack === "like"
+            ? "#4267b2"
+            : cheack === "love"
+            ? "#f63459"
+            : cheack === "haha"
+            ? "#f7b125"
+            : cheack === "sad"
+            ? "#f7b125"
+            : cheack === "wow"
+            ? "#f7b125"
+            : cheack === "angry"
+            ? "#e4605a"
+            : ""
+        }
+        `,
+          }}
+        >
+          {cheack ? cheack : "Like"}
+        </span>
         </div>
         <div className="post_action hover1">
           <i className="comment_icon"></i>

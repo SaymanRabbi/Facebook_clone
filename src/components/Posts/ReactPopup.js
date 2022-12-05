@@ -1,6 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { createReact } from '../../func/post';
+
 const reactsArray = [
   {
     name: "like",
@@ -27,11 +26,8 @@ const reactsArray = [
     image: "../../../reacts/angry.gif",
   },
 ];
-const ReactPopup = ({ visible, setVisible,postId })=> {
-  const {user} = useSelector((state)=>(({...state})))
-  const reactHandeler =async(react)=>{
-    createReact(react,postId, user.token)
-  }
+const ReactPopup = ({ visible, setVisible,reactHandeler })=> {
+ 
   return (
     <>
       {visible && (
