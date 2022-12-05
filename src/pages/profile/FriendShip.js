@@ -1,13 +1,19 @@
 import React, { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { AddFriend } from '../../func/user';
 import useClickoutside from '../../Helpers/useClickoutside';
 
-const FriendShip = ({friendship}) => {
+const FriendShip = ({friendship,profileId}) => {
     const [friendsMenu, setFriendsMenu] = useState(false);
     const [respondMenu, setRespondMenu] = useState(false);
     const menu = useRef(null);
     const menu1 = useRef(null);
     useClickoutside(menu, () => setFriendsMenu(false));
     useClickoutside(menu1, () => setRespondMenu(false));
+    const {user} = useSelector((state)=>({...state}));
+    const addFriend =async () => {
+     await AddFriend(profileId,user?.token)
+    }
     return (
         <div className="friendship">
         {friendship?.friends ? (
@@ -47,7 +53,7 @@ const FriendShip = ({friendship}) => {
         ) : (
           !friendship?.requestsent &&
           !friendship?.requestRecived && (
-            <button className="blue_btn">
+            <button className="blue_btn" onClick={()=>addFriend()}>
               <img src="../../../icons/addFriend.png" alt="" className="invert" />
               <span>Add Friend</span>
             </button>
