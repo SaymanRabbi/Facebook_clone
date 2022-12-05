@@ -12,8 +12,8 @@ const Friends = ({friends}) => {
           {friends.length === 0
             ? ""
             : friends.length === 1
-            ? "1 Photo"
-            : `${friends.length} photos`}
+            ? "1 Friend"
+            : `${friends.length} Friends`}
         </div>
       )}
       <div className="profile_card_grid">
