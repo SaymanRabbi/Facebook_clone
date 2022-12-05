@@ -93,7 +93,6 @@ export default function Profile({setVisible}) {
   const getScroll = () => {
     setScrollHeight(window.pageYOffset);
   };
-//  console.log(check && getScrollHight >= hight && leftSide >700);
   return <div className="profile">
     <Header page='profile'/>
     <div className="profile_top" ref={profileTop}>
@@ -108,7 +107,7 @@ export default function Profile({setVisible}) {
           <div className="bottom_container">
             <PplYouMayKnow />
             <div className={`profile_grid ${
-                check && scrollHeight >= height && leftHeight > 1000
+                check && scrollHeight >= height && leftHeight > 1100
                   ? "scrollFixed showLess"
                   : check &&
                     scrollHeight >= height &&
