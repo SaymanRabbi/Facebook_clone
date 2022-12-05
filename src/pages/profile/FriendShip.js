@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { acceptFriendRequest, AddFriend, CancenRequest, follow, unfollow } from '../../func/user';
+import { acceptFriendRequest, AddFriend, CancenRequest, deleteRequest, follow, unfollow, unfriend } from '../../func/user';
 import useClickoutside from '../../Helpers/useClickoutside';
 
 const FriendShip = ({friendshipp,profileId}) => {
   const [friendship,setFriendship] = useState(friendshipp);
-  console.log(friendship);
   useEffect(()=>{
 setFriendship(friendshipp)
   },[friendshipp])
@@ -33,8 +32,16 @@ setFriendship(friendshipp)
     await unfollow(profileId,user?.token)
     }
     const acceptFriendRequestFunc =async () => {
-      setFriendship({...friendship,following:true,friend:true,requestsent:false,requestRecived:false});
+      setFriendship({...friendship,following:true,friends:true,requestsent:false,requestRecived:false});
     await acceptFriendRequest(profileId,user?.token)
+    }
+    const unfiendFunc =async () => {
+      setFriendship({...friendship,following:false,friends:false,requestsent:false,requestRecived:false});
+      await unfriend( profileId,user?.token)
+    }
+    const deleteReqFunc =async () => {
+      setFriendship({...friendship,following:false,friends:false,requestsent:false,requestRecived:false});
+      await deleteRequest( profileId,user?.token)
     }
     return (
         <div className="friendship">
@@ -65,7 +72,7 @@ setFriendship(friendshipp)
                     Follow
                   </div>
                 )}
-                <div className="open_cover_menu_item hover1">
+                <div className="open_cover_menu_item hover1" onClick={()=>unfiendFunc()}> 
                   <i className="unfriend_outlined_icon"></i>
                   Unfriend
                 </div>
@@ -100,7 +107,7 @@ setFriendship(friendshipp)
               {respondMenu && (
                 <div className="open_cover_menu" ref={menu1}>
                   <div className="open_cover_menu_item hover1" onClick={()=>acceptFriendRequestFunc()}>Confirm</div>
-                  <div className="open_cover_menu_item hover1">Delete</div>
+                  <div className="open_cover_menu_item hover1" onClick={()=>deleteReqFunc()}>Delete</div>
                 </div>
               )}
             </div>
