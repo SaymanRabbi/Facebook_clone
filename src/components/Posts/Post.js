@@ -11,17 +11,14 @@ const Post = ({post,user,profile}) => {
   const [visible, setVisible] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
  const [react, setReact] = useState([]);
- console.log(react);
  const [cheack, setCheack] = useState(''); 
  useEffect(()=>{
   getReactFunc()
 },[post])
   const getReactFunc = async ()=>{
     const data = await getReact(post?._id,user?.token);
-    // console.log(data);
     setReact(data?.data?.reacts);
     setCheack(data?.data?.cheack?.react)
-    // console.log(data?.data?.cheack?.react);
   }
   
   // const {user} = useSelector((state)=>(({...state})))
@@ -115,7 +112,13 @@ const Post = ({post,user,profile}) => {
       </div>}
        <div className="post_infos">
         <div className="reacts_count">
-          <div className="reacts_count_imgs"></div>
+          <div className="reacts_count_imgs">
+            {react?.slice(0,3).map((r,i)=>
+             
+              r.count>0 &&(<img src={`../../../reacts/${r.react}.svg`} key={i}/>)
+             
+            )}
+          </div>
           <div className="reacts_count_num"></div>
         </div>
         <div className="to_right">
