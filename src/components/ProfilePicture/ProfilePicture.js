@@ -77,7 +77,7 @@ const ProfilePicture = ({setShow,pref,photos}) => {
           <h4>your profile pictures</h4>
           <div className="old_pictures">
             {photos
-              .filter(
+              ?.filter(
                 (img) => img.folder === `${user.usrname}/profile_pictures`
               )
               .map((photo) => (

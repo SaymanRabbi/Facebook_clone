@@ -3,6 +3,7 @@ import Moment from "react-moment";
 import { Link } from 'react-router-dom';
 import { createReact, getReact } from '../../func/post';
 import { Dots, Public } from "../../svg";
+import Comment from './Commnet';
 import CreateComent from './CreateComent';
 import './Post.css';
 import PostMenu from './PostMenu';
@@ -13,7 +14,8 @@ const Post = ({post,user,profile}) => {
  const [react, setReact] = useState([]);
  const [cheack, setCheack] = useState(''); 
  const [total, setTotal] = useState(0);
- 
+ const [count, setCount] = useState(1);
+ const [comments, setComments] = useState([]);
   const getReactFunc = async ()=>{
     const data = await getReact(post?._id,user?.token);
     setReact(data?.data?.reacts);
@@ -22,6 +24,9 @@ const Post = ({post,user,profile}) => {
   }
   useEffect(()=>{
     getReactFunc()
+  },[post])
+  useEffect(()=>{
+    setComments(post?.commnets)
   },[post])
   const reactHandeler =async(type)=>{
     createReact(type,post?._id, user.token)
@@ -46,6 +51,9 @@ const Post = ({post,user,profile}) => {
       }
     }
   }
+  const showMore = () => {
+    setCount((prev) => prev + 3);
+  };
     return (
         <div className="post" style={{width:`${profile && '100%'}`}}>
       <div className="post_header">
@@ -205,6 +213,18 @@ const Post = ({post,user,profile}) => {
       <div className="comments_wrap">
         <div className="comments_order"></div>
         <CreateComent user={user} postId={post?._id}/>
+        {comments &&
+          comments
+            ?.sort((a, b) => {
+              return new Date(b.commentAt) - new Date(a.commentAt);
+            })
+            ?.slice(0, count)
+            ?.map((comment, i) => <Comment comment={comment} key={i} />)}
+            {count < comments?.length && (
+          <div className="view_comments" onClick={() => showMore()}>
+            View more comments
+          </div>
+        )}
       </div>
       {showMenu && (
         <PostMenu

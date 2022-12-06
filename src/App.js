@@ -37,7 +37,7 @@ function App() {
     } catch (error) {
       dispatch({
         type:"POST_ERROR",
-        payload:error.response.data.messages
+        payload:error?.response?.data?.messages
       })
     }
   }

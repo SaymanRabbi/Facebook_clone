@@ -62,7 +62,6 @@ export default function Profile({setVisible}) {
           });
           setPhotos(data)
         } catch (error) {
-          console.log(error);
         }
         dispatch({type:"PROFILE_SUCCESS",payload:data})
       }
