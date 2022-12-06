@@ -45,3 +45,19 @@ try {
     return error?.response?.data?.messages
 }
 }
+export const getComment = async (
+    comment,postId,image,token
+)=>{
+try {
+    const {data} = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/comment`,{
+        comment,postId,image
+    },{
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    })
+    return data
+} catch (error) {
+    return error?.response?.data?.messages
+}
+}

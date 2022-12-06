@@ -1,10 +1,14 @@
 import Picker from "emoji-picker-react";
 import { useEffect, useRef, useState } from "react";
-
-const CreateComent = ({user}) => {
+import { ClipLoader } from "react-spinners";
+import { getComment } from "../../func/post";
+import { uploadImages } from "../../func/UploadImages";
+import dataURItoBlob from "../../Helpers/dataURItoBlob";
+const CreateComent = ({user,postId}) => {
     const [picker, setPicker] = useState(false);
     const [text, setText] = useState("");
     const [error, setError] = useState("");
+    const [loading,setLoading] = useState(false);
     const [commentImage, setCommentImage] = useState("");
     const [cursorPosition, setCursorPosition] = useState();
     const textRef = useRef(null);
@@ -42,6 +46,30 @@ const CreateComent = ({user}) => {
         setCommentImage(event.target.result);
       };
     };
+    const handelComments = async (e) => {
+      if(e.key==="Enter"){
+        if(commentImage !=""){
+          setLoading(true)
+          const img = dataURItoBlob(commentImage)
+      const path = `${user.usrname}/post_images/${postId}`
+      let formdata = new FormData()
+      formdata.append("path",path)
+        formdata.append("file",img)
+      const res= await uploadImages(formdata,user.token,path)
+      const data = await getComment(text,postId,res[0].url,user.token)
+      setLoading(false)
+      setText('')
+      setCommentImage('')
+    }
+        else{
+          setLoading(true)
+          const data = await getComment(text,postId,"",user.token)
+          setLoading(false)
+          setText('')
+          setCommentImage('')
+        }
+      }
+    }
     return (
       <div className="create_comment_wrap">
         <div className="create_comment">
@@ -73,7 +101,12 @@ const CreateComent = ({user}) => {
               value={text}
               placeholder="Write a comment..."
               onChange={(e) => setText(e.target.value)}
+              onKeyUp={handelComments}
+              disabled={loading}
             />
+            <div className="comment_circle" style={{marginTop:'5px'}}>
+              {loading ?<ClipLoader size={20} color="#1876f2"/>:''} 
+            </div>
             <div
               className="comment_circle_icon hover2"
               onClick={() => {

@@ -204,7 +204,7 @@ const Post = ({post,user,profile}) => {
       </div>
       <div className="comments_wrap">
         <div className="comments_order"></div>
-        <CreateComent user={user} />
+        <CreateComent user={user} postId={post?._id}/>
       </div>
       {showMenu && (
         <PostMenu
