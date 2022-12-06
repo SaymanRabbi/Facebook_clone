@@ -13,18 +13,19 @@ const Post = ({post,user,profile}) => {
  const [react, setReact] = useState([]);
  const [cheack, setCheack] = useState(''); 
  const [total, setTotal] = useState(0);
- useEffect(()=>{
-  getReactFunc()
-},[post])
+ 
   const getReactFunc = async ()=>{
     const data = await getReact(post?._id,user?.token);
     setReact(data?.data?.reacts);
     setCheack(data?.data?.cheack?.react)
     setTotal(data?.data?.total)
   }
-  const reactHandeler =async(react)=>{
-    createReact(react,post?._id, user.token)
-    if (cheack == react) {
+  useEffect(()=>{
+    getReactFunc()
+  },[post])
+  const reactHandeler =async(type)=>{
+    createReact(type,post?._id, user.token)
+    if (cheack == type) {
       setCheack();
       let index = react.findIndex((item)=>item.react == cheack);
       if(index !== -1){
@@ -32,8 +33,8 @@ const Post = ({post,user,profile}) => {
         setTotal((prev)=>--prev)
       }
     } else {
-      setCheack(react);
-      let index = react.findIndex((item)=>item.react == react);
+      setCheack(type);
+      let index = react.findIndex((item)=>item.react == type);
       let index2 = react.findIndex((item)=>item.react == cheack);
       if(index !== -1){
         setReact([...react,(react[index].count = ++react[index].count)])
