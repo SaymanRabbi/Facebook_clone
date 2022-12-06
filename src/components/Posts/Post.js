@@ -9,13 +9,16 @@ import './Post.css';
 import PostMenu from './PostMenu';
 import ReactPopup from './ReactPopup';
 const Post = ({post,user,profile}) => {
+  const [commentData, setCommentData] = useState([]);
+  useEffect(()=>{
+    setCommentData(post?.comments)
+  },[post])
   const [visible, setVisible] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
  const [react, setReact] = useState([]);
  const [cheack, setCheack] = useState(''); 
  const [total, setTotal] = useState(0);
  const [count, setCount] = useState(1);
- const [comments, setComments] = useState([]);
   const getReactFunc = async ()=>{
     const data = await getReact(post?._id,user?.token);
     setReact(data?.data?.reacts);
@@ -25,9 +28,7 @@ const Post = ({post,user,profile}) => {
   useEffect(()=>{
     getReactFunc()
   },[post])
-  useEffect(()=>{
-    setComments(post?.commnets)
-  },[post])
+  
   const reactHandeler =async(type)=>{
     createReact(type,post?._id, user.token)
     if (cheack == type) {
@@ -147,8 +148,8 @@ const Post = ({post,user,profile}) => {
           <div className="reacts_count_num">{total ? total:''}</div>
         </div>
         <div className="to_right">
-          <div className="comments_count">13 comments</div>
-          <div className="share_count">1 share</div>
+          <div className="comments_count">{`${commentData.length?commentData.length:'0'} comments`}</div>
+          <div className="share_count">0 share</div>
         </div>
       </div>
       <div className="post_actions">
@@ -212,15 +213,17 @@ const Post = ({post,user,profile}) => {
       </div>
       <div className="comments_wrap">
         <div className="comments_order"></div>
-        <CreateComent user={user} postId={post?._id}/>
-        {comments &&
-          comments
+        <CreateComent user={user} postId={post?._id} setCount={setCount}/>
+        {commentData&&
+          commentData
             ?.sort((a, b) => {
               return new Date(b.commentAt) - new Date(a.commentAt);
             })
             ?.slice(0, count)
-            ?.map((comment, i) => <Comment comment={comment} key={i} />)}
-            {count < comments?.length && (
+            ?.map((comment, i) => 
+               <Comment comment={comment} key={i} />
+            )}
+            {count < commentData.length && (
           <div className="view_comments" onClick={() => showMore()}>
             View more comments
           </div>
