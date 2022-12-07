@@ -41,7 +41,7 @@ export function profilereducer (state,action){
           return {
             loading:false,
             error:null,
-            profile:{...state,posts:action.payload}
+            profile:{...state.profile,posts:action.payload}
           }
       case "PROFILE_ERROR":
         return {

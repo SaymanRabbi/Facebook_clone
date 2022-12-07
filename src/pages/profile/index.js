@@ -146,7 +146,9 @@ export default function Profile() {
                 <div className="posts">
                   {
                     profile?.post?.map((post)=>
-                    <Post post={post} user={user} key={post._id} profile={profile}/>
+                    {
+                      return  <Post post={post} user={user} key={post._id} profile={profile}/>
+                    }
                     )
                   }
                 </div>

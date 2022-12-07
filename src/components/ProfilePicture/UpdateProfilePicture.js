@@ -54,7 +54,7 @@ const UpdateProfilePicture = ({setImage,image,setError,setShow,pref}) => {
         const update_pic = await updatePic(res[0].url,user.token);
         if(update_pic === "ok"){
         const New_profile = await createPost("profilePicture",null,description,res,user.id,user.token);
-        if(New_profile === "ok"){
+        if(New_profile.status === "ok"){
           setLoading(false);
           setImage("");
           pref.current.style.backgroundImage=`url(${res[0].url})`;

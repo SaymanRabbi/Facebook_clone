@@ -24,6 +24,8 @@ function App() {
   })
   useEffect(()=>{
   getAllpost()
+  return () => {
+  }
   },[posts])
   // console.log(posts)
   const getAllpost = async () => {

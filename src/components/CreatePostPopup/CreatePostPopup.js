@@ -30,7 +30,7 @@ const CreatePostPopup = ({ user,setVisible,posts,dispatch,profile }) => {
         setText('')
         setVisible(false)
         // toast.success("Post created successfully")
-        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data,...posts]})
+        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data,...posts?.posts]})
       }
      else{
     setError(res)
@@ -55,7 +55,7 @@ const CreatePostPopup = ({ user,setVisible,posts,dispatch,profile }) => {
        setVisible(false)
        setText('')
       //  toast.success("Post created successfully")
-       dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[response.data,...posts]})
+       dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[response.data,...posts?.posts]})
      }
      else{
       setError(response)
@@ -70,7 +70,7 @@ const CreatePostPopup = ({ user,setVisible,posts,dispatch,profile }) => {
         setText('')
         setVisible(false)
         // toast.success("Post created successfully")
-        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data,...posts]})
+        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data,...posts?.posts]})
       }
      else{
     setError(res)
