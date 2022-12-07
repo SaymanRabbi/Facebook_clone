@@ -13,7 +13,7 @@ export default function Home({setVisible,posts,loading}) {
   const [height,setHeight] = useState(0)
   useEffect(()=>{
   setHeight(middle.current.clientHeight)
-  },[])
+  },[loading,height])
   //user
   const { user } = useSelector((user) => ({ ...user }))
   
