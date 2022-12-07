@@ -25,8 +25,9 @@ function App() {
   })
   useEffect(()=>{
   getAllpost()
-  return () => {
-  }
+  // return () => {
+  //   dispatch({type:"POST_RESET"})
+  // }
   },[posts])
   // console.log(posts)
    const getAllpost = async () => {
@@ -55,7 +56,7 @@ function App() {
           <Route path="/profile"  element={<Profile  setVisible={setVisible}/>} exact />
           <Route path="/profile/:username"  element={<Profile  setVisible={setVisible}/>} exact />
           <Route path="/friends" element={<Friends  setVisible={setVisible}/>} exact />
-          <Route path="/" element={<Home loading={loading} setVisible={setVisible} posts={posts.posts} error={error}/>} exact />
+          <Route path="/" element={<Home loading={loading} getAllpost={getAllpost} setVisible={setVisible} posts={posts.posts} error={error}/>} exact />
           <Route path="/activate/:token" element={<Activate />} />
         </Route>
         <Route element={<NotLoginRoutes />}>
