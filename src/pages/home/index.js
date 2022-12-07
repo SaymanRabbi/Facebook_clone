@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { HashLoader } from "react-spinners";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import Header from "../../components/Header/Header";
 import HomeLeft from "../../components/home/HomeLeft";
@@ -27,12 +28,16 @@ export default function Home({setVisible,posts,loading,getAllpost}) {
         user.verified === false && <SendVerification user={user} />
       } 
       <CreatePost user={user} setVisible={setVisible}/>
-      
-        :<div className="posts">
+      {
+        loading?<div className="sekelton_loader">
+        <HashLoader color="#1876f2"/>
+      </div>:<div className="posts">
         {
           posts?.map(post=><Post getAllpost={getAllpost} key={post._id} post={post} user={user}/>)
         }
       </div>
+      }
+        
       </div>
     <Right user={user}/>
 </div>;

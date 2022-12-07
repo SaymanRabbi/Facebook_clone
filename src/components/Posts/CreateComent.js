@@ -66,7 +66,6 @@ const CreateComent = ({user,postId,setCount,setCommentData}) => {
         else{
           setLoading(true)
           const comments = await getComment(text,postId,"",user.token)
-          console.log(comments)
           setCommentData(comments)
           setLoading(false)
           setText('')
