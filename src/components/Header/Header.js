@@ -29,7 +29,7 @@ const Header = ({page}) => {
                 
             </div>
             {
-                showSearch && <SearchMenu setShowSearch={setShowSearch} />
+                showSearch && <SearchMenu setShowSearch={setShowSearch} token={user.token} />
             } 
             {/* --------Header Left---------------- */}
             {/* --------Header Middle---------------- */}
