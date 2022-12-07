@@ -136,3 +136,18 @@ export const updateCover = async (
      return error.response.data.messages
  }
  }
+ export const searchResult = async (
+    id,token
+ )=>{
+ try {
+     const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/deleteRequest/${id}`,{
+     },{
+         headers:{
+             Authorization:`Bearer ${token}`
+         }
+     })
+     return "ok"
+ } catch (error) {
+     return error.response.data.messages
+ }
+ }
