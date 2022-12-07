@@ -41,7 +41,6 @@ function App() {
       })
     }
   }
-console.log(posts)
   return (
     <div>
       {visible &&
