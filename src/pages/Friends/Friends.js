@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Header from '../../components/Header/Header';
+import { getFriend } from '../../func/user';
 import './Friends.css';
 const Friends = () => {
+  const {user} = useSelector((state)=>({...state}))
+  useEffect(()=>{
+    getdata()
+  },[])
+const getdata = async () => {
+    const data = await getFriend(user.token);
+    console.log(data);
+}
     return (
         <>
         <Header page="friends" />
