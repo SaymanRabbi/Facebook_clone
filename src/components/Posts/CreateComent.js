@@ -4,7 +4,7 @@ import { ClipLoader } from "react-spinners";
 import { getComment } from "../../func/post";
 import { uploadImages } from "../../func/UploadImages";
 import dataURItoBlob from "../../Helpers/dataURItoBlob";
-const CreateComent = ({user,postId,setCount}) => {
+const CreateComent = ({user,postId,setCount,setCommentData}) => {
     const [picker, setPicker] = useState(false);
     const [text, setText] = useState("");
     const [error, setError] = useState("");
@@ -56,7 +56,8 @@ const CreateComent = ({user,postId,setCount}) => {
       formdata.append("path",path)
         formdata.append("file",img)
       const res= await uploadImages(formdata,user.token,path)
-      const data = await getComment(text,postId,res[0].url,user.token)
+      const comments = await getComment(text,postId,res[0].url,user.token)
+      setCommentData(comments)
       setLoading(false)
       setText('')
       setCommentImage('')
@@ -64,7 +65,9 @@ const CreateComent = ({user,postId,setCount}) => {
     }
         else{
           setLoading(true)
-          const data = await getComment(text,postId,"",user.token)
+          const comments = await getComment(text,postId,"",user.token)
+          console.log(comments)
+          setCommentData(comments)
           setLoading(false)
           setText('')
           setCommentImage('')

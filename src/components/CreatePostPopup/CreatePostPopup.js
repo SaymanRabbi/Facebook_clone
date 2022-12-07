@@ -10,7 +10,7 @@ import EmojiPicker from "./EmojiPicker";
 import ImagesPreview from "./ImagesPreview";
 import PostError from "./PostError";
 
-const CreatePostPopup = ({ user,setVisible,posts,dispatch,profile }) => {
+const CreatePostPopup = ({ user,setVisible,posts,dispatch,profile,getAllpost }) => {
   const popup = useRef(null)
   const [text, setText] = useState("");
   const [showPrev, setShowPrev] = useState(false);
@@ -26,11 +26,10 @@ const CreatePostPopup = ({ user,setVisible,posts,dispatch,profile }) => {
       const res = await createPost(null,background,text,null,user.id,user.token)
       setLoading(false)
       if(res.status === "ok"){
+        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data,...posts]})
         setBackground('')
         setText('')
         setVisible(false)
-        // toast.success("Post created successfully")
-        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data,...posts?.posts]})
       }
      else{
     setError(res)
@@ -50,12 +49,13 @@ const CreatePostPopup = ({ user,setVisible,posts,dispatch,profile }) => {
      const response= await createPost(null,null,text,res,user.id,user.token)
       setLoading(false)
      if(response.status==="ok"){
+       dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[response.data
+        ,...posts]})
        setBackground('')
        setText('')
        setVisible(false)
        setText('')
       //  toast.success("Post created successfully")
-       dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[response.data,...posts?.posts]})
      }
      else{
       setError(response)
@@ -66,11 +66,12 @@ const CreatePostPopup = ({ user,setVisible,posts,dispatch,profile }) => {
       const res = await createPost(null,null,text,null,user.id,user.token)
       setLoading(false)
       if(res.status === "ok"){
+        console.log(res.data)
+        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data
+          ,...posts]})
         setBackground('')
         setText('')
         setVisible(false)
-        // toast.success("Post created successfully")
-        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data,...posts?.posts]})
       }
      else{
     setError(res)

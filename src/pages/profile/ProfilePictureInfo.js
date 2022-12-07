@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
 import FriendShip from './FriendShip';
 
@@ -44,7 +45,9 @@ const ProfilePictureInfo = ({profile,visitor,photos,otherName}) => {
           </div>
           <div className="profile_friend_imgs">
           {
-              profile?.friends && profile?.friends.slice(0,6).map((friend,i)=>(<img src={friend.picture} key={i} style={{transform:`translateX(${-i*7}px)`,zIndex:`${i}`}}/>))
+              profile?.friends && profile?.friends.slice(0,6).map((friend,i)=>(<Link key={i} to={`/profile/${friend.username}`}>
+              <img src={friend.picture}  style={{transform:`translateX(${-i*7}px)`,zIndex:`${i}`}}/>
+              </Link>))
           }
           </div>
         </div>

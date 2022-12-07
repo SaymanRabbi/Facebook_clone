@@ -19,7 +19,7 @@ export default function Home({setVisible,posts,loading,getAllpost}) {
   },[])
   const { user } = useSelector((user) => ({ ...user }))
   return <div className="home" style={{height:`${height+150}px`}}>
-    <Header page="home"/>
+    <Header page="home" getAllpost={getAllpost}/>
     <HomeLeft user={user} />
     <div className="home_middle" ref={middle}>
       <Stroies />
@@ -27,9 +27,10 @@ export default function Home({setVisible,posts,loading,getAllpost}) {
         user.verified === false && <SendVerification user={user} />
       } 
       <CreatePost user={user} setVisible={setVisible}/>
-      <div className="posts">
+      
+        :<div className="posts">
         {
-          posts?.map(post=><Post key={post._id} post={post} user={user}/>)
+          posts?.map(post=><Post getAllpost={getAllpost} key={post._id} post={post} user={user}/>)
         }
       </div>
       </div>

@@ -6,7 +6,7 @@ import AllMenu from './AllMenu';
 import './Header.css';
 import SearchMenu from './SearchMenu';
 import UserMenu from './UserMenu';
-const Header = ({page}) => {
+const Header = ({page,getAllpost}) => {
     const [showSearch, setShowSearch] = useState(false);
     const [showAllMenu, setShowAllMenu] = useState(false);
     const [showuserMenu, setShowUserMenu] = useState(false);
@@ -17,7 +17,7 @@ const Header = ({page}) => {
             {/* --------Header Left---------------- */}
             <div className="header_left">
                 
-                <Link to="/">
+                <Link to="/" onClick={()=>getAllpost()}>
                     <div className="circle">
                         <Logo/>
                     </div> 
@@ -34,7 +34,9 @@ const Header = ({page}) => {
             {/* --------Header Left---------------- */}
             {/* --------Header Middle---------------- */}
             <div className="header_middle">
-                <Link to='/' className={`middle_icon ${page==='home'? 'active':'hover1'}`}>
+                <Link to='/' className={`middle_icon ${page==='home'? 'active':'hover1'}`}
+                onClick={()=>getAllpost()}
+                >
                  {
                     page ==='home' ? <HomeActive  color={color}/>: <Home color={color}/>
                  }

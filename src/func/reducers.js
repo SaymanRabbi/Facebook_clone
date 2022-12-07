@@ -1,4 +1,5 @@
 export function postsreducer (state,action){
+  console.log(action.payload)
     switch(action.type){
       case "POST_REQUEST":
         return {

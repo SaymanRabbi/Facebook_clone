@@ -3,7 +3,7 @@ export const createPost = async (
     type,background,text,images,user,token
 )=>{
 try {
-    const data = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/createpost`,{
+    const {data} = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/createpost`,{
         type,background,text,images,user
     },{
         headers:{
@@ -12,7 +12,7 @@ try {
     })
     return {
         status:"ok",
-        data:data
+        data
     }
 } catch (error) {
     return error.response.data.messages

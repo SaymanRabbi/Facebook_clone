@@ -23,11 +23,9 @@ function App() {
     error:null,
     posts:[]
   })
-  const [data, setData] = useState(posts);
   useEffect(()=>{
   getAllpost()
-    setData(posts)
-  },[posts])
+  },[])
   // console.log(posts)
    const getAllpost = async () => {
     try {
@@ -48,14 +46,14 @@ function App() {
   return (
     <div>
       {visible &&
-       <CreatePostPopup user={user} setVisible={setVisible} posts={data} dispatch={dispatch}/>}
+       <CreatePostPopup user={user} setVisible={setVisible} getAllpost={getAllpost} posts={posts} dispatch={dispatch}/>}
      
       <Routes>
         <Route element={<LoginRoutes />}>
-          <Route path="/profile"  element={<Profile  setVisible={setVisible}/>} exact />
-          <Route path="/profile/:username"  element={<Profile  setVisible={setVisible}/>} exact />
-          <Route path="/friends" element={<Friends  setVisible={setVisible}/>} exact />
-          <Route path="/" element={<Home loading={loading} getAllpost={getAllpost} setVisible={setVisible} posts={posts.posts} error={error}/>} exact />
+          <Route path="/profile"  element={<Profile posts={posts}  getAllpost={getAllpost}  setVisible={setVisible}/>} exact />
+          <Route path="/profile/:username"  element={<Profile getAllpost={getAllpost}  setVisible={setVisible}/>} exact />
+          <Route path="/friends" element={<Friends getAllpost={getAllpost}  setVisible={setVisible}/>} exact />
+          <Route path="/" element={<Home loading={loading} getAllpost={getAllpost} setVisible={setVisible} posts={posts} error={error}/>} exact />
           <Route path="/activate/:token" element={<Activate />} />
         </Route>
         <Route element={<NotLoginRoutes />}>

@@ -9,10 +9,6 @@ import './Post.css';
 import PostMenu from './PostMenu';
 import ReactPopup from './ReactPopup';
 const Post = ({post,user,profile}) => {
-  const [commentData, setCommentData] = useState([]);
-  useEffect(()=>{
-    setCommentData(post?.comments)
-  },[post])
   const [visible, setVisible] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
  const [react, setReact] = useState([]);
@@ -20,6 +16,10 @@ const Post = ({post,user,profile}) => {
  const [total, setTotal] = useState(0);
  const [count, setCount] = useState(1);
  const [cheackSaved, setCheackSaved] = useState();
+ const [commentData, setCommentData] = useState([]);
+ useEffect(()=>{
+   setCommentData(post?.comments)
+ },[post])
   const getReactFunc = async ()=>{
     const data = await getReact(post?._id,user?.token);
     // console.log(data);
@@ -216,7 +216,7 @@ const Post = ({post,user,profile}) => {
       </div>
       <div className="comments_wrap">
         <div className="comments_order"></div>
-        <CreateComent user={user} postId={post?._id} setCount={setCount}/>
+        <CreateComent user={user} postId={post?._id} setCount={setCount} setCommentData={setCommentData} />
         {commentData&&
           commentData
             ?.sort((a, b) => {

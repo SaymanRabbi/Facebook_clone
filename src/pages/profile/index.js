@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useReducer, useRef, useState } from "react";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { useSelector } from "react-redux";
 import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { HashLoader } from "react-spinners";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import CreatePostPopup from "../../components/CreatePostPopup/CreatePostPopup";
 import Header from "../../components/Header/Header";
@@ -17,7 +20,7 @@ import PplYouMayKnow from "./PplYouMayKnow";
 import ProfileMenu from "./ProfileMenu";
 import ProfilePictureInfo from "./ProfilePictureInfo";
 import './style.css';
-export default function Profile() {
+export default function Profile({getAllpost}) {
   const [photos,setPhotos] = useState({})
   const [visible,setVisible] = useState(false)
   // covermenu
@@ -33,14 +36,14 @@ export default function Profile() {
     error:null,
     profile:{}
   })
-  
+  // console.log(loading)
   useEffect(()=>{
     getProfile()
-  },[userName,profile])
+  },[userName])
   const [othername , setOtherName] = useState('')
   useEffect(()=>{
     setOtherName(profile?.details?.otherName)
-  },[profile])
+  },[])
   const visitor =  userName===user.usrname? false : true;
   const getProfile = async () => {
     try {
@@ -96,12 +99,33 @@ export default function Profile() {
   };
   return <div className="profile">
     {visible &&
-       <CreatePostPopup user={user} setVisible={setVisible} posts={profile?.posts} dispatch={dispatch} profile/>}
-    <Header page='profile'/>
+       <CreatePostPopup  user={user} setVisible={setVisible} posts={profile?.posts} dispatch={dispatch} profile/>}
+    <Header page='profile' getAllpost={getAllpost}/>
     <div className="profile_top" ref={profileTop}>
       <div className="profile_container">
-       <Cover profile={profile} visitor={visitor} photo = {photos.resources}/>
+      {
+        loading ?<> <div className="profile_cover">
+          <Skeleton height="352px" containerClassName="avatar-skeleton"></Skeleton>
+          </div>
+          <div className="profile_img_wrap">
+          <div className="profile_w_left">
+          <Skeleton height="180px" width="180px" circle style={{transform:'translateY(-3.6rem)'}} containerClassName="avatar-skeleton"></Skeleton>
+          <div className="profile_w_col">
+          <div className="profile_name">
+          <Skeleton height="35px" width="200px"  style={{transform:'translateY(-3.6rem)'}} containerClassName="avatar-skeleton"></Skeleton>
+          <Skeleton height="30px" width="100px"  style={{transform:'translateY(-3.6rem)'}} containerClassName="avatar-skeleton"></Skeleton>
+          </div>
+          <div className="profile_friend_count">
+          <Skeleton height="20px" width="90px"  style={{transform:'translateY(-3.6rem)'}} containerClassName="avatar-skeleton"></Skeleton>
+          </div>
+          </div>
+          </div>
+          </div>
+           </>:<>
+         <Cover profile={profile} visitor={visitor} photo = {photos.resources}/>
        <ProfilePictureInfo profile={profile} otherName={othername} visitor={visitor} photos ={photos?.resources}/>
+        </>
+      }
        <ProfileMenu/>
       </div>
     </div>
@@ -118,9 +142,40 @@ export default function Profile() {
                     "scrollFixed showMore"
               }`}>
               <div className="profile_left" ref={leftSide}>
-                <Intro detailss={profile.details} visitor={visitor} setOtherName={setOtherName}/>
+                {
+                  loading?<>
+                  <div className="profile_card">
+      <div className="profile_card_header">
+        Intro
+      </div>
+      <div className="sekelton_loader">
+        <HashLoader color="#1876f2"/>
+      </div>
+      </div>
+      <div className="profile_card">
+      <div className="profile_card_header">
+        Photos
+        <div className="profile_header_link">See all Photos</div>
+      </div>
+      <div className="sekelton_loader">
+        <HashLoader color="#1876f2"/>
+      </div>
+      </div>
+      <div className="profile_card">
+      <div className="profile_card_header">
+        Friends
+        <div className="profile_header_link">See all Friends</div>
+      </div>
+      <div className="sekelton_loader">
+        <HashLoader color="#1876f2"/>
+      </div>
+      </div>
+                  </>:<>
+                  <Intro detailss={profile.details} visitor={visitor} setOtherName={setOtherName}/>
                 <Photos photos={photos}/>
                 <Friends friends={profile.friends}/>
+                  </>
+                }
                 <div className="relative_fb_copyright">
                   <Link to="/">Privacy </Link>
                   <span>. </span>
@@ -143,15 +198,19 @@ export default function Profile() {
                   !visitor && <CreatePost user={user} profile setVisible={setVisible} />
                 }
                 <GridPosts />
-                <div className="posts">
-                  {
-                    profile?.post?.map((post)=>
+                {
+                  loading? <div className="sekelton_loader">
+                    <HashLoader color="#1876f2"/>
+                  </div>:<div className="posts">
+                  {profile.posts && profile.posts.length&&
+                    profile?.posts?.map((post)=>
                     {
                       return  <Post post={post} user={user} key={post._id} profile={profile}/>
                     }
                     )
                   }
                 </div>
+                }
               </div>
             </div>
           </div>
