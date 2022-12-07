@@ -1,16 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { useSelector } from 'react-redux';
 import Header from '../../components/Header/Header';
+import { friendspage } from '../../func/reducers';
 import { getFriend } from '../../func/user';
 import './Friends.css';
 const Friends = () => {
   const {user} = useSelector((state)=>({...state}))
+  
+  const [{ loading, error, data }, dispatch] = useReducer(friendspage, {
+    loading: false,
+    data: {},
+    error: "",
+  });
   useEffect(()=>{
     getdata()
   },[])
 const getdata = async () => {
+  dispatch({ type: "FRIENDS_REQUEST" });
     const data = await getFriend(user.token);
-    console.log(data);
+    if (data.status === "ok") {
+      dispatch({ type: "FRIENDS_SUCCESS", payload: data.data });
+    } else {
+      dispatch({ type: "FRIENDS_ERROR", payload: data.data });
+    }
 }
     return (
         <>
