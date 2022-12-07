@@ -19,15 +19,12 @@ const Friends = () => {
 const getdata = async () => {
   dispatch({ type: "FRIENDS_REQUEST" });
     const data = await getFriend(user.token);
-    console.log(data)
     if (data.status === 200) {
       dispatch({ type: "FRIENDS_SUCCESS", payload: data.data });
-      // console.log(data.data)
     } else {
       dispatch({ type: "FRIENDS_ERROR", payload: data.data });
     }
 }
-console.log(data)
     return (
         <>
         <Header page="friends" />
@@ -111,7 +108,7 @@ console.log(data)
             <div className="flex_wrap">
               {data.requests &&
                 data.requests.map((user) => (
-                  <Card user={user} key={user._id} type="request" />
+                  <Card userr={user} key={user._id} type="request" getdata={getdata}/>
                 ))}
             </div>
           </div>
@@ -123,7 +120,7 @@ console.log(data)
             <div className="flex_wrap">
               {data.sentRequests &&
                 data.sentRequests.map((user) => (
-                  <Card user={user} key={user._id} type="sent" />
+                  <Card userr={user} key={user._id} type="sent" getdata={getdata}/>
                 ))}
             </div>
           </div>
@@ -135,7 +132,7 @@ console.log(data)
             <div className="flex_wrap">
               {data.friends &&
                 data.friends.map((user) => (
-                  <Card user={user} key={user._id} type="friends" />
+                  <Card userr={user} key={user._id} type="friends" getdata={getdata} />
                 ))}
             </div>
           </div>

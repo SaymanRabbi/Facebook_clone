@@ -23,11 +23,10 @@ function App() {
     error:null,
     posts:[]
   })
+  const [data, setData] = useState(posts);
   useEffect(()=>{
   getAllpost()
-  // return () => {
-  //   dispatch({type:"POST_RESET"})
-  // }
+    setData(posts)
   },[posts])
   // console.log(posts)
    const getAllpost = async () => {
@@ -49,7 +48,7 @@ function App() {
   return (
     <div>
       {visible &&
-       <CreatePostPopup user={user} setVisible={setVisible} posts={posts} dispatch={dispatch}/>}
+       <CreatePostPopup user={user} setVisible={setVisible} posts={data} dispatch={dispatch}/>}
      
       <Routes>
         <Route element={<LoginRoutes />}>
