@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ArrowDown, Friends, Gaming, Home, HomeActive, Logo, Market, Menu, Messenger, Notifications, Search, Watch } from '../../svg';
+import { ArrowDown, Friends, FriendsActive, Gaming, Home, HomeActive, Logo, Market, Menu, Messenger, Notifications, Search, Watch } from '../../svg';
 import AllMenu from './AllMenu';
 import './Header.css';
 import SearchMenu from './SearchMenu';
@@ -39,8 +39,10 @@ const Header = ({page}) => {
                     page ==='home' ? <HomeActive  color={color}/>: <Home color={color}/>
                  }
                 </Link>
-                <Link to='/' className='middle_icon hover1'>
-                 <Friends color={color}/>
+                <Link to='/Friends' className={`middle_icon ${page==='friend'? 'active':'hover1'}`}>
+                {
+                    page ==='friend' ? <FriendsActive  color={color}/>: <Friends color={color}/>
+                 }
                 </Link>
                 <Link to='/' className='middle_icon hover1'>
                     <Watch color={color} />

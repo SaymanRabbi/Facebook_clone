@@ -14,9 +14,7 @@ export default function Home({setVisible,posts,loading}) {
   useEffect(()=>{
   setHeight(middle.current.clientHeight)
   },[loading,height])
-  //user
   const { user } = useSelector((user) => ({ ...user }))
-  
   return <div className="home" style={{height:`${height+150}px`}}>
     <Header page="home"/>
     <HomeLeft user={user} />

@@ -1,10 +1,11 @@
 import React from 'react';
+import Header from '../../components/Header/Header';
 import './Friends.css';
 const Friends = () => {
     return (
-        <div>
-            Friends
-        </div>
+        <>
+            <Header page="friend"/>
+        </>
     );
 };
 

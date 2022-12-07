@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CreatePostPopup from "./components/CreatePostPopup/CreatePostPopup";
 import { postsreducer } from "./func/reducers";
+import Friends from "./pages/Friends/Friends";
 import Home from "./pages/home";
 import Activate from "./pages/home/activate";
 import Login from "./pages/login";
@@ -28,7 +29,7 @@ function App() {
   }
   },[posts])
   // console.log(posts)
-  const getAllpost = async () => {
+   const getAllpost = async () => {
     try {
       dispatch({type:"POST_REQUEST"})
       const {data} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts`,{
@@ -52,7 +53,8 @@ function App() {
       <Routes>
         <Route element={<LoginRoutes />}>
           <Route path="/profile"  element={<Profile  setVisible={setVisible}/>} exact />
-          <Route path="/profile/:username" setVisible={setVisible} element={<Profile  setVisible={setVisible}/>} exact />
+          <Route path="/profile/:username"  element={<Profile  setVisible={setVisible}/>} exact />
+          <Route path="/friends" element={<Friends  setVisible={setVisible}/>} exact />
           <Route path="/" element={<Home loading={loading} setVisible={setVisible} posts={posts.posts} error={error}/>} exact />
           <Route path="/activate/:token" element={<Activate />} />
         </Route>

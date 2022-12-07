@@ -1,12 +1,11 @@
-import React, { useRef } from 'react';
-import { useState } from "react";
+import Cookies from 'js-cookie';
+import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import useClickoutside from '../../Helpers/useClickoutside';
 import DisplayAccessibility from './DisplayAccessibility';
 import HelpSupport from './HelpSupport';
 import SettingsPrivacy from "./SettingsPrivacy";
-import { useDispatch } from 'react-redux';
-import Cookies from 'js-cookie';
 const UserMenu = ({ user, setShowUserMenu }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
