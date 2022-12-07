@@ -235,6 +235,8 @@ const Post = ({post,user,profile}) => {
           postUserId={post.user._id}
           imagesLength={post?.images?.length}
           setShowMenu={setShowMenu}
+          token={user.token}
+          id={post._id}
         />
       )}
     </div>

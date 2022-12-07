@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { SavedPost } from "../../func/post";
 import useClickoutside from "../../Helpers/useClickoutside";
 import Menuitem from "./Menuitem";
 
@@ -7,19 +8,26 @@ const PostMenu = ({
     userId,
     imagesLength,
     setShowMenu,
+    token,
+    id
   }) => {
     const [test, setTest] = useState(postUserId === userId ? true : false);
-    console.log(test);
     const menu = useRef(null);
     useClickoutside(menu, () => setShowMenu(false));
+    const savedHandeler = async() => {
+      SavedPost(id,token)
+    }
     return (
       <ul className="post_menu" ref={menu}>
         {test && <Menuitem icon="pin_icon" title="Pin Post" />}
+        <div onClick={()=>savedHandeler()}>
         <Menuitem
           icon="save_icon"
           title="Save Post"
           subtitle="Add this to your saved items."
         />
+        </div>
+        
         <div className="line"></div>
         {test && <Menuitem icon="edit_icon" title="Edit Post" />}
         {!test && (
