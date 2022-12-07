@@ -19,11 +19,14 @@ const Post = ({post,user,profile}) => {
  const [cheack, setCheack] = useState(''); 
  const [total, setTotal] = useState(0);
  const [count, setCount] = useState(1);
+ const [cheackSaved, setCheackSaved] = useState();
   const getReactFunc = async ()=>{
     const data = await getReact(post?._id,user?.token);
+    // console.log(data);
     setReact(data?.data?.reacts);
     setCheack(data?.data?.cheack?.react)
     setTotal(data?.data?.total)
+    setCheackSaved(data?.data?.cheackSaved)
   }
   useEffect(()=>{
     getReactFunc()
@@ -237,6 +240,8 @@ const Post = ({post,user,profile}) => {
           setShowMenu={setShowMenu}
           token={user.token}
           id={post._id}
+          setCheackSaved={setCheackSaved}
+          cheackSaved={cheackSaved}
         />
       )}
     </div>

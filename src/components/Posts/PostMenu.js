@@ -9,7 +9,7 @@ const PostMenu = ({
     imagesLength,
     setShowMenu,
     token,
-    id
+    id,setCheackSaved,cheackSaved
   }) => {
     const [test, setTest] = useState(postUserId === userId ? true : false);
     const menu = useRef(null);
@@ -20,13 +20,21 @@ const PostMenu = ({
     return (
       <ul className="post_menu" ref={menu}>
         {test && <Menuitem icon="pin_icon" title="Pin Post" />}
-        <div onClick={()=>savedHandeler()}>
-        <Menuitem
-          icon="save_icon"
-          title="Save Post"
-          subtitle="Add this to your saved items."
-        />
-        </div>
+        {
+          cheackSaved ?<div onClick={()=>savedHandeler()}>
+          <Menuitem
+            icon="save_icon"
+            title="UnSave"
+            subtitle="Remove this to your saved items."
+          />
+          </div>:<div onClick={()=>savedHandeler()}>
+          <Menuitem
+            icon="save_icon"
+            title="Save Post"
+            subtitle="Add this to your saved items."
+          />
+          </div>
+        }
         
         <div className="line"></div>
         {test && <Menuitem icon="edit_icon" title="Edit Post" />}
