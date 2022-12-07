@@ -37,6 +37,12 @@ export function profilereducer (state,action){
           error:null,
           profile:action.payload
         }
+        case "PROFILE_POSTS":
+          return {
+            loading:false,
+            error:null,
+            profile:{...state,posts:action.payload}
+          }
       case "PROFILE_ERROR":
         return {
           ...state,

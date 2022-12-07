@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from 'react-responsive';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CreatePost from "../../components/CreatePost/CreatePost";
+import CreatePostPopup from "../../components/CreatePostPopup/CreatePostPopup";
 import Header from "../../components/Header/Header";
 import Intro from "../../components/Intro/Intro";
 import Post from "../../components/Posts/Post";
@@ -16,8 +17,9 @@ import PplYouMayKnow from "./PplYouMayKnow";
 import ProfileMenu from "./ProfileMenu";
 import ProfilePictureInfo from "./ProfilePictureInfo";
 import './style.css';
-export default function Profile({setVisible}) {
+export default function Profile() {
   const [photos,setPhotos] = useState({})
+  const [visible,setVisible] = useState(false)
   // covermenu
   const navigate = useNavigate()
   const {username} = useParams();
@@ -34,7 +36,7 @@ export default function Profile({setVisible}) {
   
   useEffect(()=>{
     getProfile()
-  },[userName])
+  },[userName,profile])
   const [othername , setOtherName] = useState('')
   useEffect(()=>{
     setOtherName(profile?.details?.otherName)
@@ -93,6 +95,8 @@ export default function Profile({setVisible}) {
     setScrollHeight(window.pageYOffset);
   };
   return <div className="profile">
+    {visible &&
+       <CreatePostPopup user={user} setVisible={setVisible} posts={profile?.posts} dispatch={dispatch} profile/>}
     <Header page='profile'/>
     <div className="profile_top" ref={profileTop}>
       <div className="profile_container">

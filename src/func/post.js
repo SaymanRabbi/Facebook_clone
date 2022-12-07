@@ -10,7 +10,10 @@ try {
             Authorization:`Bearer ${token}`
         }
     })
-    return "ok"
+    return {
+        status:"ok",
+        data:data
+    }
 } catch (error) {
     return error.response.data.messages
 }

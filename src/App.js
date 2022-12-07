@@ -24,7 +24,8 @@ function App() {
   })
   useEffect(()=>{
   getAllpost()
-  },[])
+  },[posts])
+  // console.log(posts)
   const getAllpost = async () => {
     try {
       dispatch({type:"POST_REQUEST"})
@@ -44,7 +45,7 @@ function App() {
   return (
     <div>
       {visible &&
-       <CreatePostPopup user={user} setVisible={setVisible}/>}
+       <CreatePostPopup user={user} setVisible={setVisible} posts={posts} dispatch={dispatch}/>}
      
       <Routes>
         <Route element={<LoginRoutes />}>

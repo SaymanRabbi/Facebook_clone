@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
-import { toast } from "react-toastify";
 import { createPost } from "../../func/post";
 import { uploadImages } from "../../func/UploadImages";
 import dataURItoBlob from "../../Helpers/dataURItoBlob";
@@ -11,7 +10,7 @@ import EmojiPicker from "./EmojiPicker";
 import ImagesPreview from "./ImagesPreview";
 import PostError from "./PostError";
 
-const CreatePostPopup = ({ user,setVisible }) => {
+const CreatePostPopup = ({ user,setVisible,posts,dispatch,profile }) => {
   const popup = useRef(null)
   const [text, setText] = useState("");
   const [showPrev, setShowPrev] = useState(false);
@@ -26,11 +25,12 @@ const CreatePostPopup = ({ user,setVisible }) => {
       setLoading(true)
       const res = await createPost(null,background,text,null,user.id,user.token)
       setLoading(false)
-      if(res === "ok"){
+      if(res.status === "ok"){
         setBackground('')
         setText('')
         setVisible(false)
-        toast.success("Post created successfully")
+        // toast.success("Post created successfully")
+        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data,...posts]})
       }
      else{
     setError(res)
@@ -49,12 +49,13 @@ const CreatePostPopup = ({ user,setVisible }) => {
       const res= await uploadImages(formdata,user.token,path)
      const response= await createPost(null,null,text,res,user.id,user.token)
       setLoading(false)
-     if(response==="ok"){
-      setBackground('')
-      setText('')
-      setVisible(false)
-      setText('')
-      toast.success("Post created successfully")
+     if(response.status==="ok"){
+       setBackground('')
+       setText('')
+       setVisible(false)
+       setText('')
+      //  toast.success("Post created successfully")
+       dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[response.data,...posts]})
      }
      else{
       setError(response)
@@ -64,11 +65,12 @@ const CreatePostPopup = ({ user,setVisible }) => {
       setLoading(true)
       const res = await createPost(null,null,text,null,user.id,user.token)
       setLoading(false)
-      if(res === "ok"){
+      if(res.status === "ok"){
         setBackground('')
         setText('')
         setVisible(false)
-        toast.success("Post created successfully")
+        // toast.success("Post created successfully")
+        dispatch({type:profile?"PROFILE_POSTS":"POST_SUCCESS",payload:[res.data,...posts]})
       }
      else{
     setError(res)
