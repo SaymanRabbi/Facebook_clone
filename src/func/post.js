@@ -79,3 +79,18 @@ try {
     return error?.response?.data?.messages
 }
 }
+export const DeletePost = async (
+    id,token
+)=>{
+try {
+    const {data} = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/deletepost/${id}`,{
+    },{
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    })
+    return data
+} catch (error) {
+    return error?.response?.data?.messages
+}
+}

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { SavedPost } from "../../func/post";
+import { DeletePost, SavedPost } from "../../func/post";
 import useClickoutside from "../../Helpers/useClickoutside";
 import Menuitem from "./Menuitem";
 
@@ -15,7 +15,10 @@ const PostMenu = ({
     const menu = useRef(null);
     useClickoutside(menu, () => setShowMenu(false));
     const savedHandeler = async() => {
-      SavedPost(id,token)
+     await SavedPost(id,token)
+    }
+    const removepost = async() => {
+  await DeletePost(id,token)
     }
     return (
       <ul className="post_menu" ref={menu}>
@@ -61,13 +64,13 @@ const PostMenu = ({
           <Menuitem icon="refresh_icon" title="Refresh share attachment" />
         )}
         {test && <Menuitem icon="archive_icon" title="Move to archive" />}
-        {test && (
+        {test && <div onClick={()=>removepost()}>
           <Menuitem
             icon="trash_icon"
             title="Move to trash"
             subtitle="items in your trash are deleted after 30 days"
           />
-        )}
+          </div>}
         {!test && <div className="line"></div>}
         {!test && (
           <Menuitem
