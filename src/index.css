@@ -43,6 +43,9 @@ a {
   --color-primary: #e4e6eb;
   --color-secondary: #b0b3b8;
 }
+.dark .blur {
+  background: rgba(1, 1, 1, 0.53);
+}
 /*----Buttons----*/
 .blue_btn {
   border: none;

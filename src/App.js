@@ -44,7 +44,7 @@ function App() {
     }
   }
   return (
-    <div>
+    <div className="dark">
       {visible &&
        <CreatePostPopup user={user} setVisible={setVisible} getAllpost={getAllpost} posts={posts} dispatch={dispatch}/>}
      
