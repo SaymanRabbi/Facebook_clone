@@ -538,6 +538,9 @@
   .post_bg {
     height: 400px !important;
   }
+  .post_bg_text {
+    color: #000;
+  }
   .post .grid_1 {
     height: 100% !important;
   }
