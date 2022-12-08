@@ -17,7 +17,8 @@ import NotLoginRoutes from "./Routes/NotLoginRoutes";
 
 function App() {
   const [visible, setVisible] = useState(false);
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user,darkTheme } = useSelector((state) => ({ ...state }));
+  console.log(darkTheme)
   const [{loading,error,posts},dispatch] = useReducer(postsreducer,{
     loading:false,
     error:null,
@@ -44,7 +45,7 @@ function App() {
     }
   }
   return (
-    <div className="dark">
+    <div className={darkTheme && "dark"}>
       {visible &&
        <CreatePostPopup user={user} setVisible={setVisible} getAllpost={getAllpost} posts={posts} dispatch={dispatch}/>}
      

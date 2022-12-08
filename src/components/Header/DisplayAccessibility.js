@@ -1,6 +1,10 @@
+import Cookies from 'js-cookie';
 import React from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
 const DisplayAccessibility = ({setVisible}) => {
+  const dispatch = useDispatch();
+  const {darkTheme } = useSelector((state) => ({ ...state }));
+  console.log(darkTheme)
     return (
         <div className="absolute_wrap">
       <div className="absolute_wrap_header">
@@ -26,13 +30,28 @@ const DisplayAccessibility = ({setVisible}) => {
           </span>
         </div>
       </div>
-      <label htmlFor="darkOff" className="hover1">
+      <label htmlFor="darkOff" className="hover1"
+      onClick={() =>{
+        
+        dispatch({type:"LIGHT"})
+        Cookies.set("darkTheme",false)
+      } 
+      }
+      >
         <span>Off</span>
-        <input type="radio" name="dark" id="darkOff" />
+        
+          <input type="radio" name="dark" id="darkOff" />
+       
       </label>
-      <label htmlFor="darkOn" className="hover1">
+      <label htmlFor="darkOn" className="hover1"
+      onClick={() =>{
+        
+        dispatch({type:"DARK"})
+        Cookies.set("darkTheme",true)
+        } }>
         <span>On</span>
-        <input type="radio" name="dark" id="darkOn" />
+          <input type="radio" name="dark" id="darkOn"/>
+       
       </label>
       <div className="mmenu_main">
         <div className="small_circle" style={{ width: "50px" }}>
