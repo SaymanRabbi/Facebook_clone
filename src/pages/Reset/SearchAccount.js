@@ -1,10 +1,9 @@
-import React from "react";
+import axios from "axios";
 import { Form, Formik } from "formik";
-import LoginInput from "../../components/inputs/loginInput";
-import { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import axios from "axios";
+import LoginInput from "../../components/inputs/loginInput";
 const SearchAccount = ({
   email,
   setEmail,
@@ -24,7 +23,7 @@ const SearchAccount = ({
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/finduser`,
+        `https://facebookcloneserver-production.up.railway.app/finduser`,
         { email }
       );
       setUserInfos(data);

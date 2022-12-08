@@ -1,10 +1,9 @@
-import React from "react";
-import { Form, Formik } from "formik";
-import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import LoginInput from "../../components/inputs/loginInput";
-import * as Yup from "yup";
 import axios from "axios";
+import { Form, Formik } from "formik";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import LoginInput from "../../components/inputs/loginInput";
 
 const ChangesPassword = ({
   password,
@@ -35,7 +34,7 @@ const ChangesPassword = ({
   const passwordChanges = async () => {
     try {
       setLoading(true);
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/changesPassword`, {
+      await axios.post(`https://facebookcloneserver-production.up.railway.app/changesPassword`, {
         email,
         password,
       });

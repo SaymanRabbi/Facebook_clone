@@ -30,7 +30,7 @@ function App() {
    const getAllpost = async () => {
     try {
       dispatch({type:"POST_REQUEST"})
-      const {data} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts`,{
+      const {data} = await axios.get(`https://facebookcloneserver-production.up.railway.app/posts`,{
         headers:{
           Authorization:`Bearer ${user.token}`
         }

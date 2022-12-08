@@ -1,3 +1,5 @@
+import axios from "axios";
+import Cookies from 'js-cookie';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,9 +9,7 @@ import HomeLeft from "../../components/home/HomeLeft";
 import Right from "../../components/home/Right/Right";
 import Stroies from "../../components/home/Stroy/Stroies";
 import ActivateForm from "./ActivateForm";
-import './style.css'
-import Cookies from 'js-cookie' 
-import axios from "axios";
+import './style.css';
 export default function Activate() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -28,7 +28,7 @@ export default function Activate() {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/activate`,
+        `https://facebookcloneserver-production.up.railway.app/activate`,
         { token },
         {
           headers: {

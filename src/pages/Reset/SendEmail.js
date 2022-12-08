@@ -15,7 +15,7 @@ const SendEmail = ({
     try {
       setLoading(true);
       await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/sendResetPasswordCode`,
+        `https://facebookcloneserver-production.up.railway.app/sendResetPasswordCode`,
         { email }
       );
       setError("");

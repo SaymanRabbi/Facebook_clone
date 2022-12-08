@@ -1,13 +1,12 @@
-import { Formik, Form } from "formik";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Form, Formik } from "formik";
+import Cookies from "js-cookie";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import DotLoader from "react-spinners/DotLoader";
 import * as Yup from "yup";
 import LoginInput from "../../components/inputs/loginInput";
-import { useState } from "react";
-import DotLoader from "react-spinners/DotLoader";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 const loginInfos = {
   email: "",
   password: "",
@@ -35,7 +34,7 @@ export default function LoginForm({ setVisible, vesible }) {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/login`,
+        `https://facebookcloneserver-production.up.railway.app/login`,
         {
           email,
           password,

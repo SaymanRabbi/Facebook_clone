@@ -48,7 +48,7 @@ export default function Profile({getAllpost}) {
   const getProfile = async () => {
     try {
       dispatch({type:"PROFILE_REQUEST"})
-      const {data} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getProfile/${userName}`,{
+      const {data} = await axios.get(`https://facebookcloneserver-production.up.railway.app/getProfile/${userName}`,{
         headers:{
           Authorization:`Bearer ${user.token}`
         }
@@ -58,7 +58,7 @@ export default function Profile({getAllpost}) {
       }
       else{
         try {
-          const {data} = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/listimages`,{
+          const {data} = await axios.post(`https://facebookcloneserver-production.up.railway.app/listimages`,{
             path,max,sort
           },{
             headers:{

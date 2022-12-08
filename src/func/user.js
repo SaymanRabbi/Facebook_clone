@@ -3,7 +3,7 @@ export const updatePic = async (
    url,token
 )=>{
 try {
-    const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/updateProfilePicture`,{
+    const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/updateProfilePicture`,{
         url
     },{
         headers:{
@@ -19,7 +19,7 @@ export const updateCover = async (
     url,token
  )=>{
  try {
-     const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/updateCover`,{
+     const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/updateCover`,{
          url
      },{
          headers:{
@@ -35,7 +35,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/addFriend/${id}`,{
+     const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/addFriend/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -50,7 +50,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/cancelFriendRequest/${id}`,{
+     const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/cancelFriendRequest/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -65,7 +65,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/follow/${id}`,{
+     const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/follow/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -80,7 +80,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/unfollow/${id}`,{
+     const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/unfollow/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -95,7 +95,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/acceptFriendRequest/${id}`,{
+     const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/acceptFriendRequest/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -110,7 +110,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/unfriend/${id}`,{
+     const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/unfriend/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -125,7 +125,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/deleteRequest/${id}`,{
+     const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/deleteRequest/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -140,7 +140,7 @@ export const updateCover = async (
     searchTerm,token
  )=>{
  try {
-     const data = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/search/${searchTerm}`,{
+     const data = await axios.post(`https://facebookcloneserver-production.up.railway.app/search/${searchTerm}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -155,7 +155,7 @@ export const updateCover = async (
     token
  )=>{
  try {
-     const data = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/friendPageinfo`,{
+     const data = await axios.get(`https://facebookcloneserver-production.up.railway.app/friendPageinfo`,{
          headers:{
              Authorization:`Bearer ${token}`
          }

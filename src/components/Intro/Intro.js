@@ -30,7 +30,7 @@ const Intro = ({detailss,visitor,setOtherName}) => {
   const updateDetails = async () => {
     try {
       const { data } = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/updateDetails`,
+        `https://facebookcloneserver-production.up.railway.app/updateDetails`,
         {
           infos,
         },

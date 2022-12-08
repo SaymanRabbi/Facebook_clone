@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import './SendVerification.css'
 import axios from "axios";
+import React, { useState } from 'react';
+import './SendVerification.css';
 const SendVerification = ({user}) => {
     const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const sendVerificationLink = async () => {
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/sendVerification`,
+        `https://facebookcloneserver-production.up.railway.app/sendVerification`,
         {},
         {
           headers: {

@@ -1,15 +1,15 @@
+import axios from "axios";
 import { Form, Formik } from "formik";
+import Cookies from 'js-cookie';
 import { useRef, useState } from "react";
-import RegisterInput from "../inputs/registerInput";
+import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import DotLoader from "react-spinners/DotLoader";
 import * as Yup from "yup";
+import useClickoutside from "../../Helpers/useClickoutside";
+import RegisterInput from "../inputs/registerInput";
 import DateOfBirthSelect from "./DateOfBirthSelect";
 import GenderSelect from "./GenderSelect";
-import DotLoader from "react-spinners/DotLoader";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import Cookies from 'js-cookie'
-import {useNavigate} from 'react-router-dom'
-import useClickoutside from "../../Helpers/useClickoutside";
 export default function RegisterForm({ setVisible, vesible }) {
   const hidden = useRef(null)
   useClickoutside(hidden, () => {
@@ -81,7 +81,7 @@ export default function RegisterForm({ setVisible, vesible }) {
   const registerSubmit = async() => {
     try {
       setLoading(true);
-      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
+      const { data } = await axios.post(`https://facebookcloneserver-production.up.railway.app/register`, {
         first_name,
         last_name,
         email,
