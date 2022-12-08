@@ -46,6 +46,31 @@ a {
 .dark .blur {
   background: rgba(1, 1, 1, 0.53);
 }
+.dark .hover1:hover,
+.dark .hover2:hover {
+  background: var(--bg-third);
+}
+.dark .header_right svg {
+  fill: #fff;
+}
+.dark .all_right_circle i {
+  filter: invert(100%);
+}
+.dark .active_header {
+  background: var(--light-blue-color) !important;
+}
+.dark .active_header svg {
+  fill: var(--blue-color) !important;
+}
+.dark input {
+  color: var(--color-primary);
+}
+.dark .small_circle i,
+.dark .small_circle svg,
+.dark .circle i,
+.dark .white_circle svg {
+  filter: invert(100%) !important;
+}
 /*----Buttons----*/
 .blue_btn {
   border: none;

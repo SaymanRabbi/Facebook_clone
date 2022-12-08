@@ -1,16 +1,16 @@
-import { left } from "../../data/home";
-import { Link } from "react-router-dom";
-import LeftLink from "./LeftLink";
-import './HomeLeft.css'
-import { ArrowDown1 } from "../../svg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { left } from "../../data/home";
+import { ArrowDown1 } from "../../svg";
+import './HomeLeft.css';
+import LeftLink from "./LeftLink";
 import Shortcut from "./Shortcut";
 
 const HomeLeft = ({ user }) => {
   const [visible, setVisible] = useState(false);
     return (
       <div className="left_home scrollbar">
-      <Link to="/profile" className="left_link hover1">
+      <Link to="/profile" className="left_link hover2">
         <img src={user?.picture} alt="" />
         <span>
           {user?.first_name} {user.last_name}
@@ -26,7 +26,7 @@ const HomeLeft = ({ user }) => {
       ))}
       {!visible && (
         <div
-          className="left_link hover1"
+          className="left_link hover2"
           onClick={() => {
             setVisible(true);
           }}
@@ -48,7 +48,7 @@ const HomeLeft = ({ user }) => {
             />
           ))}
           <div
-            className="left_link hover1 "
+            className="left_link hover2 "
             onClick={() => {
               setVisible(false);
             }}
