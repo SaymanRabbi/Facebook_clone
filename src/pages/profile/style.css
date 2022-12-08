@@ -497,3 +497,10 @@
   display: grid;
   place-items: center;
 }
+.no_post {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
+  font-weight: 600;
+}

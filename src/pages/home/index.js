@@ -31,11 +31,11 @@ export default function Home({setVisible,posts,loading,getAllpost}) {
       {
         loading?<div className="sekelton_loader">
         <HashLoader color="#1876f2"/>
-      </div>:<div className="posts">
+      </div>:posts?.length ? <div className="posts">
         {
           posts?.map(post=><Post getAllpost={getAllpost} key={post._id} post={post} user={user}/>)
         }
-      </div>
+      </div>:<div className="no_post">No Post Avilabel</div>
       }
         
       </div>

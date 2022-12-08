@@ -104,24 +104,90 @@ export default function Profile({getAllpost}) {
     <div className="profile_top" ref={profileTop}>
       <div className="profile_container">
       {
-        loading ?<> <div className="profile_cover">
-          <Skeleton height="352px" containerClassName="avatar-skeleton"></Skeleton>
-          </div>
-          <div className="profile_img_wrap">
-          <div className="profile_w_left">
-          <Skeleton height="180px" width="180px" circle style={{transform:'translateY(-3.6rem)'}} containerClassName="avatar-skeleton"></Skeleton>
-          <div className="profile_w_col">
-          <div className="profile_name">
-          <Skeleton height="35px" width="200px"  style={{transform:'translateY(-3.6rem)'}} containerClassName="avatar-skeleton"></Skeleton>
-          <Skeleton height="30px" width="100px"  style={{transform:'translateY(-3.6rem)'}} containerClassName="avatar-skeleton"></Skeleton>
-          </div>
-          <div className="profile_friend_count">
-          <Skeleton height="20px" width="90px"  style={{transform:'translateY(-3.6rem)'}} containerClassName="avatar-skeleton"></Skeleton>
-          </div>
-          </div>
-          </div>
-          </div>
-           </>:<>
+        loading ?
+        <>
+              <div className="profile_cover">
+                <Skeleton
+                  height="347px"
+                  containerClassName="avatar-skeleton"
+                  style={{ borderRadius: "8px" }}
+                />
+              </div>
+              <div
+                className="profile_img_wrap"
+                style={{
+                  marginBottom: "-3rem",
+                  transform: "translateY(-8px)",
+                }}
+              >
+                <div className="profile_w_left">
+                  <Skeleton
+                    circle
+                    height="180px"
+                    width="180px"
+                    containerClassName="avatar-skeleton"
+                    style={{ transform: "translateY(-3.3rem)" }}
+                  />
+                  <div className="profile_w_col">
+                    <div className="profile_name">
+                      <Skeleton
+                        height="35px"
+                        width="200px"
+                        containerClassName="avatar-skeleton"
+                      />
+                      <Skeleton
+                        height="30px"
+                        width="100px"
+                        containerClassName="avatar-skeleton"
+                        style={{ transform: "translateY(2.5px)" }}
+                      />
+                    </div>
+                    <div className="profile_friend_count">
+                      <Skeleton
+                        height="20px"
+                        width="90px"
+                        containerClassName="avatar-skeleton"
+                        style={{ marginTop: "5px" }}
+                      />
+                    </div>
+                    <div className="profile_friend_imgs">
+                      {Array.from(new Array(6), (val, i) => i + 1).map(
+                        (id, i) => (
+                          <Skeleton
+                            circle
+                            height="32px"
+                            width="32px"
+                            containerClassName="avatar-skeleton"
+                            style={{ transform: `translateX(${-i * 7}px)` }}
+                          />
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className={`friendship ${!visitor && "fix"}`}>
+                  <Skeleton
+                    height="36px"
+                    width={120}
+                    containerClassName="avatar-skeleton"
+                  />
+                  <div className="flex">
+                    <Skeleton
+                      height="36px"
+                      width={120}
+                      containerClassName="avatar-skeleton"
+                    />
+                    {visitor && (
+                      <Skeleton
+                        height="36px"
+                        width={120}
+                        containerClassName="avatar-skeleton"
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </>:<>
          <Cover profile={profile} visitor={visitor} photo = {photos.resources}/>
        <ProfilePictureInfo profile={profile} otherName={othername} visitor={visitor} photos ={photos?.resources}/>
         </>
@@ -201,15 +267,15 @@ export default function Profile({getAllpost}) {
                 {
                   loading? <div className="sekelton_loader">
                     <HashLoader color="#1876f2"/>
-                  </div>:<div className="posts">
-                  {profile.posts && profile.posts.length&&
-                    profile?.posts?.map((post)=>
+                  </div>:profile?.posts?.length?<div className="posts">
+                  {
+                   profile?.posts?.map((post)=>
                     {
                       return  <Post post={post} user={user} key={post._id} profile={profile}/>
                     }
                     )
                   }
-                </div>
+                </div>:<div className="no_post">No Post Avilabel</div>
                 }
               </div>
             </div>
