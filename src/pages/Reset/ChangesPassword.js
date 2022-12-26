@@ -34,7 +34,7 @@ const ChangesPassword = ({
   const passwordChanges = async () => {
     try {
       setLoading(true);
-      await axios.post(`https://facebookcloneserver-production.up.railway.app/changesPassword`, {
+      await axios.post(`https://facebook-server.onrender.com/changesPassword`, {
         email,
         password,
       });

@@ -15,7 +15,7 @@ const SendEmail = ({
     try {
       setLoading(true);
       await axios.post(
-        `https://facebookcloneserver-production.up.railway.app/sendResetPasswordCode`,
+        `https://facebook-server.onrender.com/sendResetPasswordCode`,
         { email }
       );
       setError("");

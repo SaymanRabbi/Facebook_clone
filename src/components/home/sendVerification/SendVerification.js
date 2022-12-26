@@ -7,7 +7,7 @@ const SendVerification = ({user}) => {
   const sendVerificationLink = async () => {
     try {
       const { data } = await axios.post(
-        `https://facebookcloneserver-production.up.railway.app/sendVerification`,
+        `https://facebook-server.onrender.com/sendVerification`,
         {},
         {
           headers: {

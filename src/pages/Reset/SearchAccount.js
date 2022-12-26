@@ -23,7 +23,7 @@ const SearchAccount = ({
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `https://facebookcloneserver-production.up.railway.app/finduser`,
+        `https://facebook-server.onrender.com/finduser`,
         { email }
       );
       setUserInfos(data);

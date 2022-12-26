@@ -34,7 +34,7 @@ export default function LoginForm({ setVisible, vesible }) {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `https://facebookcloneserver-production.up.railway.app/login`,
+        `https://facebook-server.onrender.com/login`,
         {
           email,
           password,

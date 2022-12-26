@@ -81,7 +81,7 @@ export default function RegisterForm({ setVisible, vesible }) {
   const registerSubmit = async() => {
     try {
       setLoading(true);
-      const { data } = await axios.post(`https://facebookcloneserver-production.up.railway.app/register`, {
+      const { data } = await axios.post(`https://facebook-server.onrender.com/register`, {
         first_name,
         last_name,
         email,

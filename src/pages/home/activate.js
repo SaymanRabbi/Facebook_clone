@@ -28,7 +28,7 @@ export default function Activate() {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `https://facebookcloneserver-production.up.railway.app/activate`,
+        `https://facebook-server.onrender.com/activate`,
         { token },
         {
           headers: {

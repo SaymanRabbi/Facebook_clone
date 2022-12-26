@@ -25,7 +25,7 @@ const CodeVerification = ({
     try {
       setLoading(true);
       await axios.post(
-        `https://facebookcloneserver-production.up.railway.app/validateResetCode`,
+        `https://facebook-server.onrender.com/validateResetCode`,
         { email, code }
       );
       setError("");

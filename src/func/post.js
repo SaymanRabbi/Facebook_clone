@@ -3,7 +3,7 @@ export const createPost = async (
     type,background,text,images,user,token
 )=>{
 try {
-    const {data} = await axios.post(`https://facebookcloneserver-production.up.railway.app/createpost`,{
+    const {data} = await axios.post(`https://facebook-server.onrender.com/createpost`,{
         type,background,text,images,user
     },{
         headers:{
@@ -22,7 +22,7 @@ export const createReact = async (
     react, postRef,token
 )=>{
 try {
-    const data = await axios.put(`https://facebookcloneserver-production.up.railway.app/reactPost`,{
+    const data = await axios.put(`https://facebook-server.onrender.com/reactPost`,{
         react, postRef
     },{
         headers:{
@@ -38,7 +38,7 @@ export const getReact = async (
     id,token
 )=>{
 try {
-    const data = await axios.get(`https://facebookcloneserver-production.up.railway.app/getReact/${id}`,{
+    const data = await axios.get(`https://facebook-server.onrender.com/getReact/${id}`,{
         headers:{
             Authorization:`Bearer ${token}`
         }
@@ -52,7 +52,7 @@ export const getComment = async (
     comment,postId,image,token
 )=>{
 try {
-    const {data} = await axios.put(`https://facebookcloneserver-production.up.railway.app/comment`,{
+    const {data} = await axios.put(`https://facebook-server.onrender.com/comment`,{
         comment,postId,image
     },{
         headers:{
@@ -68,7 +68,7 @@ export const SavedPost = async (
     id,token
 )=>{
 try {
-    const {data} = await axios.put(`https://facebookcloneserver-production.up.railway.app/savepost/${id}`,{
+    const {data} = await axios.put(`https://facebook-server.onrender.com/savepost/${id}`,{
     },{
         headers:{
             Authorization:`Bearer ${token}`
@@ -83,7 +83,7 @@ export const DeletePost = async (
     id,token
 )=>{
 try {
-    const {data} = await axios.put(`https://facebookcloneserver-production.up.railway.app/deletepost/${id}`,{
+    const {data} = await axios.put(`https://facebook-server.onrender.com/deletepost/${id}`,{
     },{
         headers:{
             Authorization:`Bearer ${token}`
