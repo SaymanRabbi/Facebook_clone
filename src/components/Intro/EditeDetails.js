@@ -7,8 +7,8 @@ const EditeDetails = ({details,handleChange,updateDetails,infos,setVisible}) => 
   useClickoutside(refTo, () => setVisible(false));
     return (
        
-            <div className="blur">
-              <div className="postBox infosBox" ref={refTo}>
+            <div className="blur scrollbar">
+              <div className="postBox infosBox scrollbar" ref={refTo}>
                 <div className="box_header">
                   <div className="small_circle" onClick={()=>setVisible(false)}>
                     <i className="exit_icon"></i>

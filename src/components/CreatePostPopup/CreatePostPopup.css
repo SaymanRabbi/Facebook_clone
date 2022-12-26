@@ -170,7 +170,7 @@
 .rlmove2 {
   right: 1rem;
   top: 9.7rem;
-  z-index: 999;
+  z-index: 0;
 }
 .images_input {
   display: flex;
@@ -213,7 +213,7 @@
   right: 10px;
   top: 10px;
   cursor: pointer;
-  z-index: 99;
+  z-index: 0;
 }
 .add_circle {
   width: 42px;
@@ -407,7 +407,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 0;
   gap: 10px;
   opacity: 0.8;
   animation: animate 0.5s ease-in-out;

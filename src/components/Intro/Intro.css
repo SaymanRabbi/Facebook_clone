@@ -57,6 +57,7 @@
 .infosBox {
   height: 82vh;
   width: 800px !important;
+  z-index: 104;
 }
 .details_wrapper {
   padding: 1rem;
