@@ -25,7 +25,7 @@ const CodeVerification = ({
     try {
       setLoading(true);
       await axios.post(
-        `https://facebook-server.onrender.com/validateResetCode`,
+        `https://facebook-server-1-saymanrabbi.vercel.app/validateResetCode`,
         { email, code }
       );
       setError("");

@@ -81,7 +81,7 @@ export default function RegisterForm({ setVisible, vesible }) {
   const registerSubmit = async() => {
     try {
       setLoading(true);
-      const { data } = await axios.post(`https://facebook-server.onrender.com/register`, {
+      const { data } = await axios.post(`https://facebook-server-1-saymanrabbi.vercel.app/register`, {
         first_name,
         last_name,
         email,

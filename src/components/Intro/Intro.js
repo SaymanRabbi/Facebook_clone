@@ -30,7 +30,7 @@ const Intro = ({detailss,visitor,setOtherName}) => {
   const updateDetails = async () => {
     try {
       const { data } = await axios.put(
-        `https://facebook-server.onrender.com/updateDetails`,
+        `https://facebook-server-1-saymanrabbi.vercel.app/updateDetails`,
         {
           infos,
         },

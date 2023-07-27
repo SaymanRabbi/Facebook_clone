@@ -3,7 +3,7 @@ export const updatePic = async (
    url,token
 )=>{
 try {
-    const data = await axios.put(`https://facebook-server.onrender.com/updateProfilePicture`,{
+    const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/updateProfilePicture`,{
         url
     },{
         headers:{
@@ -19,7 +19,7 @@ export const updateCover = async (
     url,token
  )=>{
  try {
-     const data = await axios.put(`https://facebook-server.onrender.com/updateCover`,{
+     const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/updateCover`,{
          url
      },{
          headers:{
@@ -35,7 +35,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`https://facebook-server.onrender.com/addFriend/${id}`,{
+     const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/addFriend/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -50,7 +50,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`https://facebook-server.onrender.com/cancelFriendRequest/${id}`,{
+     const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/cancelFriendRequest/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -65,7 +65,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`https://facebook-server.onrender.com/follow/${id}`,{
+     const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/follow/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -80,7 +80,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`https://facebook-server.onrender.com/unfollow/${id}`,{
+     const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/unfollow/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -95,7 +95,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`https://facebook-server.onrender.com/acceptFriendRequest/${id}`,{
+     const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/acceptFriendRequest/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -110,7 +110,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`https://facebook-server.onrender.com/unfriend/${id}`,{
+     const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/unfriend/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -125,7 +125,7 @@ export const updateCover = async (
     id,token
  )=>{
  try {
-     const data = await axios.put(`https://facebook-server.onrender.com/deleteRequest/${id}`,{
+     const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/deleteRequest/${id}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -140,7 +140,7 @@ export const updateCover = async (
     searchTerm,token
  )=>{
  try {
-     const data = await axios.post(`https://facebook-server.onrender.com/search/${searchTerm}`,{
+     const data = await axios.post(`https://facebook-server-1-saymanrabbi.vercel.app/search/${searchTerm}`,{
      },{
          headers:{
              Authorization:`Bearer ${token}`
@@ -155,7 +155,7 @@ export const updateCover = async (
     token
  )=>{
  try {
-     const data = await axios.get(`https://facebook-server.onrender.com/friendPageinfo`,{
+     const data = await axios.get(`https://facebook-server-1-saymanrabbi.vercel.app/friendPageinfo`,{
          headers:{
              Authorization:`Bearer ${token}`
          }

@@ -7,7 +7,7 @@ const SendVerification = ({user}) => {
   const sendVerificationLink = async () => {
     try {
       const { data } = await axios.post(
-        `https://facebook-server.onrender.com/sendVerification`,
+        `https://facebook-server-1-saymanrabbi.vercel.app/sendVerification`,
         {},
         {
           headers: {
@@ -15,6 +15,7 @@ const SendVerification = ({user}) => {
           },
         }
       );
+      console.log(data);
       setSuccess(data.messages);
     } catch (error) {
       setError(error.response.data.messages);

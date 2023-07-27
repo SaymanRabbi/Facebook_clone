@@ -4,16 +4,16 @@ import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoginRoutes from "./Routes/LoginRoutes";
+import NotLoginRoutes from "./Routes/NotLoginRoutes";
 import CreatePostPopup from "./components/CreatePostPopup/CreatePostPopup";
 import { postsreducer } from "./func/reducers";
 import Friends from "./pages/Friends/Friends";
+import Reset from "./pages/Reset/Reset";
 import Home from "./pages/home";
 import Activate from "./pages/home/activate";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
-import Reset from "./pages/Reset/Reset";
-import LoginRoutes from "./Routes/LoginRoutes";
-import NotLoginRoutes from "./Routes/NotLoginRoutes";
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -30,7 +30,7 @@ function App() {
    const getAllpost = async () => {
     try {
       dispatch({type:"POST_REQUEST"})
-      const {data} = await axios.get(`https://facebook-server.onrender.com/posts`,{
+      const {data} = await axios.get(`https://facebook-server-1-saymanrabbi.vercel.app/posts`,{
         headers:{
           Authorization:`Bearer ${user.token}`
         }

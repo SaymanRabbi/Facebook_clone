@@ -15,3 +15,5 @@ export default function useClickoutside(ref, func) {
     };
   }, [ref, func]);
 }
+const a = "[\"google.com\",\"google.com\",\"urt\",\"90\"]"
+const b = JSON.parse(a)

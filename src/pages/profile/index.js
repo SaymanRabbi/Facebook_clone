@@ -48,7 +48,7 @@ export default function Profile({getAllpost}) {
   const getProfile = async () => {
     try {
       dispatch({type:"PROFILE_REQUEST"})
-      const {data} = await axios.get(`https://facebook-server.onrender.com/getProfile/${userName}`,{
+      const {data} = await axios.get(`https://facebook-server-1-saymanrabbi.vercel.app/getProfile/${userName}`,{
         headers:{
           Authorization:`Bearer ${user.token}`
         }
@@ -58,7 +58,7 @@ export default function Profile({getAllpost}) {
       }
       else{
         try {
-          const {data} = await axios.post(`https://facebook-server.onrender.com/listimages`,{
+          const {data} = await axios.post(`https://facebook-server-1-saymanrabbi.vercel.app/listimages`,{
             path,max,sort
           },{
             headers:{

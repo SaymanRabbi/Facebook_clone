@@ -34,7 +34,7 @@ const ChangesPassword = ({
   const passwordChanges = async () => {
     try {
       setLoading(true);
-      await axios.post(`https://facebook-server.onrender.com/changesPassword`, {
+      await axios.post(`https://facebook-server-1-saymanrabbi.vercel.app/changesPassword`, {
         email,
         password,
       });

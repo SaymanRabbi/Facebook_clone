@@ -23,7 +23,7 @@ const SearchAccount = ({
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `https://facebook-server.onrender.com/finduser`,
+        `https://facebook-server-1-saymanrabbi.vercel.app/finduser`,
         { email }
       );
       setUserInfos(data);

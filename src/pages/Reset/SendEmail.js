@@ -15,7 +15,7 @@ const SendEmail = ({
     try {
       setLoading(true);
       await axios.post(
-        `https://facebook-server.onrender.com/sendResetPasswordCode`,
+        `https://facebook-server-1-saymanrabbi.vercel.app/sendResetPasswordCode`,
         { email }
       );
       setError("");

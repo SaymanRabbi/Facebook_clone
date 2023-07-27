@@ -28,7 +28,7 @@ export default function Activate() {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `https://facebook-server.onrender.com/activate`,
+        `https://facebook-server-1-saymanrabbi.vercel.app/activate`,
         { token },
         {
           headers: {

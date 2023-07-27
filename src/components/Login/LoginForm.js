@@ -34,7 +34,7 @@ export default function LoginForm({ setVisible, vesible }) {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `https://facebook-server.onrender.com/login`,
+        `https://facebook-server-1-saymanrabbi.vercel.app/login`,
         {
           email,
           password,

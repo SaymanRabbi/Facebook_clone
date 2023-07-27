@@ -3,7 +3,7 @@ export const createPost = async (
     type,background,text,images,user,token
 )=>{
 try {
-    const {data} = await axios.post(`https://facebook-server.onrender.com/createpost`,{
+    const {data} = await axios.post(`https://facebook-server-1-saymanrabbi.vercel.app/createpost`,{
         type,background,text,images,user
     },{
         headers:{
@@ -22,7 +22,7 @@ export const createReact = async (
     react, postRef,token
 )=>{
 try {
-    const data = await axios.put(`https://facebook-server.onrender.com/reactPost`,{
+    const data = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/reactPost`,{
         react, postRef
     },{
         headers:{
@@ -38,7 +38,7 @@ export const getReact = async (
     id,token
 )=>{
 try {
-    const data = await axios.get(`https://facebook-server.onrender.com/getReact/${id}`,{
+    const data = await axios.get(`https://facebook-server-1-saymanrabbi.vercel.app/getReact/${id}`,{
         headers:{
             Authorization:`Bearer ${token}`
         }
@@ -52,7 +52,7 @@ export const getComment = async (
     comment,postId,image,token
 )=>{
 try {
-    const {data} = await axios.put(`https://facebook-server.onrender.com/comment`,{
+    const {data} = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/comment`,{
         comment,postId,image
     },{
         headers:{
@@ -68,7 +68,7 @@ export const SavedPost = async (
     id,token
 )=>{
 try {
-    const {data} = await axios.put(`https://facebook-server.onrender.com/savepost/${id}`,{
+    const {data} = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/savepost/${id}`,{
     },{
         headers:{
             Authorization:`Bearer ${token}`
@@ -83,7 +83,7 @@ export const DeletePost = async (
     id,token
 )=>{
 try {
-    const {data} = await axios.put(`https://facebook-server.onrender.com/deletepost/${id}`,{
+    const {data} = await axios.put(`https://facebook-server-1-saymanrabbi.vercel.app/deletepost/${id}`,{
     },{
         headers:{
             Authorization:`Bearer ${token}`
